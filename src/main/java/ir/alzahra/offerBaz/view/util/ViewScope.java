@@ -1,4 +1,4 @@
-package ir.alzahra.offerBaz.util;
+package ir.alzahra.offerBaz.view.util;
 
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.config.Scope;
