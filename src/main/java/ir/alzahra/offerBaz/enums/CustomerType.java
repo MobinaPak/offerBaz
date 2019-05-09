@@ -7,7 +7,7 @@ package ir.alzahra.offerBaz.enums;
 public enum CustomerType {
 
     PERSON ("حقیقی"),
-    LEGALm("حقوقی");
+    LEGAL("حقوقی");
 
 
     private final String value;
