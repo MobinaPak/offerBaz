@@ -5,26 +5,51 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-     >
+>
 <f:metadata>
     <f:viewAction onPostback="false" action="#{insertProductViewBean.init}"/>
 </f:metadata>
-<ui:composition >
-    <ui:define name="title">
+
+<ui:composition>
+    <h:head>
         <title>تعریف محصول</title>
-    </ui:define>
-        <div class="ui-g-3">
-            <p:fieldset legend="تعریف محصول">
-                <h:form id="addForm">
-                    <p:fieldset legend="مشخصات محصول" rendered="true">
-                        <p:panelGrid id="addProduct" columns="4">
 
 
-                        </p:panelGrid>
-                    </p:fieldset>
-                </h:form>
-            </p:fieldset>
-        </div>
+        <h:outputStylesheet library="css" name="style.css"/>
 
+
+    </h:head>
+    <h:body>
+        <div class="ui-g-3"></div>
+
+        <p:fieldset legend="تعریف محصول" style="margin-bottom:30px" class="ui-g-6">
+            <h:form id="addForm">
+                <p:fieldset legend="مشخصات محصول" style="margin-bottom:20px" >
+
+                    <p:panelGrid id="productAdd" columns="2" columnsWidth="2,4" styleClass="ui-noborder" >
+                        <p:outputLabel value="نام محصول:"/>
+                        <p:inputText  value="#{insertProductViewBean.productDTO.productName}"/>
+
+                        <p:outputLabel value="توضیحات:"/>
+                        <p:inputTextarea rows="6" cols="33" value="#{insertProductViewBean.productDTO.description}"/>
+
+
+                        <p:outputLabel value="نام بانک:"/>
+                        <p:inputText  value="#{insertProductViewBean.bankDTO.name}"/>
+                    </p:panelGrid>
+                    <p:spacer height="5"/>
+
+                    <p:panel styleClass="buttonBox">
+                        <p:commandButton value="تایید" actionListener="#{insertProductViewBean.insert}"
+                                         update=":addForm">
+                        </p:commandButton>
+                    </p:panel>
+
+                </p:fieldset>
+            </h:form>
+        </p:fieldset>
+
+        <div class="ui-g-3"></div>
+    </h:body>
 </ui:composition>
 </html>
