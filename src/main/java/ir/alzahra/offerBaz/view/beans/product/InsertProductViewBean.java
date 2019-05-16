@@ -22,7 +22,7 @@ public class InsertProductViewBean {
     private IProductProxy productProxy;
 
     private ProductDTO productDTO;
-    private BankDTO bankDTO;
+
 
     public void init() {
         if (Objects.isNull(productDTO))
@@ -40,22 +40,15 @@ public class InsertProductViewBean {
         this.productDTO = productDTO;
     }
 
-    public BankDTO getBankDTO() {
-        return bankDTO;
-    }
-
-    public void setBankDTO(BankDTO bankDTO) {
-        this.bankDTO = bankDTO;
-    }
 
     private void emptyPage() {
         productDTO = new ProductDTO();
-        bankDTO= new BankDTO();
+
     }
 
     public void insert() {
         try {
-            productDTO.setBankDTO(bankDTO);
+
             productProxy.insert(productDTO);
         } catch (BaseException e) {
             //TODO

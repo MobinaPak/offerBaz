@@ -8,7 +8,7 @@ public class ProductDTO {
     private Long id;
     private String productName;
     private String description;
-    private BankDTO bankDTO;
+    private BankDTO bankDTO = new BankDTO();
 
     public Long getId() {
         return id;
