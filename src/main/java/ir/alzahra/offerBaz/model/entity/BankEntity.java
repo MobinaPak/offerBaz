@@ -1,5 +1,8 @@
 package ir.alzahra.offerBaz.model.entity;
 
+import ir.alzahra.offerBaz.dto.ProductDTO;
+import ir.alzahra.offerBaz.facade.mapper.MapTo;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -22,6 +25,7 @@ public class BankEntity extends BaseEntity{
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "BANK_ID")
+    @MapTo(targetEntity = ProductDTO.class)
     private List<ProductEntity> products;
 
     public Long getId() {
@@ -47,6 +51,4 @@ public class BankEntity extends BaseEntity{
     public void setProducts(List<ProductEntity> products) {
         this.products = products;
     }
-
-
 }

@@ -1,31 +1,63 @@
-package ir.alzahra.offerBaz.dto;
+package ir.alzahra.offerBaz.model.entity;
 
+import ir.alzahra.offerBaz.dto.BankDTO;
+import ir.alzahra.offerBaz.dto.OfferRequestDTO;
+import ir.alzahra.offerBaz.dto.ProfileDTO;
 import ir.alzahra.offerBaz.enums.CustomerType;
 import ir.alzahra.offerBaz.enums.Gender;
 import ir.alzahra.offerBaz.facade.mapper.MapTo;
-import ir.alzahra.offerBaz.model.entity.OfferRequestEntity;
-import ir.alzahra.offerBaz.model.entity.ProfileEntity;
 
+import javax.persistence.*;
 import java.util.List;
 
 /**
- * @Author: zahra soltaninejad
- * @Date: 4/18/2019, Thu
+ * @Author: hanieh Moafi
+ * @Date: 5/24/2019
  **/
-public class UserDTO {
 
+@Entity
+@Table(name="USER_ENTITY")
+public class UserEntity extends BaseEntity {
+
+    @Id
+    @GeneratedValue
+    @Column(name = "ID")
     private Long id;
+
+    @Column(name = "NAME")
     private String name;
+
+    @Column(name = "FAMILY")
     private String family;
+
+    @Column(name = "AGE")
     private String age;
+
+    @Column(name = "GENDER")
+    @Enumerated(EnumType.STRING)
     private Gender gender;
-    @MapTo(targetEntity = ProfileEntity.class)
-    private ProfileDTO profile;
+
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "USER_ID")
+    @MapTo(targetEntity = ProfileDTO.class)
+    private ProfileEntity profile;
+
+    @Column(name = "EMAIL")
     private String email;
+
+    @Column(name = "PHONE_NUMBER")
     private String phoneNumber;
+
+    @Column(name = "CUSTOMER_TYPE")
+    @Enumerated(EnumType.STRING)
     private CustomerType customerType;
-    @MapTo(targetEntity = OfferRequestEntity.class)
-    private List<OfferRequestDTO> requestDTOS;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "OFFER_REQ_ID")
+    @MapTo(targetEntity = OfferRequestDTO.class)
+    private List<OfferRequestEntity> requestDTOS;
+
 
     public Long getId() {
         return id;
@@ -67,11 +99,11 @@ public class UserDTO {
         this.gender = gender;
     }
 
-    public ProfileDTO getProfile() {
+    public ProfileEntity getProfile() {
         return profile;
     }
 
-    public void setProfile(ProfileDTO profile) {
+    public void setProfile(ProfileEntity profile) {
         this.profile = profile;
     }
 
@@ -99,11 +131,11 @@ public class UserDTO {
         this.customerType = customerType;
     }
 
-    public List<OfferRequestDTO> getRequestDTOS() {
+    public List<OfferRequestEntity> getRequestDTOS() {
         return requestDTOS;
     }
 
-    public void setRequestDTOS(List<OfferRequestDTO> requestDTOS) {
+    public void setRequestDTOS(List<OfferRequestEntity> requestDTOS) {
         this.requestDTOS = requestDTOS;
     }
 }

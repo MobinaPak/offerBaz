@@ -1,5 +1,8 @@
 package ir.alzahra.offerBaz.model.entity;
 
+import ir.alzahra.offerBaz.dto.ProfileDTO;
+import ir.alzahra.offerBaz.facade.mapper.MapTo;
+
 import javax.persistence.*;
 
 /**
@@ -22,6 +25,7 @@ public class ProfileRoleEntity extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PROFILE_ID")
+    @MapTo(targetEntity = ProfileDTO.class)
     private ProfileEntity profile;
 
     @Column(name = "ROLE", nullable = false, length = 45)

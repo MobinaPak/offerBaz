@@ -5,6 +5,7 @@ import ir.alzahra.offerBaz.dto.ResponseDTO;
 import ir.alzahra.offerBaz.facade.IProductFacade;
 import ir.alzahra.offerBaz.view.RestURIConstants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,10 +27,10 @@ public class ProductController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/insert")
     ResponseEntity<ResponseDTO> insert(@RequestBody ProductDTO productDTO) {
-        ResponseDTO responseDto = new ResponseDTO();
+        productFacade.insert(productDTO);
+        return new ResponseEntity(HttpStatus.OK);
 
-        return null;
-    }
+       }
 
 
 }

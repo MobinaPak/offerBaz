@@ -4,6 +4,7 @@ import ir.alzahra.offerBaz.dto.ProductDTO;
 import ir.alzahra.offerBaz.dto.ResponseDTO;
 import ir.alzahra.offerBaz.enums.ResponseStatus;
 import ir.alzahra.offerBaz.exception.BaseException;
+import ir.alzahra.offerBaz.view.RestURIConstants;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;

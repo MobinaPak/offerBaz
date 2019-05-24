@@ -1,5 +1,9 @@
 package ir.alzahra.offerBaz.model.entity;
 
+import ir.alzahra.offerBaz.dto.OfferRequestDTO;
+import ir.alzahra.offerBaz.dto.ProductDTO;
+import ir.alzahra.offerBaz.facade.mapper.MapTo;
+
 import javax.persistence.*;
 
 /**
@@ -25,11 +29,14 @@ public class OfferEntity extends BaseEntity {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "OFFER_ID")
+    @MapTo(targetEntity = ProductDTO.class)
     private ProductEntity product;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "OFFER_REQUEST_ID")
+    @MapTo(targetEntity = OfferRequestDTO.class)
     private OfferRequestEntity offerRequest;
+
 
     public Long getId() {
         return id;

@@ -1,5 +1,10 @@
 package ir.alzahra.offerBaz.dto;
 
+import ir.alzahra.offerBaz.facade.mapper.MapTo;
+import ir.alzahra.offerBaz.model.entity.OfferEntity;
+import ir.alzahra.offerBaz.model.entity.ProfileEntity;
+import ir.alzahra.offerBaz.model.entity.UserEntity;
+
 import java.util.Date;
 import java.util.List;
 
@@ -12,10 +17,15 @@ public class OfferRequestDTO {
     private Long id;
     private String name;
     private String description;
-    private List<OfferDTO> offerDTO;
+    @MapTo(targetEntity = OfferEntity.class)
+    private List<OfferDTO> offers;
     private String salaryPerMonth;
     private String savedMoney;
     private Date submitDate;
+    @MapTo(targetEntity = ProfileEntity.class)
+    private ProfileDTO profile;
+    @MapTo(targetEntity = UserEntity.class)
+    private UserDTO user;
 
     public Long getId() {
         return id;
@@ -41,12 +51,12 @@ public class OfferRequestDTO {
         this.description = description;
     }
 
-    public List<OfferDTO> getOfferDTO() {
-        return offerDTO;
+    public List<OfferDTO> getOffers() {
+        return offers;
     }
 
-    public void setOfferDTO(List<OfferDTO> offerDTO) {
-        this.offerDTO = offerDTO;
+    public void setOffers(List<OfferDTO> offers) {
+        this.offers = offers;
     }
 
     public String getSalaryPerMonth() {
@@ -71,5 +81,21 @@ public class OfferRequestDTO {
 
     public void setSubmitDate(Date submitDate) {
         this.submitDate = submitDate;
+    }
+
+    public ProfileDTO getProfile() {
+        return profile;
+    }
+
+    public void setProfile(ProfileDTO profile) {
+        this.profile = profile;
+    }
+
+    public UserDTO getUser() {
+        return user;
+    }
+
+    public void setUser(UserDTO user) {
+        this.user = user;
     }
 }

@@ -1,6 +1,13 @@
 package ir.alzahra.offerBaz.model.entity;
 
+import ir.alzahra.offerBaz.dto.OfferRequestDTO;
+import ir.alzahra.offerBaz.dto.ProfileDTO;
+import ir.alzahra.offerBaz.dto.ProfileRoleDTO;
+import ir.alzahra.offerBaz.dto.UserDTO;
+import ir.alzahra.offerBaz.facade.mapper.MapTo;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -16,6 +23,11 @@ public class ProfileEntity extends BaseEntity {
     private static final long serialVersionUID = 7323957813318349601L;
 
     @Id
+    @GeneratedValue
+    @Column(name = "ID")
+    private Long id;
+
+
     @Column(name = "USERNAME", unique = true,nullable = false, length = 45)
     private String userName;
 
@@ -27,31 +39,35 @@ public class ProfileEntity extends BaseEntity {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "PROFILE_ID")
-    private Set<ProfileRoleEntity> profileRoles = new HashSet<ProfileRoleEntity>(0);
+    @MapTo(targetEntity = ProfileRoleDTO.class)
+    private List<ProfileRoleEntity> profileRoles = new ArrayList();
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "PROFILE_ID")
+    @MapTo(targetEntity = OfferRequestDTO.class)
     private List<OfferRequestEntity> offerRequests;
 
-    public ProfileEntity() {
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "USER_ID")
+    @MapTo(targetEntity = UserDTO.class)
+    private UserEntity user;
+
+
+    public Long getId() {
+        return id;
     }
 
-    public ProfileEntity(String username, String password, boolean enabled) {
-        this.userName = username;
-        this.password = password;
-        this.enabled = enabled;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public ProfileEntity(String username, String password,
-                         boolean enabled, Set<ProfileRoleEntity> userRole) {
-        this.userName = username;
-        this.password = password;
-        this.enabled = enabled;
-        this.profileRoles = userRole;
+    public List<ProfileRoleEntity> getProfileRoles() {
+        return profileRoles;
     }
 
-    public Set<ProfileRoleEntity> getUserRole() {
-        return this.profileRoles;
+    public void setProfileRoles(List<ProfileRoleEntity> profileRoles) {
+        this.profileRoles = profileRoles;
     }
 
     public static long getSerialVersionUID() {
@@ -88,5 +104,13 @@ public class ProfileEntity extends BaseEntity {
 
     public void setOfferRequests(List<OfferRequestEntity> offerRequests) {
         this.offerRequests = offerRequests;
+    }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 }

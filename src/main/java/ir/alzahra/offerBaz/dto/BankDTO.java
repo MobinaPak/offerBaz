@@ -1,5 +1,9 @@
 package ir.alzahra.offerBaz.dto;
 
+import ir.alzahra.offerBaz.facade.mapper.MapTo;
+import ir.alzahra.offerBaz.model.entity.ProductEntity;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,7 +15,8 @@ public class BankDTO {
 
     private Long id;
     private String name;
-    private List<ProductDTO> productDTOS;
+    @MapTo(targetEntity = ProductEntity.class)
+    private List<ProductDTO> products = new ArrayList<>();
 
 
     public Long getId() {
@@ -31,10 +36,10 @@ public class BankDTO {
     }
 
     public List<ProductDTO> getProductDTOS() {
-        return productDTOS;
+        return products;
     }
 
-    public void setProductDTOS(List<ProductDTO> productDTOS) {
-        this.productDTOS = productDTOS;
+    public void setProductDTOS(List<ProductDTO> products) {
+        this.products = products;
     }
 }

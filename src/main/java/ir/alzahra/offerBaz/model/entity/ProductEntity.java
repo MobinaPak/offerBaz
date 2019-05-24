@@ -1,5 +1,9 @@
 package ir.alzahra.offerBaz.model.entity;
 
+import ir.alzahra.offerBaz.dto.BankDTO;
+import ir.alzahra.offerBaz.dto.OfferDTO;
+import ir.alzahra.offerBaz.facade.mapper.MapTo;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -19,18 +23,20 @@ public class ProductEntity extends BaseEntity {
     private Long id;
 
     @Column(name = "NAME")
-    private String name;
+    private String productName;
 
     @Column(name = "DESCRIPTION")
     private String description;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "OFFER_ID")
+    @MapTo(targetEntity = OfferDTO.class)
     private List<OfferEntity> offers;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "BANK_ID")
-    private BankEntity bank;
+    @MapTo(targetEntity = BankDTO.class)
+    private BankEntity bank = new BankEntity();
 
     public Long getId() {
         return id;
@@ -40,12 +46,12 @@ public class ProductEntity extends BaseEntity {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public String getDescription() {
