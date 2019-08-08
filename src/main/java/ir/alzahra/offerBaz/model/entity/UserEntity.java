@@ -1,6 +1,5 @@
 package ir.alzahra.offerBaz.model.entity;
 
-import ir.alzahra.offerBaz.dto.BankDTO;
 import ir.alzahra.offerBaz.dto.OfferRequestDTO;
 import ir.alzahra.offerBaz.dto.ProfileDTO;
 import ir.alzahra.offerBaz.enums.CustomerType;
@@ -16,7 +15,7 @@ import java.util.List;
  **/
 
 @Entity
-@Table(name="USER_ENTITY")
+@Table(name = "USER_ENTITY")
 public class UserEntity extends BaseEntity {
 
     @Id
