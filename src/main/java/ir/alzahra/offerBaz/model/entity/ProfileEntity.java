@@ -20,7 +20,7 @@ import java.util.Set;
 @Table(name="PROFILE")
 public class ProfileEntity extends BaseEntity {
 
-    private static final long serialVersionUID = 7323957813318349601L;
+   // private static final long serialVersionUID = 7323957813318349601L;
 
     @Id
     @GeneratedValue
@@ -68,10 +68,6 @@ public class ProfileEntity extends BaseEntity {
 
     public void setProfileRoles(List<ProfileRoleEntity> profileRoles) {
         this.profileRoles = profileRoles;
-    }
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
     }
 
     public String getUserName() {

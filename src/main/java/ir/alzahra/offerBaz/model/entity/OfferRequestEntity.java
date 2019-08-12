@@ -17,7 +17,7 @@ import java.util.List;
 @Table(name="OFFER_REQUEST")
 public class OfferRequestEntity extends BaseEntity {
 
-    private static final long serialVersionUID = -7400819531205311768L;
+    //private static final long serialVersionUID = -7400819531205311768L;
 
     @Id
     @GeneratedValue

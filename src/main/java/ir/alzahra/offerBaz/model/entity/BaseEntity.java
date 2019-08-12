@@ -15,7 +15,6 @@ import java.util.Date;
 @Audited(withModifiedFlag = false)
 public abstract class BaseEntity implements Serializable {
 
-    private static final long serialVersionUID = -2538405712908921268L;
 
     @Column(name = "CREATED_BY", length = 40)
     private String createdBy;

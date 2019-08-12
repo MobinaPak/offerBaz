@@ -15,7 +15,7 @@ import java.util.List;
 @Table(name="PRODUCT")
 public class ProductEntity extends BaseEntity {
 
-    private static final long serialVersionUID = -7140560430822563744L;
+   // private static final long serialVersionUID = -7140560430822563744L;
 
     @Id
     @GeneratedValue

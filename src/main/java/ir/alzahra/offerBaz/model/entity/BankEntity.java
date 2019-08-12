@@ -10,11 +10,18 @@ import java.util.List;
  * @Author: zahra soltaninejad
  * @Date: 4/21/2019, Sun
  **/
+@NamedQueries(
+        {
+                @NamedQuery(
+                        name = "getAllBanks",
+                        query = "from BankEntity b "
+                )
+        }
+)
 @Entity
 @Table(name="BANK")
 public class BankEntity extends BaseEntity{
 
-    private static final long serialVersionUID = -8570263691305690317L;
     @Id
     @GeneratedValue
     @Column(name = "ID")

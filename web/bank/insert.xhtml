@@ -7,12 +7,12 @@
       xmlns:p="http://primefaces.org/ui"
 >
 <f:metadata>
-    <f:viewAction onPostback="false" action="#{insertProductViewBean.init}"/>
+    <f:viewAction onPostback="false" action="#{insertBankViewBean.init}"/>
 </f:metadata>
 
 <ui:composition>
     <h:head>
-        <title>تعریف محصول</title>
+        <title>ثبت بانک</title>
 
 
         <h:outputStylesheet library="css" name="style.css"/>
@@ -22,33 +22,21 @@
     <h:body>
         <div class="ui-g-3"></div>
 
-        <p:fieldset legend="تعریف محصول" style="margin-bottom:30px" class="ui-g-6">
+        <p:fieldset legend="ثبت بانک" style="margin-bottom:30px" class="ui-g-6">
             <h:form id="addForm">
                 <p:growl id="growl" showDetail="true" sticky="true" />
 
-                <p:fieldset legend="مشخصات محصول" style="margin-bottom:20px" >
+                <p:fieldset legend="مشخصات بانک" style="margin-bottom:20px" >
 
                     <p:panelGrid id="productAdd" columns="2" columnsWidth="2,4" styleClass="ui-noborder" >
                         <p:outputLabel value="نام بانک:"/>
-                        <h:selectOneMenu  value="#{insertProductViewBean.selectedBank}" style="width:310px" filter="true" filterMatchMode="contains">
-                            <f:selectItem itemLabel="بانک را انتخاب کنید" itemValue="" noSelectionOption="true" />
-                            <f:selectItems var="bank" value="#{insertProductViewBean.bankDTOS}"  itemLabel="#{bank.name}" itemValue="#{bank}"/>
-                        </h:selectOneMenu>
-
-
-                        <p:outputLabel value="نام محصول:"/>
-                        <p:inputText  value="#{insertProductViewBean.productDTO.productName}"/>
-
-                        <p:outputLabel value="توضیحات:"/>
-                        <p:inputTextarea rows="6" cols="33" value="#{insertProductViewBean.productDTO.description}"/>
-
-
+                        <p:inputText  value="#{insertBankViewBean.bankDTO.name}"/>
 
                     </p:panelGrid>
                     <p:spacer height="5"/>
 
                     <p:panel styleClass="buttonBox">
-                        <p:commandButton value="تایید" actionListener="#{insertProductViewBean.insert}"
+                        <p:commandButton value="ثبت" actionListener="#{insertBankViewBean.insert}"
                                          update=":addForm">
                         </p:commandButton>
                     </p:panel>
