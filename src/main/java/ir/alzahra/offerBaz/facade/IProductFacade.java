@@ -2,6 +2,7 @@ package ir.alzahra.offerBaz.facade;
 
 import ir.alzahra.offerBaz.dto.ProductDTO;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @Author: hanieh Moafi
@@ -10,5 +11,6 @@ import org.springframework.stereotype.Component;
 
 public interface IProductFacade {
 
+    @Transactional(rollbackFor = Exception.class)
     void insert(ProductDTO productDTO);
 }

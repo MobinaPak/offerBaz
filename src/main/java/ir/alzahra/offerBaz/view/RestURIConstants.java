@@ -10,7 +10,7 @@ public class RestURIConstants {
 
     //CONTROLLER CLASS
     public static final String OFFER = "/offer";
-    public static final String PRODUCT = "/ws/product";
+    public static final String PRODUCT = "/product";
     public static final String USER = "/user";
 
     //CONTROLLER METHODS

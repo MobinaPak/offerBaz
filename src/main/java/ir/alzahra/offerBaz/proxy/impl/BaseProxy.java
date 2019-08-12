@@ -13,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import java.util.Objects;
 
 /**
  * @Author: hanieh Moafi
@@ -20,8 +21,6 @@ import javax.faces.context.FacesContext;
  **/
 abstract class BaseProxy {
 
-    @Value("${SERVER_URL}")
-    protected String serverUrl;
 
     protected <T> T callRest(String address, ParameterizedTypeReference<ResponseDTO<T>> t) throws BaseException {
         return callRest(address, null, t);
@@ -41,12 +40,14 @@ abstract class BaseProxy {
                 requestEntity,
                 t);
         ResponseDTO<T> responseDto = response.getBody();
-        if (responseDto.getResponseStatus().equals(ResponseStatus.OK)) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, responseDto.getMsg(), ""));
-        } else {
-            throw new BaseException(responseDto.getMsg());
-        }
-        return responseDto.getResponse();
+        if (Objects.nonNull(responseDto)) {
+//            if (responseDto.getResponseStatus().equals(ResponseStatus.OK)) {
+//                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, responseDto.getMsg(), ""));
+//            } else {
+//                throw new BaseException(responseDto.getMsg());
+//            }
+            return responseDto.getResponse();
+        } else return null;
     }
 
     protected void callRest(String address) throws BaseException {

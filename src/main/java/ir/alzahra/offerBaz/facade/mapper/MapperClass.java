@@ -26,19 +26,19 @@ public class MapperClass {
 
 
         //get getter methods
-        for (Method sourceMethod : fromMethods)
+        for (Method sourceMethod : fromMethods) {
             if (sourceMethod.getName().contains("get"))
                 srcGetterMethods.add(sourceMethod);
-
+        }
 
         //generate a map of field name & corresponding getterMethod name
-        for (Field field : srcFieldsNames)
+        for (Field field : srcFieldsNames) {
             for (Method sourceMethod : srcGetterMethods)
                 if (field.getName().equalsIgnoreCase(sourceMethod.getName().substring(3))) {
 
                     srcFieldToGetterMap.put(field, sourceMethod);
                 }
-
+        }
         for (Field srcField : srcFieldsNames) {
             //lists of java classes
             if (srcField.getType().toString().contains("List") && Objects.isNull(srcField.getDeclaredAnnotation(MapTo.class))) {

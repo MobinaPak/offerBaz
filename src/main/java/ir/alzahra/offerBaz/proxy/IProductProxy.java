@@ -1,4 +1,4 @@
-package ir.alzahra.offerBaz.proxy.impl;
+package ir.alzahra.offerBaz.proxy;
 
 import ir.alzahra.offerBaz.dto.ProductDTO;
 import ir.alzahra.offerBaz.exception.BaseException;
