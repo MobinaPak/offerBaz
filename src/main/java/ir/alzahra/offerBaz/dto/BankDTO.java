@@ -15,6 +15,7 @@ public class BankDTO {
 
     private Long id;
     private String name;
+
     @MapTo(targetEntity = ProductEntity.class)
     private List<ProductDTO> products = new ArrayList<>();
 
@@ -35,11 +36,11 @@ public class BankDTO {
         this.name = name;
     }
 
-    public List<ProductDTO> getProductDTOS() {
+    public List<ProductDTO> getProducts() {
         return products;
     }
 
-    public void setProductDTOS(List<ProductDTO> products) {
+    public void setProducts(List<ProductDTO> products) {
         this.products = products;
     }
 }

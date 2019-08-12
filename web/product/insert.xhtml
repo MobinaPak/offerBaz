@@ -30,9 +30,11 @@
 
                     <p:panelGrid id="productAdd" columns="2" columnsWidth="2,4" styleClass="ui-noborder" >
                         <p:outputLabel value="نام بانک:"/>
-                        <h:selectOneMenu  value="#{insertProductViewBean.selectedBank}" style="width:310px" filter="true" filterMatchMode="contains">
+                        <h:selectOneMenu id="test" value="#{insertProductViewBean.bankId}" style="width:310px" filter="true" filterMatchMode="contains">
                             <f:selectItem itemLabel="بانک را انتخاب کنید" itemValue="" noSelectionOption="true" />
-                            <f:selectItems var="bank" value="#{insertProductViewBean.bankDTOS}"  itemLabel="#{bank.name}" itemValue="#{bank}"/>
+                            <f:selectItems var="bank" value="#{insertProductViewBean.bankDTOS}"  itemLabel="#{bank.name}" itemValue="#{bank.id}"/>
+                            <f:ajax listener="#{insertProductViewBean.findBank()}"
+                                    execute="@this"/>
                         </h:selectOneMenu>
 
 
@@ -48,8 +50,9 @@
                     <p:spacer height="5"/>
 
                     <p:panel styleClass="buttonBox">
-                        <p:commandButton value="تایید" actionListener="#{insertProductViewBean.insert}"
-                                         update=":addForm">
+                        <p:commandButton value="تایید" action="#{insertProductViewBean.insert}"
+                                         update=":addForm"
+                        >
                         </p:commandButton>
                     </p:panel>
 

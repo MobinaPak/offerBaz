@@ -80,12 +80,22 @@ public class InsertProductViewBean extends BaseBean{
 
     }
 
+    public void findBank(){
+        for (BankDTO b:bankDTOS
+             ) {
+            if (b.getId()==bankId)
+                selectedBank=b;
+
+        }
+
+    }
+
     public void insert() {
         try {
 
             //offerProxy.insert(productDTO);
             if (Objects.nonNull(productDTO) && Objects.nonNull(selectedBank)) {
-                selectedBank.getProductDTOS().add(productDTO);
+                selectedBank.getProducts().add(productDTO);
                 offerProxy.updateBank(selectedBank);
                 addNotificationMessage();
                   emptyPage();

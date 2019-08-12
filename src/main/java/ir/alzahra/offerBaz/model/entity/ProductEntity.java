@@ -33,10 +33,10 @@ public class ProductEntity extends BaseEntity {
     @MapTo(targetEntity = OfferDTO.class)
     private List<OfferEntity> offers;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+/*    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "BANK_ID")
     @MapTo(targetEntity = BankDTO.class)
-    private BankEntity bank = new BankEntity();
+    private BankEntity bank = new BankEntity();*/
 
     public Long getId() {
         return id;
@@ -70,11 +70,11 @@ public class ProductEntity extends BaseEntity {
         this.offers = offers;
     }
 
-    public BankEntity getBank() {
+/*    public BankEntity getBank() {
         return bank;
     }
 
     public void setBank(BankEntity bank) {
         this.bank = bank;
-    }
+    }*/
 }

@@ -30,7 +30,7 @@ public class BankEntity extends BaseEntity{
     @Column(name = "NAME")
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade={CascadeType.ALL}, fetch = FetchType.LAZY, orphanRemoval = true)
     @JoinColumn(name = "BANK_ID")
     @MapTo(targetEntity = ProductDTO.class)
     private List<ProductEntity> products;
