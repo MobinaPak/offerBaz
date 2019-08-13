@@ -7,7 +7,7 @@ import ir.alzahra.offerBaz.model.entity.ProfileEntity;
  * @Author: hanieh Moafi
  * @Date: 5/24/2019
  **/
-public class ProfileRoleDTO {
+public class ProfileRoleDTO extends BaseDto{
 
     private Long id;
     @MapTo(targetEntity = ProfileEntity.class)

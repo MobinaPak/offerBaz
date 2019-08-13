@@ -11,7 +11,7 @@ import java.util.List;
  * @Date: 4/18/2019, Thu
  **/
 
-public class BankDTO {
+public class BankDTO extends BaseDto{
 
     private Long id;
     private String name;

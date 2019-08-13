@@ -8,7 +8,7 @@ import ir.alzahra.offerBaz.model.entity.ProductEntity;
  * @Author: zahra soltaninejad
  * @Date: 4/18/2019, Thu
  **/
-public class OfferDTO {
+public class OfferDTO extends BaseDto {
 
     private Long id;
     private String name;

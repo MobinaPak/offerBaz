@@ -6,7 +6,7 @@ import ir.alzahra.offerBaz.enums.ResponseStatus;
  * @Autor: Mobina Pak
  * @Date: 3/5/2019
  **/
-public class ResponseDTO<T> {
+public class ResponseDTO<T> extends BaseDto{
 
     private ResponseStatus responseStatus;
     private T response;

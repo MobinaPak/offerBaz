@@ -11,7 +11,7 @@ import java.util.List;
  * @Author: zahra soltaninejad
  * @Date: 4/18/2019, Thu
  **/
-public class ProductDTO {
+public class ProductDTO extends BaseDto{
 
     private Long id;
     private String productName;

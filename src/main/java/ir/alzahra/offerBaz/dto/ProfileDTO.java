@@ -12,7 +12,7 @@ import java.util.List;
  * @Author: hanieh moafi
  * @Date: 4/19/2019
  **/
-public class ProfileDTO {
+public class ProfileDTO extends BaseDto{
 
     private Long id;
     private String userName;

@@ -12,7 +12,7 @@ import java.util.List;
  * @Author: zahra soltaninejad
  * @Date: 4/18/2019, Thu
  **/
-public class OfferRequestDTO {
+public class OfferRequestDTO extends BaseDto {
 
     private Long id;
     private String name;
