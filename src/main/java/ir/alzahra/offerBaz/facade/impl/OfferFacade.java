@@ -1,5 +1,6 @@
 package ir.alzahra.offerBaz.facade.impl;
 
+import com.sun.org.apache.xpath.internal.operations.String;
 import ir.alzahra.offerBaz.control.IOfferService;
 import ir.alzahra.offerBaz.dto.BankDTO;
 import ir.alzahra.offerBaz.dto.ProductDTO;
@@ -58,5 +59,11 @@ public class OfferFacade  implements IOfferFacade{
     public void updateBank(BankDTO bankDTO) throws BaseException {
         BankEntity bankEntity=MapperClass.mapper(new BankEntity(),bankDTO);
         offerService.updateBank(bankEntity);
+    }
+
+    @Override
+    public BankDTO findBankByName(String bankName) throws BaseException {
+        BankEntity bank=offerService.findBankByName(bankName);
+        return MapperClass.mapper(new BankDTO(),bank);
     }
 }

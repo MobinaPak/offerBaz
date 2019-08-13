@@ -1,5 +1,6 @@
 package ir.alzahra.offerBaz.control;
 
+import com.sun.org.apache.xpath.internal.operations.String;
 import ir.alzahra.offerBaz.exception.BaseException;
 import ir.alzahra.offerBaz.model.entity.BankEntity;
 import ir.alzahra.offerBaz.model.entity.ProductEntity;
@@ -19,4 +20,6 @@ public interface IOfferService {
     List<BankEntity> getAllBanks()throws BaseException;
 
     void updateBank(BankEntity bankEntity)throws BaseException;
+
+    BankEntity findBankByName(String bankName)throws BaseException;
 }

@@ -1,7 +1,6 @@
 package ir.alzahra.offerBaz.proxy.impl;
 
 import ir.alzahra.offerBaz.dto.BankDTO;
-import ir.alzahra.offerBaz.dto.ProductDTO;
 import ir.alzahra.offerBaz.dto.ResponseDTO;
 import ir.alzahra.offerBaz.exception.BaseException;
 import ir.alzahra.offerBaz.proxy.IOfferProxy;
@@ -42,6 +41,15 @@ public class OfferProxy extends BaseProxy implements IOfferProxy {
     @Override
     public void updateBank(BankDTO selectedBank) throws BaseException {
         callRest(RestURIConstants.MAIN_URI+"/bank/updateBank",selectedBank);
+
+    }
+
+    @Override
+    public BankDTO findBankByName(String bankName) throws BaseException {
+/*        MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
+        params.add("bankName", Objects.toString(bankName, null));*/
+       return callRest(RestURIConstants.MAIN_URI + "/bank/findBankByName", bankName, new ParameterizedTypeReference<ResponseDTO<BankDTO>>() {
+       });
 
     }
 }

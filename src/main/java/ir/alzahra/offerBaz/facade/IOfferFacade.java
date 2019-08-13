@@ -1,5 +1,6 @@
 package ir.alzahra.offerBaz.facade;
 
+import com.sun.org.apache.xpath.internal.operations.String;
 import ir.alzahra.offerBaz.dto.BankDTO;
 import ir.alzahra.offerBaz.dto.ProductDTO;
 import ir.alzahra.offerBaz.exception.BaseException;
@@ -24,4 +25,7 @@ public interface IOfferFacade {
 
     @Transactional(rollbackFor = Exception.class)
     void updateBank(BankDTO bankDTO)throws BaseException;
+
+    @Transactional(rollbackFor = Exception.class)
+    BankDTO findBankByName(String bankName)throws BaseException;
 }

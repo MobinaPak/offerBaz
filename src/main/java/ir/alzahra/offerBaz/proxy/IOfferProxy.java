@@ -19,4 +19,6 @@ public interface IOfferProxy {
     List<BankDTO> getAllBanks()throws BaseException;
 
     void updateBank(BankDTO selectedBank)throws BaseException;
+
+    BankDTO findBankByName(String bankName)throws BaseException;
 }

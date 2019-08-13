@@ -5,10 +5,7 @@ import ir.alzahra.offerBaz.enums.ResponseStatus;
 import ir.alzahra.offerBaz.exception.BaseException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.faces.application.FacesMessage;
@@ -29,7 +26,6 @@ abstract class BaseProxy {
     protected <T> T callRest(String address, Object sendObject, ParameterizedTypeReference<ResponseDTO<T>> t) throws BaseException {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders requestHeaders = new HttpHeaders();
-
         String headerValue = FacesContext.getCurrentInstance().getExternalContext().getRequestHeaderMap().get("cookie");
         requestHeaders.add("Cookie", headerValue);
 

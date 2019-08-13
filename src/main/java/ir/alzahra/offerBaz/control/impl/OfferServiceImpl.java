@@ -1,5 +1,6 @@
 package ir.alzahra.offerBaz.control.impl;
 
+import com.sun.org.apache.xpath.internal.operations.String;
 import ir.alzahra.offerBaz.control.IOfferService;
 import ir.alzahra.offerBaz.dto.BankDTO;
 import ir.alzahra.offerBaz.exception.BaseException;
@@ -54,5 +55,10 @@ public class OfferServiceImpl implements IOfferService {
         bankDao.update(bankEntity);
         applicationEventPublisher.notify("product.insert.success", NotificationType.Info);
 
+    }
+
+    @Override
+    public BankEntity findBankByName(String bankName) throws BaseException {
+       return bankDao.findByName(bankName);
     }
 }
