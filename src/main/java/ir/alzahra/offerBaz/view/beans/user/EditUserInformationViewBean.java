@@ -11,37 +11,49 @@ import org.springframework.stereotype.Component;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import java.util.Objects;
 
 /**
  * @Author: Mobina Pak
- * @Date: 8/8/2019
+ * @Date: 8/9/2019
  **/
-@Component("registerUserViewBean")
+@Component("editUserInformationViewBean")
 @Scope("view")
-public class RegisterUserViewBean extends BaseBean {
+public class EditUserInformationViewBean extends BaseBean {
 
     private UserDTO userDTO;
-    private String userName;
-    private String password;
 
     @Autowired
     private IUserProxy userProxy;
 
-    public RegisterUserViewBean() {
-        userDTO = new UserDTO();
+    public void init() {
+        try {
+            // TODO: 8/16/2019 SHAMIM
+            userDTO = new UserDTO();
+            userDTO.setProfile(new ProfileDTO());
+            userDTO.getProfile().setUserName("09304101396");
+            userDTO = userProxy.getUser(userDTO);
+        } catch (BaseException e) {
+            // TODO: 8/9/2019 SHAMIM
+            e.printStackTrace();
+        }
+        if (Objects.isNull(userDTO)){
+            emptyPage();
+        }
     }
 
-    public void register() {
+    public void edit() {
         try {
-            userDTO.setProfile(new ProfileDTO(userName , password));
-            userDTO.setPhoneNumber(userName);
-            userProxy.register(userDTO);
-            addNotificationMessage();
+            userProxy.edit(userDTO);
             emptyPage();
         } catch (BaseException e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
                     e.getMessage(), ""));
         }
+    }
+
+    public void dismiss() {
+        emptyPage();
     }
 
     private void emptyPage() {
@@ -54,21 +66,5 @@ public class RegisterUserViewBean extends BaseBean {
 
     public void setUserDTO(UserDTO userDTO) {
         this.userDTO = userDTO;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }

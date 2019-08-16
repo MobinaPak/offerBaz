@@ -25,7 +25,7 @@ public class UserController {
     private IUserFacade userFacade;
 
     @RequestMapping(method = RequestMethod.POST, value = RestURIConstants.REGISTER_USER)
-    ResponseEntity<ResponseDTO> register(@RequestBody UserDTO userDTO) {
+    ResponseEntity<ResponseDTO<UserDTO>> register(@RequestBody UserDTO userDTO) {
         ResponseDTO<UserDTO> responseDto = new ResponseDTO<>();
         try {
             responseDto.setResponse(userFacade.register(userDTO));
@@ -37,4 +37,32 @@ public class UserController {
         }
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
+
+    @RequestMapping(method = RequestMethod.POST, value = RestURIConstants.GET_USER)
+    ResponseEntity<ResponseDTO<UserDTO>> searchUserByUserName(@RequestBody UserDTO userDTO) {
+        ResponseDTO<UserDTO> responseDto = new ResponseDTO<>();
+        try {
+            responseDto.setResponse(userFacade.searchUserByUserName(userDTO));
+            responseDto.setResponseStatus(ResponseStatus.OK);
+        } catch (Exception e) {
+            responseDto.setMsg(e.getMessage());
+            responseDto.setResponseStatus(ResponseStatus.ERROR);
+        }
+        return new ResponseEntity<>(responseDto, HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = RestURIConstants.EDIT_USER)
+    ResponseEntity<ResponseDTO<UserDTO>> editUser(@RequestBody UserDTO userDTO) {
+        ResponseDTO<UserDTO> responseDto = new ResponseDTO<>();
+        try {
+            responseDto.setResponse(userFacade.edit(userDTO));
+            responseDto.setMsg("User edited successfully");
+            responseDto.setResponseStatus(ResponseStatus.OK);
+        } catch (Exception e) {
+            responseDto.setMsg(e.getMessage());
+            responseDto.setResponseStatus(ResponseStatus.ERROR);
+        }
+        return new ResponseEntity<>(responseDto, HttpStatus.OK);
+    }
+
 }

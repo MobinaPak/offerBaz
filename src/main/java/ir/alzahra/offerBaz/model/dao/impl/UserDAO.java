@@ -1,8 +1,11 @@
 package ir.alzahra.offerBaz.model.dao.impl;
 
+import ir.alzahra.offerBaz.exception.BaseException;
 import ir.alzahra.offerBaz.model.dao.IUserDao;
 import ir.alzahra.offerBaz.model.entity.UserEntity;
 import org.springframework.stereotype.Repository;
+
+import javax.persistence.Query;
 
 /**
  * @Author: Mobina Pak
@@ -18,7 +21,20 @@ public class UserDAO extends AbstractDAO implements IUserDao {
 
     @Override
     public void update(UserEntity entity) {
+        entityManager.merge(entity);
+    }
 
+    @Override
+    public UserEntity searchUserByUserName(String userName) throws BaseException {
+        String jpql = "select user from UserEntity user where user.profile.userName =:userName";
+        Query query = entityManager.createQuery(jpql);
+        query.setParameter("userName" , userName);
+
+        try {
+            return (UserEntity) query.getSingleResult();
+        }catch (Exception e){
+            throw new BaseException("No item matches!" , e);
+        }
     }
 
     @Override

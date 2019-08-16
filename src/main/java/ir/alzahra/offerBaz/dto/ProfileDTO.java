@@ -25,6 +25,13 @@ public class ProfileDTO extends BaseDto{
     @MapTo(targetEntity = UserEntity.class)
     private UserDTO user;
 
+    public ProfileDTO() {
+    }
+
+    public ProfileDTO(String userName, String password) {
+        this.userName = userName;
+        this.password = password;
+    }
 
     public Long getId() {
         return id;

@@ -18,13 +18,13 @@
             <h:form id="registerForm">
                 <p:fieldset legend="مشخصات کاربر" style="margin-bottom:20px">
 
-                    <p:messages autoUpdate="true"/>
+                    <p:growl id="growl" showDetail="true" sticky="true" />
                     <p:panelGrid id="registerUser" columns="2" columnsWidth="2,4" styleClass="ui-noborder">
-                        <p:outputLabel value="نام:"/>
-                        <p:inputText rows="2" cols="33" value="#{registerUserViewBean.userDTO.name}"/>
+                        <p:outputLabel value="شماره موبایل:"/>
+                        <p:inputText id="userName" rows="2" cols="33" value="#{registerUserViewBean.userName}"/>
 
-                        <p:outputLabel value="نام خانوادگی:"/>
-                        <p:inputTextarea rows="2" cols="33" value="#{registerUserViewBean.userDTO.family}"/>
+                        <p:outputLabel value="رمز عبور:"/>
+                        <p:password id="password" rows="2" cols="33" value="#{registerUserViewBean.password}"/>
                     </p:panelGrid>
                     <p:spacer height="5"/>
                     <p:panel styleClass="buttonBox">

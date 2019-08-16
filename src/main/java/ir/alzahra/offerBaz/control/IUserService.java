@@ -1,5 +1,6 @@
 package ir.alzahra.offerBaz.control;
 
+import ir.alzahra.offerBaz.exception.BaseException;
 import ir.alzahra.offerBaz.model.entity.UserEntity;
 
 /**
@@ -8,4 +9,6 @@ import ir.alzahra.offerBaz.model.entity.UserEntity;
  **/
 public interface IUserService {
     UserEntity register(UserEntity userEntity);
+    UserEntity searchUserByUserName(UserEntity userEntity) throws BaseException;
+    UserEntity edit(UserEntity userEntity);
 }

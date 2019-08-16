@@ -15,4 +15,6 @@ public class RestURIConstants {
 
     //CONTROLLER METHODS
     public static final String REGISTER_USER = "/registerUser";
+    public static final String GET_USER = "/getUser";
+    public static final String EDIT_USER = "/editUser";
 }

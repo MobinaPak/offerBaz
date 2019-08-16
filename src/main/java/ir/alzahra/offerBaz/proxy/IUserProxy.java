@@ -9,4 +9,8 @@ import ir.alzahra.offerBaz.exception.BaseException;
  **/
 public interface IUserProxy {
     UserDTO register(UserDTO userDTO) throws BaseException;
+
+    UserDTO getUser(UserDTO userDTO) throws BaseException;
+
+    UserDTO edit(UserDTO userDTO) throws BaseException;
 }

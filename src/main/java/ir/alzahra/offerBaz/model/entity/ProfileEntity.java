@@ -20,13 +20,10 @@ import java.util.Set;
 @Table(name="PROFILE")
 public class ProfileEntity extends BaseEntity {
 
-   // private static final long serialVersionUID = 7323957813318349601L;
-
     @Id
     @GeneratedValue
     @Column(name = "ID")
     private Long id;
-
 
     @Column(name = "USERNAME", unique = true,nullable = false, length = 45)
     private String userName;

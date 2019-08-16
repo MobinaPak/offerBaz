@@ -5,8 +5,8 @@ package ir.alzahra.offerBaz.enums;
  * @Date: 4/18/2019, Thu
  **/
 public enum Gender {
-        FEMALE("زن"),
-        MALE("مرد");
+        FEMALE("مونث"),
+        MALE("مذکر");
 
       /*  private int code;
         Gender(int i) {

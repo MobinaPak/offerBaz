@@ -17,7 +17,19 @@ public class UserProxyImpl extends BaseProxy implements IUserProxy {
 
     @Override
     public UserDTO register(UserDTO userDTO) throws BaseException {
-        return callRest(RestURIConstants.MAIN_URI + "/ws" + RestURIConstants.USER + RestURIConstants.REGISTER_USER, userDTO, new ParameterizedTypeReference<ResponseDTO<UserDTO>>() {
+        return callRest(RestURIConstants.MAIN_URI  + RestURIConstants.USER + RestURIConstants.REGISTER_USER, userDTO, new ParameterizedTypeReference<ResponseDTO<UserDTO>>() {
+        });
+    }
+
+    @Override
+    public UserDTO getUser(UserDTO userDTO) throws BaseException {
+        return callRest(RestURIConstants.MAIN_URI + RestURIConstants.USER + RestURIConstants.GET_USER, userDTO, new ParameterizedTypeReference<ResponseDTO<UserDTO>>() {
+        });
+    }
+
+    @Override
+    public UserDTO edit(UserDTO userDTO) throws BaseException {
+        return callRest(RestURIConstants.MAIN_URI + RestURIConstants.USER + RestURIConstants.EDIT_USER, userDTO, new ParameterizedTypeReference<ResponseDTO<UserDTO>>() {
         });
     }
 }

@@ -28,7 +28,7 @@ abstract class BaseProxy {
         HttpHeaders requestHeaders = new HttpHeaders();
         String headerValue = FacesContext.getCurrentInstance().getExternalContext().getRequestHeaderMap().get("cookie");
         requestHeaders.add("Cookie", headerValue);
-
+        requestHeaders.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity requestEntity = new HttpEntity(sendObject, requestHeaders);
         ResponseEntity<ResponseDTO<T>> response = restTemplate.exchange(
                 address,

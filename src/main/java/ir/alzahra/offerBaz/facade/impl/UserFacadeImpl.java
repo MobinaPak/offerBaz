@@ -2,6 +2,7 @@ package ir.alzahra.offerBaz.facade.impl;
 
 import ir.alzahra.offerBaz.control.IUserService;
 import ir.alzahra.offerBaz.dto.UserDTO;
+import ir.alzahra.offerBaz.exception.BaseException;
 import ir.alzahra.offerBaz.facade.IUserFacade;
 import ir.alzahra.offerBaz.facade.mapper.MapperClass;
 import ir.alzahra.offerBaz.model.entity.UserEntity;
@@ -25,5 +26,19 @@ public class UserFacadeImpl implements IUserFacade {
         UserEntity userEntity = MapperClass.mapper(new UserEntity(), userDTO);
         userService.register(userEntity);
         return userDTO;
+    }
+
+    @Override
+    public UserDTO searchUserByUserName(UserDTO userDTO) throws BaseException {
+        UserEntity userEntity = MapperClass.mapper(new UserEntity(), userDTO);
+        UserEntity user = userService.searchUserByUserName(userEntity);
+        return MapperClass.mapper(new UserDTO() , user);
+    }
+
+    @Override
+    public UserDTO edit(UserDTO userDTO) throws BaseException {
+        UserEntity userEntity = MapperClass.mapper(new UserEntity(), userDTO);
+        UserEntity user = userService.edit(userEntity);
+        return MapperClass.mapper(new UserDTO() , user);
     }
 }
