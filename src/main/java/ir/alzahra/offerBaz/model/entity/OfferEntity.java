@@ -32,10 +32,10 @@ public class OfferEntity extends BaseEntity {
     @MapTo(targetEntity = ProductDTO.class)
     private ProductEntity product;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+/*    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "OFFER_REQUEST_ID")
     @MapTo(targetEntity = OfferRequestDTO.class)
-    private OfferRequestEntity offerRequest;
+    private OfferRequestEntity offerRequest;*/
 
 
     public Long getId() {
@@ -69,12 +69,12 @@ public class OfferEntity extends BaseEntity {
     public void setProduct(ProductEntity product) {
         this.product = product;
     }
-
+/*
     public OfferRequestEntity getOfferRequest() {
         return offerRequest;
     }
 
     public void setOfferRequest(OfferRequestEntity offerRequest) {
         this.offerRequest = offerRequest;
-    }
+    }*/
 }

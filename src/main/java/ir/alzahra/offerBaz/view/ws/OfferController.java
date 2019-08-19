@@ -1,7 +1,7 @@
 package ir.alzahra.offerBaz.view.ws;
 
-import com.sun.org.apache.xpath.internal.operations.String;
 import ir.alzahra.offerBaz.dto.BankDTO;
+import ir.alzahra.offerBaz.dto.MultiWrapperDto;
 import ir.alzahra.offerBaz.dto.ProductDTO;
 import ir.alzahra.offerBaz.dto.ResponseDTO;
 import ir.alzahra.offerBaz.exception.BaseException;
@@ -59,7 +59,7 @@ public class OfferController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/bank/findBankByName")
-    ResponseEntity<ResponseDTO<BankDTO>> findBankByName(@RequestParam String bankName) throws BaseException {
+    ResponseEntity<ResponseDTO<BankDTO>> findBankByName(@RequestBody String bankName) throws BaseException {
         ResponseDTO responseDto = new ResponseDTO();
         responseDto.setResponse(offerFacade.findBankByName(bankName));
         return new ResponseEntity<ResponseDTO<BankDTO>>(responseDto, HttpStatus.OK);

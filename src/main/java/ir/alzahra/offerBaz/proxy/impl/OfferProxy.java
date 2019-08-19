@@ -1,6 +1,7 @@
 package ir.alzahra.offerBaz.proxy.impl;
 
 import ir.alzahra.offerBaz.dto.BankDTO;
+import ir.alzahra.offerBaz.dto.MultiWrapperDto;
 import ir.alzahra.offerBaz.dto.ResponseDTO;
 import ir.alzahra.offerBaz.exception.BaseException;
 import ir.alzahra.offerBaz.proxy.IOfferProxy;

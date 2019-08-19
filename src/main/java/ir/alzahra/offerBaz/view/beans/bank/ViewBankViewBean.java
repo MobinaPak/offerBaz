@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.faces.context.FacesContext;
+import java.io.IOException;
+
 /**
  * @author z.moafi
  * @since 13/08/2019
@@ -46,9 +49,7 @@ public class ViewBankViewBean extends BaseBean {
             //TODO
         }else {
             try {
-                offerProxy.findBankByName(bankName);
-                addNotificationMessage();
-                emptyPage();
+                selectedBank=offerProxy.findBankByName(bankName);
             } catch (BaseException e) {
                 //TODO
             }
@@ -57,6 +58,11 @@ public class ViewBankViewBean extends BaseBean {
     }
 
     public void redirectViewProduct(){
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 

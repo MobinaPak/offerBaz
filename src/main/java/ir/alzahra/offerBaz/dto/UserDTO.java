@@ -6,6 +6,7 @@ import ir.alzahra.offerBaz.facade.mapper.MapTo;
 import ir.alzahra.offerBaz.model.entity.OfferRequestEntity;
 import ir.alzahra.offerBaz.model.entity.ProfileEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,8 +25,8 @@ public class UserDTO extends BaseDto{
     private String email;
     private String phoneNumber;
     private CustomerType customerType;
-    @MapTo(targetEntity = OfferRequestEntity.class)
-    private List<OfferRequestDTO> requestDTOS;
+/*    @MapTo(targetEntity = OfferRequestEntity.class)
+    private List<OfferRequestDTO> requestDTOS = new ArrayList<>();*/
 
     public Long getId() {
         return id;
@@ -99,11 +100,11 @@ public class UserDTO extends BaseDto{
         this.customerType = customerType;
     }
 
-    public List<OfferRequestDTO> getRequestDTOS() {
+/*    public List<OfferRequestDTO> getRequestDTOS() {
         return requestDTOS;
     }
 
     public void setRequestDTOS(List<OfferRequestDTO> requestDTOS) {
         this.requestDTOS = requestDTOS;
-    }
+    }*/
 }

@@ -22,8 +22,8 @@ public class ProfileDTO extends BaseDto{
     private List<OfferRequestDTO> offerRequests=new ArrayList<>();
     @MapTo(targetEntity = ProfileRoleEntity.class)
     private List<ProfileRoleDTO> profileRoles = new ArrayList<>();
-    @MapTo(targetEntity = UserEntity.class)
-    private UserDTO user;
+/*    @MapTo(targetEntity = UserEntity.class)
+    private UserDTO user;*/
 
     public ProfileDTO() {
     }
@@ -57,7 +57,7 @@ public class ProfileDTO extends BaseDto{
         this.password = password;
     }
 
-    public boolean isEnabled() {
+    public boolean getEnabled() {
         return enabled;
     }
 
@@ -80,12 +80,12 @@ public class ProfileDTO extends BaseDto{
     public void setProfileRoles(List<ProfileRoleDTO> profileRoles) {
         this.profileRoles = profileRoles;
     }
-
+/*
     public UserDTO getUser() {
         return user;
     }
 
     public void setUser(UserDTO user) {
         this.user = user;
-    }
+    }*/
 }

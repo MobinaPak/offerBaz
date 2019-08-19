@@ -22,10 +22,10 @@ public class OfferRequestDTO extends BaseDto {
     private String salaryPerMonth;
     private String savedMoney;
     private Date submitDate;
-    @MapTo(targetEntity = ProfileEntity.class)
-    private ProfileDTO profile;
-    @MapTo(targetEntity = UserEntity.class)
-    private UserDTO user;
+/*    @MapTo(targetEntity = ProfileEntity.class)
+    private ProfileDTO profile;*/
+//    @MapTo(targetEntity = UserEntity.class)
+//    private UserDTO user;
 
     public Long getId() {
         return id;
@@ -83,19 +83,19 @@ public class OfferRequestDTO extends BaseDto {
         this.submitDate = submitDate;
     }
 
-    public ProfileDTO getProfile() {
+/*    public ProfileDTO getProfile() {
         return profile;
     }
 
     public void setProfile(ProfileDTO profile) {
         this.profile = profile;
-    }
-
+    }*/
+/*
     public UserDTO getUser() {
         return user;
     }
 
     public void setUser(UserDTO user) {
         this.user = user;
-    }
+    }*/
 }

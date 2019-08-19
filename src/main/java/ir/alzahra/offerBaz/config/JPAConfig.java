@@ -37,7 +37,7 @@ public class JPAConfig {
 
     private Properties HibernateProperties(){
         Properties hibernateProperties = new Properties();
-//        hibernateProperties.put("hibernate.hbm2ddl.auto", "create-drop");
+        hibernateProperties.put("hibernate.hbm2ddl.auto", "create-drop");
 //        hibernateProperties.put("hibernate.hbm2ddl.auto", "create");
         return hibernateProperties;
     }

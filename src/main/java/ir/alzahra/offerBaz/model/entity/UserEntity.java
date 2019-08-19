@@ -38,7 +38,7 @@ public class UserEntity extends BaseEntity {
 
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "USER_ID")
+    @JoinColumn(name = "PROFILE_ID")
     @MapTo(targetEntity = ProfileDTO.class)
     private ProfileEntity profile;
 
@@ -52,10 +52,10 @@ public class UserEntity extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private CustomerType customerType;
 
-    @OneToMany(cascade = CascadeType.ALL)
+/*    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "OFFER_REQ_ID")
     @MapTo(targetEntity = OfferRequestDTO.class)
-    private List<OfferRequestEntity> requestDTOS;
+    private List<OfferRequestEntity> requestDTOS;*/
 
 
     public Long getId() {
@@ -130,11 +130,11 @@ public class UserEntity extends BaseEntity {
         this.customerType = customerType;
     }
 
-    public List<OfferRequestEntity> getRequestDTOS() {
+/*    public List<OfferRequestEntity> getRequestDTOS() {
         return requestDTOS;
     }
 
     public void setRequestDTOS(List<OfferRequestEntity> requestDTOS) {
         this.requestDTOS = requestDTOS;
-    }
+    }*/
 }

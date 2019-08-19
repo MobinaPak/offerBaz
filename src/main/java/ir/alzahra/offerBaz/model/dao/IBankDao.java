@@ -1,6 +1,5 @@
 package ir.alzahra.offerBaz.model.dao;
 
-import com.sun.org.apache.xpath.internal.operations.String;
 import ir.alzahra.offerBaz.exception.BaseException;
 import ir.alzahra.offerBaz.model.entity.BankEntity;
 import ir.alzahra.offerBaz.model.entity.ProductEntity;

@@ -55,9 +55,16 @@ public class BaseBean {
 
 
     protected CustomEventParameters getCustomEventParameters() {
-        CustomEventParameters customEventParameters = customSpringEventListener.getCustomEventParameters().get(0);
-        customSpringEventListener.getCustomEventParameters().remove(0);
-        return customEventParameters;
+       if (customSpringEventListener.getCustomEventParameters().size()!=0) {
+           CustomEventParameters customEventParameters = customSpringEventListener.getCustomEventParameters().get(0);
+           customSpringEventListener.getCustomEventParameters().remove(0);
+           return customEventParameters;
+       }else {
+           new CustomEventParameters();
+
+       }
+       return null;
+
     }
 
 

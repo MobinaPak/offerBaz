@@ -45,10 +45,10 @@ public class ProfileEntity extends BaseEntity {
     private List<OfferRequestEntity> offerRequests;
 
 
-    @OneToOne(cascade = CascadeType.ALL)
+/*    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "USER_ID")
     @MapTo(targetEntity = UserDTO.class)
-    private UserEntity user;
+    private UserEntity user;*/
 
 
     public Long getId() {
@@ -83,7 +83,7 @@ public class ProfileEntity extends BaseEntity {
         this.password = password;
     }
 
-    public boolean isEnabled() {
+    public boolean getEnabled() {
         return enabled;
     }
 
@@ -99,11 +99,11 @@ public class ProfileEntity extends BaseEntity {
         this.offerRequests = offerRequests;
     }
 
-    public UserEntity getUser() {
+/*    public UserEntity getUser() {
         return user;
     }
 
     public void setUser(UserEntity user) {
         this.user = user;
-    }
+    }*/
 }

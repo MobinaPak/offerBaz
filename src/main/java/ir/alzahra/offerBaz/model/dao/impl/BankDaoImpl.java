@@ -1,6 +1,6 @@
 package ir.alzahra.offerBaz.model.dao.impl;
 
-import com.sun.org.apache.xpath.internal.operations.String;
+
 import ir.alzahra.offerBaz.exception.BaseException;
 import ir.alzahra.offerBaz.model.dao.IBankDao;
 import ir.alzahra.offerBaz.model.entity.BankEntity;
@@ -42,6 +42,7 @@ public class BankDaoImpl extends AbstractDAO implements IBankDao {
     @Override
     public BankEntity findByName(String bankName) throws BaseException {
         TypedQuery query =entityManager.createNamedQuery("findBankByName",BankEntity.class);
+        query.setParameter("bankName",bankName);
         List<BankEntity> banks = query.getResultList();
         if (Objects.nonNull(banks) && banks.size()>0)
             return banks.get(0);

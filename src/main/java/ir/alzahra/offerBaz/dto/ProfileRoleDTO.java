@@ -10,8 +10,8 @@ import ir.alzahra.offerBaz.model.entity.ProfileEntity;
 public class ProfileRoleDTO extends BaseDto{
 
     private Long id;
-    @MapTo(targetEntity = ProfileEntity.class)
-    private ProfileDTO profile;
+/*    @MapTo(targetEntity = ProfileEntity.class)
+    private ProfileDTO profile;*/
     private String role;
 
     public Long getId() {
@@ -21,14 +21,14 @@ public class ProfileRoleDTO extends BaseDto{
     public void setId(Long id) {
         this.id = id;
     }
-
+/*
     public ProfileDTO getProfile() {
         return profile;
     }
 
     public void setProfile(ProfileDTO profile) {
         this.profile = profile;
-    }
+    }*/
 
     public String getRole() {
         return role;

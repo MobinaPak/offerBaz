@@ -44,15 +44,15 @@ public class OfferRequestEntity extends BaseEntity {
     @MapTo(targetEntity = OfferDTO.class)
     private List<OfferEntity> offers;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+/*    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "PROFILE_ID")
     @MapTo(targetEntity = ProfileDTO.class)
-    private ProfileEntity profile;
+    private ProfileEntity profile;*/
 
-    @ManyToOne(cascade = CascadeType.ALL)
+/*    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "OFFER_REQ_ID")
     @MapTo(targetEntity = UserDTO.class)
-    private UserEntity user;
+    private UserEntity user;*/
 
     public Long getId() {
         return id;
@@ -110,19 +110,19 @@ public class OfferRequestEntity extends BaseEntity {
         this.offers = offers;
     }
 
-    public ProfileEntity getProfile() {
+/*    public ProfileEntity getProfile() {
         return profile;
     }
 
     public void setProfile(ProfileEntity profile) {
         this.profile = profile;
-    }
+    }*/
 
-    public UserEntity getUser() {
+/*    public UserEntity getUser() {
         return user;
     }
 
     public void setUser(UserEntity user) {
         this.user = user;
-    }
+    }*/
 }

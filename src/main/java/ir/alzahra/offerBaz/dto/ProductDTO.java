@@ -18,8 +18,8 @@ public class ProductDTO extends BaseDto{
     private String description;
 /*    @MapTo(targetEntity = BankEntity.class)
     private BankDTO bank = new BankDTO();*/
-    @MapTo(targetEntity = OfferEntity.class)
-    private List<OfferDTO> offers = new ArrayList<>();
+/*    @MapTo(targetEntity = OfferEntity.class)
+    private List<OfferDTO> offers = new ArrayList<>();*/
 
     public Long getId() {
         return id;
@@ -53,11 +53,11 @@ public class ProductDTO extends BaseDto{
         this.bank = bank;
     }*/
 
-    public List<OfferDTO> getOffers() {
+/*    public List<OfferDTO> getOffers() {
         return offers;
     }
 
     public void setOffers(List<OfferDTO> offers) {
         this.offers = offers;
-    }
+    }*/
 }

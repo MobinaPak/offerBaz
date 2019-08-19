@@ -15,8 +15,8 @@ public class OfferDTO extends BaseDto {
     private String description;
     @MapTo(targetEntity = ProductEntity.class)
     private ProductDTO product = new ProductDTO();
-    @MapTo(targetEntity = OfferRequestEntity.class)
-    private OfferRequestDTO offerRequest = new OfferRequestDTO();
+/*    @MapTo(targetEntity = OfferRequestEntity.class)
+    private OfferRequestDTO offerRequest = new OfferRequestDTO();*/
 
 
     public Long getId() {
@@ -50,12 +50,12 @@ public class OfferDTO extends BaseDto {
     public void setProduct(ProductDTO product) {
         this.product = product;
     }
-
+/*
     public OfferRequestDTO getOfferRequest() {
         return offerRequest;
     }
 
     public void setOfferRequest(OfferRequestDTO offerRequest) {
         this.offerRequest = offerRequest;
-    }
+    }*/
 }

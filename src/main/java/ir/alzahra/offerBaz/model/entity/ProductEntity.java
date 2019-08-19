@@ -28,10 +28,10 @@ public class ProductEntity extends BaseEntity {
     @Column(name = "DESCRIPTION")
     private String description;
 
-    @OneToMany(cascade = CascadeType.ALL)
+/*    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "OFFER_ID")
     @MapTo(targetEntity = OfferDTO.class)
-    private List<OfferEntity> offers;
+    private List<OfferEntity> offers;*/
 
 /*    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "BANK_ID")
@@ -62,13 +62,13 @@ public class ProductEntity extends BaseEntity {
         this.description = description;
     }
 
-    public List<OfferEntity> getOffers() {
+/*    public List<OfferEntity> getOffers() {
         return offers;
     }
 
     public void setOffers(List<OfferEntity> offers) {
         this.offers = offers;
-    }
+    }*/
 
 /*    public BankEntity getBank() {
         return bank;
