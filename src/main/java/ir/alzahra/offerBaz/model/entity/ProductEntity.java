@@ -11,6 +11,15 @@ import java.util.List;
  * @Author: zahra soltaninejad
  * @Date: 4/21/2019, Sun
  **/
+
+@NamedQueries(
+        {
+                @NamedQuery(
+                        name = "findProductByCode",
+                        query = "from ProductEntity p "
+                )
+        }
+)
 @Entity
 @Table(name="PRODUCT")
 public class ProductEntity extends BaseEntity {

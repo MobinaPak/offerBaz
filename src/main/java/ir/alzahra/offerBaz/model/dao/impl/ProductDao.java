@@ -1,5 +1,6 @@
 package ir.alzahra.offerBaz.model.dao.impl;
 
+import ir.alzahra.offerBaz.exception.BaseException;
 import ir.alzahra.offerBaz.model.dao.GenericDao;
 import ir.alzahra.offerBaz.model.dao.IProductDao;
 import ir.alzahra.offerBaz.model.entity.ProductEntity;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Repository;
  **/
 @Repository
 public class ProductDao extends AbstractDAO implements IProductDao {
+
+
 
 
     @Override
@@ -27,5 +30,10 @@ public class ProductDao extends AbstractDAO implements IProductDao {
     @Override
     public void delete(ProductEntity entity) {
 
+    }
+
+    @Override
+    public ProductEntity findProductByCode(String trackingCode) throws BaseException {
+        return null;
     }
 }

@@ -22,4 +22,6 @@ public interface IOfferService {
     void updateBank(BankEntity bankEntity)throws BaseException;
 
     BankEntity findBankByName(String bankName)throws BaseException;
+
+    ProductEntity findProductByCode(String trackingCode)throws BaseException;
 }

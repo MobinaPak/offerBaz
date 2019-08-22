@@ -26,4 +26,7 @@ public interface IOfferFacade {
 
     @Transactional(rollbackFor = Exception.class)
     BankDTO findBankByName(String bankName)throws BaseException;
+
+    @Transactional(rollbackFor = Exception.class)
+    Object findProductByCode(String trackingCode)throws BaseException;
 }

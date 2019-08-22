@@ -21,6 +21,7 @@ public enum NotificationType {
 
     Success;
 
+
     /**
      * Instantiates a new Notification type.
      */

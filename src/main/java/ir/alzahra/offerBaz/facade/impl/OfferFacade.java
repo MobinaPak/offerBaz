@@ -65,4 +65,10 @@ public class OfferFacade  implements IOfferFacade{
         BankEntity bank=offerService.findBankByName(bankName);
         return MapperClass.mapper(new BankDTO(),bank);
     }
+
+    @Override
+    public Object findProductByCode(String trackingCode) throws BaseException {
+        ProductEntity p = offerService.findProductByCode(trackingCode);
+        return MapperClass.mapper(new ProductDTO(),p);
+    }
 }

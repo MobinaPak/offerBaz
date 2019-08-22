@@ -67,4 +67,13 @@ public class OfferController {
 
     }
 
+    @RequestMapping(method = RequestMethod.POST, value = "/product/findProductByCode")
+    ResponseEntity<ResponseDTO<ProductDTO>> findProductByCode(@RequestBody String trackingCode) throws BaseException {
+        ResponseDTO responseDto = new ResponseDTO();
+        responseDto.setResponse(offerFacade.findProductByCode(trackingCode));
+        return new ResponseEntity<ResponseDTO<ProductDTO>>(responseDto, HttpStatus.OK);
+
+
+    }
+
 }

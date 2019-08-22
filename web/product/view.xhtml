@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+>
+<f:metadata>
+    <f:viewAction onPostback="false" action="#{viewProductBean.init}"/>
+</f:metadata>
+
+<ui:composition>
+    <h:head>
+        <title>نمایش محصول</title>
+
+
+        <h:outputStylesheet library="css" name="style.css"/>
+
+
+    </h:head>
+    <h:body style="direction: rtl">
+        <div class="ui-g-3"></div>
+        <h:form id="addForm">
+            <p:messages autoUpdate="true" globalOnly="false" id="messages" closable="true"/>
+            <p:fieldset legend="نمایش محصول" style="margin-bottom:30px" class="ui-g-6">
+                <p:panel styleClass="searchBox">
+                    <p:panelGrid id="productAdd" columns="4" columnsWidth="2,4,2,4" styleClass="ui-noborder">
+                        <p:outputLabel value="کد محصول:" style="margin-left: 5px;"/>
+                        <p:inputText value="#{viewProductBean.trackingCode}" id="nameSearch"/>
+
+                        <p:commandButton id="searchButton" value="جستجو"
+                                         actionListener="#{viewProductBean.searchProduct}"
+                                         >
+
+                        </p:commandButton>
+                    </p:panelGrid>
+                </p:panel>
+
+
+        </p:fieldset>
+        </h:form>
+        <div class="ui-g-3"></div>
+    </h:body>
+</ui:composition>
+</html>

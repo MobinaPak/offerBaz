@@ -6,6 +6,7 @@ import ir.alzahra.offerBaz.dto.BankDTO;
 import ir.alzahra.offerBaz.exception.BaseException;
 import ir.alzahra.offerBaz.model.dao.IBankDao;
 import ir.alzahra.offerBaz.model.dao.IProductDao;
+import ir.alzahra.offerBaz.model.dao.impl.ProductDao;
 import ir.alzahra.offerBaz.model.entity.BankEntity;
 import ir.alzahra.offerBaz.model.entity.ProductEntity;
 import ir.alzahra.offerBaz.notify.CustomSpringEvent;
@@ -60,5 +61,10 @@ public class OfferServiceImpl implements IOfferService {
     @Override
     public BankEntity findBankByName(String bankName) throws BaseException {
        return bankDao.findByName(bankName);
+    }
+
+    @Override
+    public ProductEntity findProductByCode(String trackingCode) throws BaseException {
+        return productDao.findProductByCode(trackingCode);
     }
 }

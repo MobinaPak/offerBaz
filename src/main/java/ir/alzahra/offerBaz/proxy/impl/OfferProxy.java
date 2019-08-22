@@ -2,6 +2,7 @@ package ir.alzahra.offerBaz.proxy.impl;
 
 import ir.alzahra.offerBaz.dto.BankDTO;
 import ir.alzahra.offerBaz.dto.MultiWrapperDto;
+import ir.alzahra.offerBaz.dto.ProductDTO;
 import ir.alzahra.offerBaz.dto.ResponseDTO;
 import ir.alzahra.offerBaz.exception.BaseException;
 import ir.alzahra.offerBaz.proxy.IOfferProxy;
@@ -52,5 +53,11 @@ public class OfferProxy extends BaseProxy implements IOfferProxy {
        return callRest(RestURIConstants.MAIN_URI + "/bank/findBankByName", bankName, new ParameterizedTypeReference<ResponseDTO<BankDTO>>() {
        });
 
+    }
+
+    @Override
+    public ProductDTO findProduct(String trackingCode) throws BaseException {
+        return callRest(RestURIConstants.MAIN_URI + "/product/findProductByCode", trackingCode, new ParameterizedTypeReference<ResponseDTO<ProductDTO>>() {
+        });
     }
 }
