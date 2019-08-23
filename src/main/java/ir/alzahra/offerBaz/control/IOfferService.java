@@ -24,4 +24,8 @@ public interface IOfferService {
     BankEntity findBankByName(String bankName)throws BaseException;
 
     ProductEntity findProductByCode(String trackingCode)throws BaseException;
+
+    void initializeDatabase(String name) throws BaseException;
+
+    String generateUniqueCode() throws BaseException;
 }

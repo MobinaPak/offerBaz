@@ -16,6 +16,7 @@ public class ProductDTO extends BaseDto{
     private Long id;
     private String productName;
     private String description;
+    private String uniqueCode;
 /*    @MapTo(targetEntity = BankEntity.class)
     private BankDTO bank = new BankDTO();*/
 /*    @MapTo(targetEntity = OfferEntity.class)
@@ -45,7 +46,14 @@ public class ProductDTO extends BaseDto{
         this.description = description;
     }
 
-/*    public BankDTO getBank() {
+    public String getUniqueCode() {
+        return uniqueCode;
+    }
+
+    public void setUniqueCode(String uniqueCode) {
+        this.uniqueCode = uniqueCode;
+    }
+    /*    public BankDTO getBank() {
         return bank;
     }
 

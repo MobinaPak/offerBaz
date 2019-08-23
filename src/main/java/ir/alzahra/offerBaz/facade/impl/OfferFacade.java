@@ -1,5 +1,6 @@
 package ir.alzahra.offerBaz.facade.impl;
 
+import ir.alzahra.offerBaz.config.JPAConfig;
 import ir.alzahra.offerBaz.control.IOfferService;
 import ir.alzahra.offerBaz.dto.BankDTO;
 import ir.alzahra.offerBaz.dto.ProductDTO;
@@ -9,7 +10,13 @@ import ir.alzahra.offerBaz.facade.mapper.MapperClass;
 import ir.alzahra.offerBaz.model.entity.BankEntity;
 import ir.alzahra.offerBaz.model.entity.ProductEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,12 +26,14 @@ import java.util.Objects;
  * @Author: Mobina Pak
  * @Date: 5/3/2019
  **/
-@Component
-public class OfferFacade  implements IOfferFacade{
+@Service
+public class OfferFacade  implements IOfferFacade , ApplicationListener<ContextRefreshedEvent> {
 
     @Autowired
     private IOfferService offerService;
 
+    @Autowired
+    private ApplicationContext applicationContext;
 
     @Override
     public void insertProduct(ProductDTO productDTO) throws BaseException {
@@ -71,4 +80,24 @@ public class OfferFacade  implements IOfferFacade{
         ProductEntity p = offerService.findProductByCode(trackingCode);
         return MapperClass.mapper(new ProductDTO(),p);
     }
+
+    public void initializeDataBase() throws BaseException {
+        offerService.initializeDatabase("dropSessionSequence.txt");
+        offerService.initializeDatabase("createSessionSequence.txt");
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+
+        if (JPAConfig.state.equals("create")){
+            try {
+               initializeDataBase();
+    } catch (BaseException e) {
+        e.printStackTrace();
+    }
+}
+    }
+
+
 }

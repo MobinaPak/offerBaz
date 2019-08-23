@@ -11,4 +11,7 @@ public interface IProductDao extends GenericDao<ProductEntity> {
 
      ProductEntity findProductByCode(String trackingCode)throws BaseException;
 
+    void initializeDatabase(String s) throws BaseException;
+
+    Integer getUniqueNumber() throws BaseException;
 }

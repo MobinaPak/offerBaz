@@ -37,6 +37,9 @@ public class ProductEntity extends BaseEntity {
     @Column(name = "DESCRIPTION")
     private String description;
 
+    @Column(name = "UNIQUE_CODE")
+    private String uniqueCode;
+
 /*    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "OFFER_ID")
     @MapTo(targetEntity = OfferDTO.class)
@@ -71,7 +74,15 @@ public class ProductEntity extends BaseEntity {
         this.description = description;
     }
 
-/*    public List<OfferEntity> getOffers() {
+    public String getUniqueCode() {
+        return uniqueCode;
+    }
+
+    public void setUniqueCode(String uniqueCode) {
+        this.uniqueCode = uniqueCode;
+    }
+
+    /*    public List<OfferEntity> getOffers() {
         return offers;
     }
 

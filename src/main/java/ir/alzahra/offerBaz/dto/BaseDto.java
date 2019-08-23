@@ -8,7 +8,6 @@ public class BaseDto {
 
 
     private Long version;
-
     public Long getVersion() {
         return version;
     }
@@ -16,4 +15,5 @@ public class BaseDto {
     public void setVersion(Long version) {
         this.version = version;
     }
+
 }

@@ -4,7 +4,13 @@ import ir.alzahra.offerBaz.exception.BaseException;
 import ir.alzahra.offerBaz.model.dao.GenericDao;
 import ir.alzahra.offerBaz.model.dao.IProductDao;
 import ir.alzahra.offerBaz.model.entity.ProductEntity;
+import org.apache.ibatis.jdbc.ScriptRunner;
+import org.hibernate.internal.SessionImpl;
 import org.springframework.stereotype.Repository;
+
+import javax.persistence.Query;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 /**
  * @Author: hanieh Moafi
@@ -35,5 +41,19 @@ public class ProductDao extends AbstractDAO implements IProductDao {
     @Override
     public ProductEntity findProductByCode(String trackingCode) throws BaseException {
         return null;
+    }
+
+    public Integer getUniqueNumber(){
+        String query= "select SESSION_COUNTER_SEQ.nextval from dual";
+        Query nativeQuery = entityManager.createNativeQuery(query);
+        return ((Number)nativeQuery.getSingleResult()).intValue();
+    }
+
+
+    public void initializeDatabase(String name) throws BaseException {
+        InputStream resourcAsStream = this.getClass().getClassLoader().getResourceAsStream(name);
+        ScriptRunner sr = new ScriptRunner(entityManager.unwrap(SessionImpl.class).connection());
+        sr.runScript(new InputStreamReader(resourcAsStream));
+
     }
 }

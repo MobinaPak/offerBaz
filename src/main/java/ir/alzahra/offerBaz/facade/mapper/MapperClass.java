@@ -103,7 +103,7 @@ public class MapperClass {
             //
             else if (Objects.isNull(srcField.getDeclaredAnnotation(NotMap.class))) {
                 for (Method destinationMethod : toMethods) {
-                    if (destinationMethod.getName().startsWith("set") && Objects.equals(destinationMethod.getName(), "set" + srcFieldToGetterMap.get(srcField).getName().substring(3))) {
+                     if (destinationMethod.getName().startsWith("set") && Objects.equals(destinationMethod.getName(), "set" + srcFieldToGetterMap.get(srcField).getName().substring(3))) {
                         try {
                             Object getterResult = srcFieldToGetterMap.get(srcField).invoke(source);
                             if (Objects.nonNull(getterResult))

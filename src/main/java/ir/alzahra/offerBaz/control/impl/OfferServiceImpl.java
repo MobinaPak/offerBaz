@@ -34,8 +34,20 @@ public class OfferServiceImpl implements IOfferService {
 
     @Override
     public void insertProduct(ProductEntity productEntity) throws BaseException{
+        productEntity.setUniqueCode(generateUniqueCode());
         productDao.insert(productEntity);
         applicationEventPublisher.notify("product.insert.success", NotificationType.Info);
+
+    }
+
+    public String generateUniqueCode() throws BaseException {
+       Integer code = productDao.getUniqueNumber();
+       code++;
+       return code.toString();
+    }
+
+    public void initializeDatabase(String name) throws BaseException {
+        productDao.initializeDatabase(name);
 
     }
 
