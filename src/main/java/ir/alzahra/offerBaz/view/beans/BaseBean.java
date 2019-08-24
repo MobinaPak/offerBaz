@@ -9,7 +9,9 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import java.math.BigDecimal;
 import java.util.Locale;
+import java.util.Objects;
 
 
 /**
@@ -31,14 +33,14 @@ public class BaseBean {
 
    @PostConstruct
     public void init() {
-        this.context = tempContext;
+        context = tempContext;
     }
 
     public void addNotificationMessage() {
 
         CustomEventParameters customEventParameters = getCustomEventParameters();
         if (customEventParameters == null) return;
-        String message = show(customEventParameters.getNotification());
+        String message = show(customEventParameters.getNotification(),customEventParameters.getParams());
 
         switch (customEventParameters.getNotificationType()) {
             case Nothing:
@@ -68,9 +70,15 @@ public class BaseBean {
     }
 
 
-    public static String show(String msgCode) {
-        Object[] f = new Object[10];
-        return context.getMessage(msgCode, f,defaultMsg, Locale.ENGLISH);
+    public static String show(String msgCode,Object[] params) {
+       if (Objects.nonNull(params)){
+           for (int i = 0; i < params.length; i++) {
+               if (!(params[i] instanceof BigDecimal) && !(params[0].getClass().getName().contains("alzahra")))
+                   params[i] = params[i].toString();
+           }
+       }
+
+        return context.getMessage(msgCode, params,defaultMsg, Locale.ENGLISH);
 
     }
 

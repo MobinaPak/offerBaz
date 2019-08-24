@@ -66,7 +66,7 @@ public class OfferServiceImpl implements IOfferService {
     @Override
     public void updateBank(BankEntity bankEntity) throws BaseException {
         bankDao.update(bankEntity);
-        applicationEventPublisher.notify("product.insert.success", NotificationType.Info);
+        applicationEventPublisher.notify("product.insert.success",new Object[]{bankEntity.getProducts().get(0).getUniqueCode()}, NotificationType.Info);
 
     }
 

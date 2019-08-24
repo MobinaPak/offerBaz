@@ -10,6 +10,8 @@ public class CustomEventParameters implements Serializable {
 
     private String notification;
     private NotificationType notificationType;
+    private Object[] params;
+
 
 
 
@@ -29,4 +31,11 @@ public class CustomEventParameters implements Serializable {
         this.notificationType = notificationType;
     }
 
+    public Object[] getParams() {
+        return params;
+    }
+
+    public void setParams(Object[] params) {
+        this.params = params;
+    }
 }

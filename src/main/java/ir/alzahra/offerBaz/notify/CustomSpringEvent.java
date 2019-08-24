@@ -22,4 +22,8 @@ public class CustomSpringEvent implements ApplicationEventPublisherAware {
     public void notify(final String message, final NotificationType notificationType) {
         applicationEventPublisher.publishEvent(new CustomNotifyEvent(this, message, notificationType));
     }
+
+    public void notify(final String message, final Object[] params,final NotificationType notificationType) {
+        applicationEventPublisher.publishEvent(new CustomNotifyEvent(this, message, params, notificationType));
+    }
 }

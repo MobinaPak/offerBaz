@@ -17,6 +17,16 @@ public class CustomNotifyEvent extends ApplicationEvent {
         customEventParameters.setNotificationType(notificationType);
     }
 
+
+    public CustomNotifyEvent(final Object source, final String notification, final Object[] params, final NotificationType notificationType) {
+        super(source);
+        customEventParameters = new CustomEventParameters();
+        customEventParameters.setNotification(notification);
+        customEventParameters.setParams(params);
+        customEventParameters.setNotificationType(notificationType);
+    }
+
+
     public CustomEventParameters getCustomEventParameters() {
         return customEventParameters;
     }
