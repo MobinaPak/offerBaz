@@ -2,6 +2,7 @@ package ir.alzahra.offerBaz.view.beans.product;
 
 import ir.alzahra.offerBaz.dto.BankDTO;
 import ir.alzahra.offerBaz.dto.ProductDTO;
+import ir.alzahra.offerBaz.enums.DtoState;
 import ir.alzahra.offerBaz.exception.BaseException;
 import ir.alzahra.offerBaz.proxy.IOfferProxy;
 import ir.alzahra.offerBaz.view.beans.BaseBean;
@@ -93,8 +94,8 @@ public class InsertProductViewBean extends BaseBean{
     public void insert() {
         try {
 
-            //offerProxy.insert(productDTO);
             if (Objects.nonNull(productDTO) && Objects.nonNull(selectedBank)) {
+                productDTO.setDtoState(DtoState.New);
                 selectedBank.getProducts().add(productDTO);
                 offerProxy.updateBank(selectedBank);
                 addNotificationMessage();

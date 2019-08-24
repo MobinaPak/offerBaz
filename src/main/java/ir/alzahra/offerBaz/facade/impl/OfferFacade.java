@@ -4,6 +4,7 @@ import ir.alzahra.offerBaz.config.JPAConfig;
 import ir.alzahra.offerBaz.control.IOfferService;
 import ir.alzahra.offerBaz.dto.BankDTO;
 import ir.alzahra.offerBaz.dto.ProductDTO;
+import ir.alzahra.offerBaz.enums.DtoState;
 import ir.alzahra.offerBaz.exception.BaseException;
 import ir.alzahra.offerBaz.facade.IOfferFacade;
 import ir.alzahra.offerBaz.facade.mapper.MapperClass;
@@ -65,6 +66,12 @@ public class OfferFacade  implements IOfferFacade , ApplicationListener<ContextR
 
     @Override
     public void updateBank(BankDTO bankDTO) throws BaseException {
+        List<ProductDTO> productDTOS = bankDTO.getProducts();
+        for (ProductDTO p :productDTOS
+             ) {
+            if (p.getDtoState().equals(DtoState.New))
+                p.setUniqueCode(offerService.generateUniqueCode());
+        }
         BankEntity bankEntity=MapperClass.mapper(new BankEntity(),bankDTO);
         offerService.updateBank(bankEntity);
     }
