@@ -34,6 +34,9 @@ public class BankEntity extends BaseEntity{
     @Column(name = "NAME")
     private String name;
 
+    @Column(name = "NAME_ABBREVIATION")
+    private String nameAbbreviation;
+
     @OneToMany(cascade={CascadeType.ALL}, fetch = FetchType.LAZY, orphanRemoval = true)
     @JoinColumn(name = "BANK_ID")
     @MapTo(targetEntity = ProductDTO.class)
@@ -61,5 +64,13 @@ public class BankEntity extends BaseEntity{
 
     public void setProducts(List<ProductEntity> products) {
         this.products = products;
+    }
+
+    public String getNameAbbreviation() {
+        return nameAbbreviation;
+    }
+
+    public void setNameAbbreviation(String nameAbbreviation) {
+        this.nameAbbreviation = nameAbbreviation;
     }
 }

@@ -69,7 +69,7 @@ public class OfferFacade  implements IOfferFacade {
              ) {
             if (p.getDtoState().equals(DtoState.New)) {
                 p.setDtoState(DtoState.None);
-                p.setUniqueCode(offerService.generateUniqueCode());
+                p.setUniqueCode(bankDTO.getNameAbbreviation()+offerService.generateUniqueCode());
             }
         }
         BankEntity bankEntity=MapperClass.mapper(new BankEntity(),bankDTO);

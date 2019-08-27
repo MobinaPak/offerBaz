@@ -15,6 +15,7 @@ public class BankDTO extends BaseDto{
 
     private Long id;
     private String name;
+    private String nameAbbreviation;
 
     @MapTo(targetEntity = ProductEntity.class)
     private List<ProductDTO> products = new ArrayList<>();
@@ -43,5 +44,13 @@ public class BankDTO extends BaseDto{
 
     public void setProducts(List<ProductDTO> products) {
         this.products = products;
+    }
+
+    public String getNameAbbreviation() {
+        return nameAbbreviation;
+    }
+
+    public void setNameAbbreviation(String nameAbbreviation) {
+        this.nameAbbreviation = nameAbbreviation;
     }
 }
