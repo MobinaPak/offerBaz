@@ -37,6 +37,7 @@ public class BankDTO extends BaseDto{
     }
 
     public List<ProductDTO> getProducts() {
+
         return products;
     }
 

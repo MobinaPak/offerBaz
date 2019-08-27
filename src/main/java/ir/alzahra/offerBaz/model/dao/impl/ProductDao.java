@@ -17,6 +17,7 @@ import java.io.InputStreamReader;
  * @Date: 5/24/2019
  **/
 @Repository
+
 public class ProductDao extends AbstractDAO implements IProductDao {
 
 
@@ -43,17 +44,17 @@ public class ProductDao extends AbstractDAO implements IProductDao {
         return null;
     }
 
-    public Integer getUniqueNumber(){
-        String query= "select SESSION_COUNTER_SEQ.nextval from dual";
-        Query nativeQuery = entityManager.createNativeQuery(query);
-        return ((Number)nativeQuery.getSingleResult()).intValue();
-    }
-
-
-    public void initializeDatabase(String name) throws BaseException {
-        InputStream resourcAsStream = this.getClass().getClassLoader().getResourceAsStream(name);
-        ScriptRunner sr = new ScriptRunner(entityManager.unwrap(SessionImpl.class).connection());
-        sr.runScript(new InputStreamReader(resourcAsStream));
-
-    }
+//    public Integer getUniqueNumber(){
+//        String query= "select SESSION_COUNTER_SEQ.nextval from dual";
+//        Query nativeQuery = entityManager.createNativeQuery(query);
+//        return ((Number)nativeQuery.getSingleResult()).intValue();
+//    }
+//
+//
+//    public void initializeDatabase(String name) throws BaseException {
+//        InputStream resourcAsStream = this.getClass().getClassLoader().getResourceAsStream(name);
+//        ScriptRunner sr = new ScriptRunner(entityManager.unwrap(SessionImpl.class).connection());
+//        sr.runScript(new InputStreamReader(resourcAsStream));
+//
+//    }
 }

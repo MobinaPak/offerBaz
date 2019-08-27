@@ -25,7 +25,7 @@ public interface IOfferService {
 
     ProductEntity findProductByCode(String trackingCode)throws BaseException;
 
-    void initializeDatabase(String name) throws BaseException;
-
+//    void initializeDatabase(String name) throws BaseException;
+//
     String generateUniqueCode() throws BaseException;
 }

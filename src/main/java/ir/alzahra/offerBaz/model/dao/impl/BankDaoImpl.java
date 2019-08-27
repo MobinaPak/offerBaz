@@ -6,6 +6,7 @@ import ir.alzahra.offerBaz.model.dao.IBankDao;
 import ir.alzahra.offerBaz.model.entity.BankEntity;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Objects;
@@ -48,5 +49,10 @@ public class BankDaoImpl extends AbstractDAO implements IBankDao {
             return banks.get(0);
         else
         return null;
+    }
+
+    public Long getCountOfRecord(){
+        Query query = entityManager.createQuery("SELECT count (*) FROM ProductEntity ");
+        return (long) query.getSingleResult();
     }
 }

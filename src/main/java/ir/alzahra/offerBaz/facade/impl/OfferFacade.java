@@ -28,13 +28,11 @@ import java.util.Objects;
  * @Date: 5/3/2019
  **/
 @Service
-public class OfferFacade  implements IOfferFacade , ApplicationListener<ContextRefreshedEvent> {
+public class OfferFacade  implements IOfferFacade {
 
     @Autowired
     private IOfferService offerService;
 
-    @Autowired
-    private ApplicationContext applicationContext;
 
     @Override
     public void insertProduct(ProductDTO productDTO) throws BaseException {
@@ -69,8 +67,10 @@ public class OfferFacade  implements IOfferFacade , ApplicationListener<ContextR
         List<ProductDTO> productDTOS = bankDTO.getProducts();
         for (ProductDTO p :productDTOS
              ) {
-            if (p.getDtoState().equals(DtoState.New))
+            if (p.getDtoState().equals(DtoState.New)) {
+                p.setDtoState(DtoState.None);
                 p.setUniqueCode(offerService.generateUniqueCode());
+            }
         }
         BankEntity bankEntity=MapperClass.mapper(new BankEntity(),bankDTO);
         offerService.updateBank(bankEntity);
@@ -88,23 +88,23 @@ public class OfferFacade  implements IOfferFacade , ApplicationListener<ContextR
         return MapperClass.mapper(new ProductDTO(),p);
     }
 
-    public void initializeDataBase() throws BaseException {
-        offerService.initializeDatabase("dropSessionSequence.txt");
-        offerService.initializeDatabase("createSessionSequence.txt");
-    }
+//    public void initializeDataBase() throws BaseException {
+//        offerService.initializeDatabase("dropSessionSequence.txt");
+//        offerService.initializeDatabase("createSessionSequence.txt");
+//    }
 
-    @Override
-    @Transactional(rollbackFor = Exception.class)
-    public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-
-        if (JPAConfig.state.equals("create")){
-            try {
-               initializeDataBase();
-    } catch (BaseException e) {
-        e.printStackTrace();
-    }
-}
-    }
+//    @Override
+//    @Transactional(rollbackFor = Exception.class)
+//    public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+//
+//        if (JPAConfig.state.equals("create")){
+//            try {
+//               initializeDataBase();
+//    } catch (BaseException e) {
+//        e.printStackTrace();
+//    }
+//}
+//    }
 
 
 }

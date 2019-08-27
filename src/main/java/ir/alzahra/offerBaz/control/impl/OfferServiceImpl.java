@@ -14,6 +14,8 @@ import ir.alzahra.offerBaz.notify.NotificationType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -31,25 +33,27 @@ public class OfferServiceImpl implements IOfferService {
 
     @Autowired
     private CustomSpringEvent applicationEventPublisher;
+    private String finalcode;
 
     @Override
     public void insertProduct(ProductEntity productEntity) throws BaseException{
-        productEntity.setUniqueCode(generateUniqueCode());
         productDao.insert(productEntity);
         applicationEventPublisher.notify("product.insert.success", NotificationType.Info);
 
     }
 
     public String generateUniqueCode() throws BaseException {
-       Integer code = productDao.getUniqueNumber();
-       code++;
-       return code.toString();
+       Long code = bankDao.getCountOfRecord();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+        LocalDateTime now = LocalDateTime.now();
+        finalcode =code+dtf.format(now);
+       return finalcode;
     }
 
-    public void initializeDatabase(String name) throws BaseException {
-        productDao.initializeDatabase(name);
-
-    }
+//    public void initializeDatabase(String name) throws BaseException {
+//        productDao.initializeDatabase(name);
+//
+//    }
 
     @Override
     public void insertBank(BankEntity bank) throws BaseException {

@@ -94,6 +94,7 @@ public class InsertProductViewBean extends BaseBean{
     public void insert() {
         try {
 
+            //offerProxy.insert(productDTO);
             if (Objects.nonNull(productDTO) && Objects.nonNull(selectedBank)) {
                 productDTO.setDtoState(DtoState.New);
                 selectedBank.getProducts().add(productDTO);
