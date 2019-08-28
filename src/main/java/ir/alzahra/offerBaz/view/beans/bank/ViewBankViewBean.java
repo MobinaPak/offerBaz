@@ -59,7 +59,7 @@ public class ViewBankViewBean extends BaseBean {
 
     public void redirectViewProduct(){
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/web/product/view.xhtml");
         } catch (IOException e) {
             e.printStackTrace();
         }

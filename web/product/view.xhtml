@@ -21,25 +21,64 @@
     </h:head>
     <h:body style="direction: rtl">
         <div class="ui-g-3"></div>
-        <h:form id="addForm">
-            <p:messages autoUpdate="true" globalOnly="false" id="messages" closable="true"/>
-            <p:fieldset legend="نمایش محصول" style="margin-bottom:30px" class="ui-g-6">
+
+        <p:fieldset legend="نمایش محصول" style="margin-bottom:30px" class="ui-g-6">
+            <h:form id="addForm">
+                <p:messages autoUpdate="true" globalOnly="false" id="messages" closable="true" />
+                <p:fieldset legend="جستجوی محصول">
+                    <p:panel styleClass="searchBox">
+                        <p:panelGrid id="productAdd" columns="4" columnsWidth="2,4,2,4" styleClass="ui-noborder">
+                            <p:outputLabel value="کد محصول:" style="margin-left: 5px;"/>
+                            <p:inputText value="#{viewProductBean.productCode}" id="nameSearch"/>
+
+
+                            <p:commandButton id="searchButton" value="جستجو"
+                                             actionListener="#{viewProductBean.searchProduct}"
+                                             update=":#{p:component('productEdit')}">
+
+                            </p:commandButton>
+                            <p:commandButton value="جستجوی پیشرفته" type="button" onclick="PF('dlg1').show();" />
+
+                        </p:panelGrid>
+
+                        <p:dialog header="Basic Dialog" widgetVar="dlg1" minHeight="100" width="800px" height="400px">
+                            <p:panelGrid id="productSearch" columns="4" columnsWidth="2,4,2,4" styleClass="ui-noborder">
+                                <p:outputLabel value="کد محصول:" style="margin-left: 5px;"/>
+                                <p:inputText value="#{viewProductBean.productSearchParam.code}" />
+
+                                <p:outputLabel value="بانک:" style="margin-left: 5px;"/>
+                                <h:selectOneMenu id="test" value="#{viewProductBean.productSearchParam.bankId}" filter="true" filterMatchMode="contains" style="width: 220px">
+                                    <f:selectItem  itemValue="" noSelectionOption="true" />
+                                    <f:selectItems var="bank" value="#{viewProductBean.bankDTOS}"  itemLabel="#{bank.name}" itemValue="#{bank.id}"/>
+
+                                </h:selectOneMenu>
+                            </p:panelGrid>
+
+                        </p:dialog>
+                    </p:panel>
+                    <p:spacer height="10"/>
+                </p:fieldset>
+
+                <p:spacer height="10"/>
+
                 <p:panel styleClass="searchBox">
-                    <p:panelGrid id="productAdd" columns="4" columnsWidth="2,4,2,4" styleClass="ui-noborder">
-                        <p:outputLabel value="کد محصول:" style="margin-left: 5px;"/>
-                        <p:inputText value="#{viewProductBean.trackingCode}" id="nameSearch"/>
+                    <p:panelGrid id="productEdit" columns="2" columnsWidth="2,4" styleClass="ui-noborder" >
+                        <p:outputLabel value="نام بانک:"/>
+                        <p:inputText  value="#{viewProductBean.bankName}" readonly="true"/>
 
-                        <p:commandButton id="searchButton" value="جستجو"
-                                         actionListener="#{viewProductBean.searchProduct}"
-                                         >
+                        <p:outputLabel value="نام محصول:"/>
+                        <p:inputText  value="#{viewProductBean.selectedProduct.productName}"  readonly="true"/>
 
-                        </p:commandButton>
+                        <p:outputLabel value="توضیحات:"/>
+                        <p:inputTextarea rows="6" cols="33" value="#{viewProductBean.selectedProduct.description}"  readonly="true"/>
+
+
+
                     </p:panelGrid>
                 </p:panel>
-
-
+            </h:form>
         </p:fieldset>
-        </h:form>
+
         <div class="ui-g-3"></div>
     </h:body>
 </ui:composition>

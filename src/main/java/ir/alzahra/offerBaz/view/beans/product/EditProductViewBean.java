@@ -32,14 +32,21 @@ public class EditProductViewBean extends BaseBean {
 
 
     public void init() {
-        productSearchParam = new ProductSearchParam();
-        selectedProduct = new ProductDTO();
+        emptyPage();
+
         try {
             bankDTOS = offerProxy.getAllBanks();
         } catch (BaseException e) {
             //TODO
         }
 
+    }
+
+    private void emptyPage() {
+        productSearchParam = new ProductSearchParam();
+        selectedProduct = new ProductDTO();
+        bankName="";
+        productCode="";
     }
 
     public String getProductCode() {
@@ -87,6 +94,7 @@ public class EditProductViewBean extends BaseBean {
             selectedProduct = offerProxy.findProduct(productCode);
             bankName = offerProxy.findBankByAbbreviation(selectedProduct.getUniqueCode().substring(6, 9));
             addNotificationMessage();
+            emptyPage();
         } catch (BaseException e) {
             //TODO
         }
@@ -98,6 +106,8 @@ public class EditProductViewBean extends BaseBean {
         try {
             selectedProduct.setDtoState(DtoState.Edit);
             offerProxy.editProduct(selectedProduct);
+            addNotificationMessage();
+            emptyPage();
         } catch (BaseException e) {
             //TODO
         }
@@ -108,6 +118,8 @@ public class EditProductViewBean extends BaseBean {
         selectedProduct.setDtoState(DtoState.Delete);
         try {
             offerProxy.deleteProduct(selectedProduct);
+            addNotificationMessage();
+            emptyPage();
         } catch (BaseException e) {
             //TODO
         }
