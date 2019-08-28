@@ -27,5 +27,11 @@ public interface IOfferService {
 
 //    void initializeDatabase(String name) throws BaseException;
 //
-    String generateUniqueCode() throws BaseException;
+    String generateUniqueCode(String name2) throws BaseException;
+
+    void updateProduct(ProductEntity productEntity)throws BaseException;
+
+    void deleteProduct(ProductEntity productEntity)throws BaseException;
+
+    String findBankByAbbreviation(String name)throws BaseException;
 }

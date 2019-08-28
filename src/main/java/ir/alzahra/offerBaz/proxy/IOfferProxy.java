@@ -23,4 +23,10 @@ public interface IOfferProxy {
     BankDTO findBankByName(String bankName)throws BaseException;
 
     ProductDTO findProduct(String trackingCode)throws BaseException;
+
+    void editProduct(ProductDTO selectedProduct)throws BaseException;
+
+    void deleteProduct(ProductDTO selectedProduct)throws BaseException;
+
+    String findBankByAbbreviation(String substring)throws BaseException;
 }

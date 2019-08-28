@@ -76,4 +76,26 @@ public class OfferController {
 
     }
 
+    @RequestMapping(method = RequestMethod.POST, value = "/product/updateProduct")
+    ResponseEntity<ResponseDTO> updateProduct(@RequestBody ProductDTO productDTO) throws BaseException {
+        offerFacade.updateProduct(productDTO);
+        return new ResponseEntity(HttpStatus.OK);
+
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/product/deleteProduct")
+    ResponseEntity<ResponseDTO> deleteProduct(@RequestBody ProductDTO productDTO) throws BaseException {
+        offerFacade.deleteProduct(productDTO);
+        return new ResponseEntity(HttpStatus.OK);
+
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/bank/findBankByAbbreviation")
+    ResponseEntity<ResponseDTO<String>> findBankByAbbreviation(@RequestBody String name) throws BaseException {
+        ResponseDTO responseDto = new ResponseDTO();
+        responseDto.setResponse(offerFacade.findBankByAbbreviation(name));
+        return new ResponseEntity<ResponseDTO<String>>(responseDto, HttpStatus.OK);
+
+    }
+
 }

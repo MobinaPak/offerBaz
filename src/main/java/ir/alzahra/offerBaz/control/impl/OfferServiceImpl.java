@@ -42,11 +42,11 @@ public class OfferServiceImpl implements IOfferService {
 
     }
 
-    public String generateUniqueCode() throws BaseException {
-       Long code = bankDao.getCountOfRecord();
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+    public String generateUniqueCode(String name2) throws BaseException {
+       long code = bankDao.getCountOfRecord()+1000;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyMMdd");
         LocalDateTime now = LocalDateTime.now();
-        finalcode =code+dtf.format(now);
+        finalcode =dtf.format(now)+name2+code;
        return finalcode;
     }
 
@@ -82,5 +82,23 @@ public class OfferServiceImpl implements IOfferService {
     @Override
     public ProductEntity findProductByCode(String trackingCode) throws BaseException {
         return productDao.findProductByCode(trackingCode);
+    }
+
+    @Override
+    public void updateProduct(ProductEntity productEntity) throws BaseException {
+        productDao.update(productEntity);
+        applicationEventPublisher.notify("product.update.success", NotificationType.Info);
+    }
+
+    @Override
+    public void deleteProduct(ProductEntity productEntity) throws BaseException {
+        productDao.delete(productEntity);
+        applicationEventPublisher.notify("product.delete.success", NotificationType.Info);
+
+    }
+
+    @Override
+    public String findBankByAbbreviation(String name) throws BaseException {
+        return bankDao.findBankByAbbreviation(name);
     }
 }

@@ -29,4 +29,13 @@ public interface IOfferFacade {
 
     @Transactional(rollbackFor = Exception.class)
     Object findProductByCode(String trackingCode)throws BaseException;
+
+    @Transactional(rollbackFor = Exception.class)
+    void updateProduct(ProductDTO productDTO)throws BaseException;
+
+    @Transactional(rollbackFor = Exception.class)
+    void deleteProduct(ProductDTO productDTO)throws BaseException;
+
+    @Transactional(rollbackFor = Exception.class)
+    String findBankByAbbreviation(String name)throws BaseException;
 }

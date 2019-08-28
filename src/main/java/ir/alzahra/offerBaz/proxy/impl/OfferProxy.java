@@ -60,4 +60,21 @@ public class OfferProxy extends BaseProxy implements IOfferProxy {
         return callRest(RestURIConstants.MAIN_URI + "/product/findProductByCode", trackingCode, new ParameterizedTypeReference<ResponseDTO<ProductDTO>>() {
         });
     }
+
+    @Override
+    public void editProduct(ProductDTO productDto) throws BaseException {
+         callRest(RestURIConstants.MAIN_URI + "/product/updateProduct", productDto);
+    }
+
+    @Override
+    public void deleteProduct(ProductDTO productDto) throws BaseException {
+        callRest(RestURIConstants.MAIN_URI + "/product/deleteProduct", productDto);
+
+    }
+
+    @Override
+    public String findBankByAbbreviation(String name) throws BaseException {
+        return callRest(RestURIConstants.MAIN_URI + "/bank/findBankByAbbreviation", name, new ParameterizedTypeReference<ResponseDTO<String>>() {
+        });
+    }
 }

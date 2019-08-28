@@ -55,4 +55,13 @@ public class BankDaoImpl extends AbstractDAO implements IBankDao {
         Query query = entityManager.createQuery("SELECT count (*) FROM ProductEntity ");
         return (long) query.getSingleResult();
     }
+
+    @Override
+    public String findBankByAbbreviation(String name) throws BaseException {
+        String query="select b.NAME from BANK b where b.NAME_ABBREVIATION =:name";
+        Query statement=entityManager.createNativeQuery(query);
+        statement.setParameter("name",name);
+        return (String) statement.getSingleResult();
+
+    }
 }

@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+>
+<f:metadata>
+    <f:viewAction onPostback="false" action="#{editProductViewBean.init}"/>
+</f:metadata>
+
+<ui:composition>
+    <h:head>
+        <title>ویرایش محصول</title>
+
+
+        <h:outputStylesheet library="css" name="style.css"/>
+
+
+    </h:head>
+    <h:body style="direction: rtl">
+        <div class="ui-g-3"></div>
+
+        <p:fieldset legend="ویرایش محصول" style="margin-bottom:30px" class="ui-g-6">
+            <h:form id="addForm">
+                <p:messages autoUpdate="true" globalOnly="false" id="messages" closable="true" />
+                <p:fieldset legend="جستجوی محصول">
+                    <p:panel styleClass="searchBox">
+                        <p:panelGrid id="productAdd" columns="4" columnsWidth="2,4,2,4" styleClass="ui-noborder">
+                            <p:outputLabel value="کد محصول:" style="margin-left: 5px;"/>
+                            <p:inputText value="#{editProductViewBean.productCode}" id="nameSearch"/>
+
+
+                            <p:commandButton id="searchButton" value="جستجو"
+                                             actionListener="#{editProductViewBean.searchProduct}"
+                                             update=":#{p:component('productEdit')}">
+
+                            </p:commandButton>
+                            <p:commandButton value="جستجوی پیشرفته" type="button" onclick="PF('dlg1').show();" />
+
+                        </p:panelGrid>
+
+                        <p:dialog header="Basic Dialog" widgetVar="dlg1" minHeight="100" width="800px" height="400px">
+                            <p:panelGrid id="productSearch" columns="4" columnsWidth="2,4,2,4" styleClass="ui-noborder">
+                            <p:outputLabel value="کد محصول:" style="margin-left: 5px;"/>
+                            <p:inputText value="#{editProductViewBean.productSearchParam.code}" />
+
+                            <p:outputLabel value="بانک:" style="margin-left: 5px;"/>
+                            <h:selectOneMenu id="test" value="#{editProductViewBean.productSearchParam.bankId}" filter="true" filterMatchMode="contains" style="width: 220px">
+                                <f:selectItem  itemValue="" noSelectionOption="true" />
+                                <f:selectItems var="bank" value="#{editProductViewBean.bankDTOS}"  itemLabel="#{bank.name}" itemValue="#{bank.id}"/>
+                                <f:ajax listener="#{insertProductViewBean.findBank()}"
+                                        execute="@this"/>
+                            </h:selectOneMenu>
+                            </p:panelGrid>
+
+                        </p:dialog>
+                    </p:panel>
+                    <p:spacer height="10"/>
+                </p:fieldset>
+
+                <p:spacer height="10"/>
+
+                <p:panel styleClass="searchBox">
+                <p:panelGrid id="productEdit" columns="2" columnsWidth="2,4" styleClass="ui-noborder" >
+                    <p:outputLabel value="نام بانک:"/>
+                    <p:inputText  value="#{editProductViewBean.bankName}" readonly="true"/>
+
+                    <p:outputLabel value="نام محصول:"/>
+                    <p:inputText  value="#{editProductViewBean.selectedProduct.productName}"/>
+
+                    <p:outputLabel value="توضیحات:"/>
+                    <p:inputTextarea rows="6" cols="33" value="#{editProductViewBean.selectedProduct.description}"/>
+
+
+
+                </p:panelGrid>
+                </p:panel>
+                <p:spacer height="5"/>
+                <p:panel styleClass="buttonBox">
+                    <p:commandButton value="ویرایش" action="#{editProductViewBean.edit}"
+                                     update=":addForm"
+                    >
+                    </p:commandButton>
+                    <p:commandButton value="حذف" action="#{editProductViewBean.delete}"
+                                     update=":addForm"
+                    >
+                    </p:commandButton>
+                </p:panel>
+            </h:form>
+        </p:fieldset>
+
+        <div class="ui-g-3"></div>
+    </h:body>
+</ui:composition>
+</html>

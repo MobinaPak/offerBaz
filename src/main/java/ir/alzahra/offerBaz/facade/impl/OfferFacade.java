@@ -69,7 +69,7 @@ public class OfferFacade  implements IOfferFacade {
              ) {
             if (p.getDtoState().equals(DtoState.New)) {
                 p.setDtoState(DtoState.None);
-                p.setUniqueCode(bankDTO.getNameAbbreviation()+offerService.generateUniqueCode());
+                p.setUniqueCode(offerService.generateUniqueCode(bankDTO.getNameAbbreviation()));
             }
         }
         BankEntity bankEntity=MapperClass.mapper(new BankEntity(),bankDTO);
@@ -88,7 +88,23 @@ public class OfferFacade  implements IOfferFacade {
         return MapperClass.mapper(new ProductDTO(),p);
     }
 
-//    public void initializeDataBase() throws BaseException {
+    @Override
+    public void updateProduct(ProductDTO productDTO) throws BaseException {
+       ProductEntity productEntity=MapperClass.mapper(new ProductEntity(),productDTO);
+       offerService.updateProduct(productEntity);
+    }
+
+    @Override
+    public void deleteProduct(ProductDTO productDTO) throws BaseException {
+        ProductEntity productEntity=MapperClass.mapper(new ProductEntity(),productDTO);
+        offerService.deleteProduct(productEntity);
+    }
+
+    @Override
+    public String findBankByAbbreviation(String name) throws BaseException {
+        return offerService.findBankByAbbreviation(name);
+    }
+    //    public void initializeDataBase() throws BaseException {
 //        offerService.initializeDatabase("dropSessionSequence.txt");
 //        offerService.initializeDatabase("createSessionSequence.txt");
 //    }

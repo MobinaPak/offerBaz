@@ -1,16 +1,13 @@
 package ir.alzahra.offerBaz.model.dao.impl;
 
 import ir.alzahra.offerBaz.exception.BaseException;
-import ir.alzahra.offerBaz.model.dao.GenericDao;
 import ir.alzahra.offerBaz.model.dao.IProductDao;
 import ir.alzahra.offerBaz.model.entity.ProductEntity;
-import org.apache.ibatis.jdbc.ScriptRunner;
-import org.hibernate.internal.SessionImpl;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.Query;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import javax.persistence.TypedQuery;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * @Author: hanieh Moafi
@@ -31,17 +28,26 @@ public class ProductDao extends AbstractDAO implements IProductDao {
 
     @Override
     public void update(ProductEntity entity) {
+        entityManager.merge(entity);
 
     }
 
     @Override
     public void delete(ProductEntity entity) {
+        entityManager.remove(entityManager.contains(entity) ? entity : entityManager.merge(entity));
+//        entityManager.remove(entity);
 
     }
 
     @Override
     public ProductEntity findProductByCode(String trackingCode) throws BaseException {
-        return null;
+        TypedQuery query =entityManager.createNamedQuery("findProductByCode", ProductEntity.class);
+        query.setParameter("productCode",trackingCode);
+        List<ProductEntity> products = query.getResultList();
+        if (Objects.nonNull(products) && products.size()>0)
+            return products.get(0);
+        else
+            return null;
     }
 
 //    public Integer getUniqueNumber(){

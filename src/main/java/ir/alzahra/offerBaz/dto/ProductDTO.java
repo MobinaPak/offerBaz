@@ -1,12 +1,5 @@
 package ir.alzahra.offerBaz.dto;
 
-import ir.alzahra.offerBaz.facade.mapper.MapTo;
-import ir.alzahra.offerBaz.model.entity.BankEntity;
-import ir.alzahra.offerBaz.model.entity.OfferEntity;
-
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @Author: zahra soltaninejad
  * @Date: 4/18/2019, Thu
