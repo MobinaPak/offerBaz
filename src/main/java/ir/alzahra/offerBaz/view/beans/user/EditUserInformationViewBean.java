@@ -31,7 +31,7 @@ public class EditUserInformationViewBean extends BaseBean {
             // TODO: 8/16/2019 SHAMIM
             userDTO = new UserDTO();
             userDTO.setProfile(new ProfileDTO());
-            userDTO.getProfile().setUserName("09304101396");
+            userDTO.getProfile().setUserName("0");
             userDTO = userProxy.getUser(userDTO);
         } catch (BaseException e) {
             // TODO: 8/9/2019 SHAMIM
