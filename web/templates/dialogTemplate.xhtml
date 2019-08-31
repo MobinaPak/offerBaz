@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+>
+<h:head>
+    <!--<title>بانکداری اختصاصی</title>-->
+    <ui:insert name="title"/>
+    <meta name="_csrf" content="${_csrf.token}"/>
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta name="_csrf_header" content="${_csrf.headerName}"/>
+</h:head>
+<body style="overflow: hidden" id="container">
+<div class="ui-grid ui-grid-responsive">
+    <div class="ui-grid-row">
+        <div class="ui-grid-col-12">
+            <ui:insert name="maincontent"/>
+        </div>
+    </div>
+</div>
+<p:ajaxStatus id="startAjaxDialogTemplate" onstart="PF('start').show();" oncomplete="PF('start').hide();">
+</p:ajaxStatus>
+<p:dialog widgetVar="start" modal="true" closable="false" resizable="false" showHeader="false" draggable="false"
+          style="box-shadow:none; padding: 10px; text-align: center;direction: rtl">
+</p:dialog>
+</body>
+</html>

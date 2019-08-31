@@ -1,15 +1,21 @@
 package ir.alzahra.offerBaz.view.beans.bank;
 
 import ir.alzahra.offerBaz.dto.BankDTO;
+import ir.alzahra.offerBaz.dto.ProductDTO;
 import ir.alzahra.offerBaz.exception.BaseException;
 import ir.alzahra.offerBaz.proxy.IOfferProxy;
 import ir.alzahra.offerBaz.view.beans.BaseBean;
+import ir.alzahra.offerBaz.view.util.GeneralUtil;
+import org.primefaces.context.RequestContext;
+import org.primefaces.event.SelectEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.faces.context.FacesContext;
+import java.awt.event.ActionEvent;
 import java.io.IOException;
+import java.util.*;
 
 /**
  * @author z.moafi
@@ -23,9 +29,9 @@ public class ViewBankViewBean extends BaseBean {
     private IOfferProxy offerProxy;
 
 
-
     private String bankName;
     private BankDTO selectedBank;
+    private ProductDTO selectedProduct;
 
 
     public String getBankName() {
@@ -44,12 +50,20 @@ public class ViewBankViewBean extends BaseBean {
         this.selectedBank = selectedBank;
     }
 
-    public void searchBank(){
-        if (bankName.equals("") || bankName.equals(null)){
+    public ProductDTO getSelectedProduct() {
+        return selectedProduct;
+    }
+
+    public void setSelectedProduct(ProductDTO selectedProduct) {
+        this.selectedProduct = selectedProduct;
+    }
+
+    public void searchBank() {
+        if (bankName.equals("") || bankName.equals(null)) {
             //TODO
-        }else {
+        } else {
             try {
-                selectedBank=offerProxy.findBankByName(bankName);
+                selectedBank = offerProxy.findBankByName(bankName);
             } catch (BaseException e) {
                 //TODO
             }
@@ -57,21 +71,27 @@ public class ViewBankViewBean extends BaseBean {
 
     }
 
-    public void redirectViewProduct(){
-        try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("http://localhost:8080/web/product/view.xhtml");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+    public void redirectViewProduct() {
+        if (Objects.nonNull(selectedProduct))
+            GeneralUtil.openWindow("includes/viewPro", new Object[]{true, "850", "520", "100%", "100%", false, false}, "viewObject", selectedProduct, "viewObject");
     }
 
     private void emptyPage() {
-        selectedBank=new BankDTO();
-        bankName=null;
+        selectedBank = new BankDTO();
+        bankName = null;
     }
 
-    public void onBankSelected(){
+    public void onBankSelected() {
 
+    }
+
+    public void returnProduct(final SelectEvent event) {
+        Object returnObj = event.getObject();
+        if (returnObj != null) {
+//            cardDataTableDto = (CardDataTableDto) returnObj;
+//            if (cardDataTableDto.getDtoState() == DtoState.Edit) {
+
+            //  }
+        }
     }
 }

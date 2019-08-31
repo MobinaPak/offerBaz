@@ -23,7 +23,7 @@
         <div class="ui-g-3"></div>
 
         <p:fieldset legend="نمایش بانک" style="margin-bottom:30px" class="ui-g-6">
-            <h:form id="addForm">
+            <h:form id="form"  prependId="false">
                 <p:messages autoUpdate="true" globalOnly="false" id="messages" closable="true" />
 
                 <p:fieldset legend="جستجوی بانک">
@@ -44,7 +44,9 @@
 
                     <p:panel>
                         <p:dataTable id="sessionTable" value="#{viewBankViewBean.selectedBank.products}"
-                                     var="product" selectionMode="single"
+                                     var="product"
+                                     selectionMode="single"
+                                     selection="#{viewBankViewBean.selectedProduct}"
                                      rowKey="#{product.hashCode()}"
                                      rowIndexVar="index"
                                      emptyMessage="سطری برای نمایش وجود ندارد">
@@ -59,23 +61,36 @@
                             <p:column headerText="نام محصول" width="120">
                                 <h:outputText value="#{product.productName}"/>
                             </p:column>
-                            <p:column headerText="توضیحات محصول" width="200">
+                            <p:column headerText="توضیحات محصول" width="800">
                                 <h:outputText value="#{product.description}"/>
                             </p:column>
                             <p:column headerText="جزییات">
                                 <center>
                                     <p:commandButton value="مشاهده محصول" id="nonAjax"
                                                      actionListener="#{viewBankViewBean.redirectViewProduct}"
-                                                     ajax="false"/>
+                                                     ajax="true">
+                                    <p:ajax event="dialogReturn"
+                                            listener="#{viewBankViewBean.returnProduct}"
+                                            update=":#{p:component('sessionTable')}"/>
+                                    </p:commandButton>
                                 </center>
                             </p:column>
-
                         </p:dataTable>
+
                     </p:panel>
 
                 </p:fieldset>
             </h:form>
         </p:fieldset>
+
+        <p:dialog header="نمایش محصول" widgetVar="dlg1" minHeight="100" width="800px" height="400px">
+            <p:panelGrid id="productSearch" columns="4" columnsWidth="2,4,2,4" styleClass="ui-noborder">
+                <p:outputLabel value="نام محصول:" style="margin-left: 5px;"/>
+                <p:inputText value="#{viewBankViewBean.bankName}" readonly="true" />
+
+            </p:panelGrid>
+
+        </p:dialog>
 
         <div class="ui-g-3"></div>
     </h:body>
