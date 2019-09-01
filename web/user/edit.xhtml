@@ -18,7 +18,7 @@
             <h:form id="editForm">
                 <p:fieldset legend="مشخصات کاربر" style="margin-bottom:20px">
 
-                    <p:growl id="growl" showDetail="true" sticky="true" />
+                    <p:messages autoUpdate="true" globalOnly="false" id="messages" closable="true" />
                     <p:panelGrid id="registerUser" columns="2" columnsWidth="2,4" styleClass="ui-noborder">
                         <p:outputLabel value="نام:"/>
                         <p:inputText rows="2" cols="33" value="#{registerUserViewBean.userDTO.name}"/>
