@@ -4,6 +4,7 @@ import ir.alzahra.offerBaz.dto.BankDTO;
 import ir.alzahra.offerBaz.dto.MultiWrapperDto;
 import ir.alzahra.offerBaz.dto.ProductDTO;
 import ir.alzahra.offerBaz.dto.ResponseDTO;
+import ir.alzahra.offerBaz.dto.searchParameter.ProductSearchParam;
 import ir.alzahra.offerBaz.exception.BaseException;
 import ir.alzahra.offerBaz.facade.IOfferFacade;
 import ir.alzahra.offerBaz.view.RestURIConstants;
@@ -95,6 +96,14 @@ public class OfferController {
         ResponseDTO responseDto = new ResponseDTO();
         responseDto.setResponse(offerFacade.findBankByAbbreviation(name));
         return new ResponseEntity<ResponseDTO<String>>(responseDto, HttpStatus.OK);
+
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/product/searchProductByParam")
+    ResponseEntity<ResponseDTO<List<ProductDTO>>> searchProductByParam(@RequestBody Long param) throws BaseException {
+        ResponseDTO responseDto = new ResponseDTO();
+        responseDto.setResponse(offerFacade.searchProductByParam(param));
+        return new ResponseEntity<ResponseDTO<List<ProductDTO>>>(responseDto, HttpStatus.OK);
 
     }
 

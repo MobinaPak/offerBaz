@@ -3,6 +3,7 @@ package ir.alzahra.offerBaz.control.impl;
 
 import ir.alzahra.offerBaz.control.IOfferService;
 import ir.alzahra.offerBaz.dto.BankDTO;
+import ir.alzahra.offerBaz.dto.searchParameter.ProductSearchParam;
 import ir.alzahra.offerBaz.exception.BaseException;
 import ir.alzahra.offerBaz.model.dao.IBankDao;
 import ir.alzahra.offerBaz.model.dao.IProductDao;
@@ -100,5 +101,11 @@ public class OfferServiceImpl implements IOfferService {
     @Override
     public String findBankByAbbreviation(String name) throws BaseException {
         return bankDao.findBankByAbbreviation(name);
+    }
+
+    @Override
+    public List<ProductEntity> searchProductByParam(Long param) throws BaseException {
+        return productDao.searchProductByParam(param);
+
     }
 }

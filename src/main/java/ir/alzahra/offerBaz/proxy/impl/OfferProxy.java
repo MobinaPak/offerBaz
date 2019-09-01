@@ -4,6 +4,7 @@ import ir.alzahra.offerBaz.dto.BankDTO;
 import ir.alzahra.offerBaz.dto.MultiWrapperDto;
 import ir.alzahra.offerBaz.dto.ProductDTO;
 import ir.alzahra.offerBaz.dto.ResponseDTO;
+import ir.alzahra.offerBaz.dto.searchParameter.ProductSearchParam;
 import ir.alzahra.offerBaz.exception.BaseException;
 import ir.alzahra.offerBaz.proxy.IOfferProxy;
 import ir.alzahra.offerBaz.view.RestURIConstants;
@@ -77,4 +78,10 @@ public class OfferProxy extends BaseProxy implements IOfferProxy {
         return callRest(RestURIConstants.MAIN_URI + "/bank/findBankByAbbreviation", name, new ParameterizedTypeReference<ResponseDTO<String>>() {
         });
     }
+
+    @Override
+    public List<ProductDTO> searchProduct(Long searchParam) throws BaseException {
+        return callRest(RestURIConstants.MAIN_URI + "/product/searchProductByParam", searchParam, new ParameterizedTypeReference<ResponseDTO<List<ProductDTO>>>() {
+
+        });}
 }

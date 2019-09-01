@@ -2,6 +2,7 @@ package ir.alzahra.offerBaz.proxy;
 
 import ir.alzahra.offerBaz.dto.BankDTO;
 import ir.alzahra.offerBaz.dto.ProductDTO;
+import ir.alzahra.offerBaz.dto.searchParameter.ProductSearchParam;
 import ir.alzahra.offerBaz.exception.BaseException;
 
 import java.util.List;
@@ -29,4 +30,6 @@ public interface IOfferProxy {
     void deleteProduct(ProductDTO selectedProduct)throws BaseException;
 
     String findBankByAbbreviation(String substring)throws BaseException;
+
+    List<ProductDTO> searchProduct(Long searchParam)throws BaseException;
 }

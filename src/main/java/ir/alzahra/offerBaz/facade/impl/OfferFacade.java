@@ -4,6 +4,7 @@ import ir.alzahra.offerBaz.config.JPAConfig;
 import ir.alzahra.offerBaz.control.IOfferService;
 import ir.alzahra.offerBaz.dto.BankDTO;
 import ir.alzahra.offerBaz.dto.ProductDTO;
+import ir.alzahra.offerBaz.dto.searchParameter.ProductSearchParam;
 import ir.alzahra.offerBaz.enums.DtoState;
 import ir.alzahra.offerBaz.exception.BaseException;
 import ir.alzahra.offerBaz.facade.IOfferFacade;
@@ -104,23 +105,15 @@ public class OfferFacade  implements IOfferFacade {
     public String findBankByAbbreviation(String name) throws BaseException {
         return offerService.findBankByAbbreviation(name);
     }
-    //    public void initializeDataBase() throws BaseException {
-//        offerService.initializeDatabase("dropSessionSequence.txt");
-//        offerService.initializeDatabase("createSessionSequence.txt");
-//    }
 
-//    @Override
-//    @Transactional(rollbackFor = Exception.class)
-//    public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-//
-//        if (JPAConfig.state.equals("create")){
-//            try {
-//               initializeDataBase();
-//    } catch (BaseException e) {
-//        e.printStackTrace();
-//    }
-//}
-//    }
-
-
+    @Override
+    public List<ProductDTO> searchProductByParam(Long param) throws BaseException {
+        List<ProductEntity> products=offerService.searchProductByParam(param);
+        List<ProductDTO> productDTOS = new ArrayList<>();
+        for (ProductEntity p:products
+             ) {
+            productDTOS.add(MapperClass.mapper(new ProductDTO(),p));
+        }
+        return productDTOS;
+    }
 }

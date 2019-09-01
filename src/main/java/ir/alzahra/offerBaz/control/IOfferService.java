@@ -1,6 +1,7 @@
 package ir.alzahra.offerBaz.control;
 
 
+import ir.alzahra.offerBaz.dto.searchParameter.ProductSearchParam;
 import ir.alzahra.offerBaz.exception.BaseException;
 import ir.alzahra.offerBaz.model.entity.BankEntity;
 import ir.alzahra.offerBaz.model.entity.ProductEntity;
@@ -34,4 +35,6 @@ public interface IOfferService {
     void deleteProduct(ProductEntity productEntity)throws BaseException;
 
     String findBankByAbbreviation(String name)throws BaseException;
+
+    List<ProductEntity> searchProductByParam(Long param)throws BaseException;
 }

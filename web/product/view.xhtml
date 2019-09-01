@@ -33,9 +33,9 @@
                             <p:commandButton id="searchButton" value="جستجو"
                                              actionListener="#{viewProductBean.searchProduct}"
                                              update="@form">
-
+                                <p:ajax event="dialogReturn" listener="#{viewProductBean.onProductSelected}"
+                                        update="@form"/>
                             </p:commandButton>
-                            <p:commandButton value="جستجوی پیشرفته" type="button"  />
 
                         </p:panelGrid>
                     </p:panel>

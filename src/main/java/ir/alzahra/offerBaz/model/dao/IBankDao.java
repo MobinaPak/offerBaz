@@ -1,5 +1,6 @@
 package ir.alzahra.offerBaz.model.dao;
 
+import ir.alzahra.offerBaz.dto.searchParameter.ProductSearchParam;
 import ir.alzahra.offerBaz.exception.BaseException;
 import ir.alzahra.offerBaz.model.entity.BankEntity;
 import ir.alzahra.offerBaz.model.entity.ProductEntity;
@@ -18,4 +19,5 @@ public interface IBankDao extends GenericDao<BankEntity> {
     Long getCountOfRecord()throws BaseException;
 
     String findBankByAbbreviation(String name)throws BaseException;
+
 }

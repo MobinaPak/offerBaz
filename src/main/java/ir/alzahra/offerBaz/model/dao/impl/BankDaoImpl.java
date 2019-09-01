@@ -1,9 +1,11 @@
 package ir.alzahra.offerBaz.model.dao.impl;
 
 
+import ir.alzahra.offerBaz.dto.searchParameter.ProductSearchParam;
 import ir.alzahra.offerBaz.exception.BaseException;
 import ir.alzahra.offerBaz.model.dao.IBankDao;
 import ir.alzahra.offerBaz.model.entity.BankEntity;
+import ir.alzahra.offerBaz.model.entity.ProductEntity;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.Query;
@@ -64,4 +66,6 @@ public class BankDaoImpl extends AbstractDAO implements IBankDao {
         return (String) statement.getSingleResult();
 
     }
+
+
 }

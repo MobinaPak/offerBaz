@@ -7,11 +7,14 @@ import ir.alzahra.offerBaz.enums.DtoState;
 import ir.alzahra.offerBaz.exception.BaseException;
 import ir.alzahra.offerBaz.proxy.IOfferProxy;
 import ir.alzahra.offerBaz.view.beans.BaseBean;
+import ir.alzahra.offerBaz.view.util.GeneralUtil;
+import org.primefaces.event.SelectEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author z.moafi
@@ -89,16 +92,38 @@ public class ViewProductBean extends BaseBean {
     }
 
     public void searchProduct() {
-        try {
-            selectedProduct = offerProxy.findProduct(productCode);
-            bankName = offerProxy.findBankByAbbreviation(selectedProduct.getUniqueCode().substring(6, 9));
-            addNotificationMessage();
-            //emptyPage();
-        } catch (BaseException e) {
-            //TODO
+
+        if (Objects.equals(productCode, "")) {
+            GeneralUtil.openWindow("includes/searchProduct", new Object[]{true, "850", "520", "100%", "100%", false, false}, "viewObject", null, "viewObject");
+
+        } else {
+            try {
+                selectedProduct = offerProxy.findProduct(productCode);
+                bankName = offerProxy.findBankByAbbreviation(selectedProduct.getUniqueCode().substring(6, 9));
+                addNotificationMessage();
+                //emptyPage();
+            } catch (BaseException e) {
+                //TODO
+            }
         }
 
 
+    }
+
+    public void onProductSelected(SelectEvent event){
+
+        Object returnObj = event.getObject();
+        if (returnObj != null) {
+            selectedProduct = (ProductDTO) returnObj;
+            productCode=selectedProduct.getUniqueCode();
+            try {
+                bankName = offerProxy.findBankByAbbreviation(selectedProduct.getUniqueCode().substring(6, 9));
+            } catch (BaseException e) {
+                //TODO
+            }
+
+
+        }
     }
 
 }
