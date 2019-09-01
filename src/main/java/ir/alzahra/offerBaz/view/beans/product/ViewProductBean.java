@@ -45,8 +45,7 @@ public class ViewProductBean extends BaseBean {
     private void emptyPage() {
         productSearchParam = new ProductSearchParam();
         selectedProduct = new ProductDTO();
-        bankName="";
-        productCode="";
+
     }
 
     public String getProductCode() {
@@ -94,7 +93,7 @@ public class ViewProductBean extends BaseBean {
             selectedProduct = offerProxy.findProduct(productCode);
             bankName = offerProxy.findBankByAbbreviation(selectedProduct.getUniqueCode().substring(6, 9));
             addNotificationMessage();
-            emptyPage();
+            //emptyPage();
         } catch (BaseException e) {
             //TODO
         }
