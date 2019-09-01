@@ -34,28 +34,13 @@
 
                             <p:commandButton id="searchButton" value="جستجو"
                                              actionListener="#{editProductViewBean.searchProduct}"
-                                             update=":#{p:component('productEdit')}">
+                                             update="@form">
+                                <p:ajax event="dialogReturn" listener="#{editProductViewBean.onProductSelected}"
+                                        update="@form"/>
 
                             </p:commandButton>
-                            <p:commandButton value="جستجوی پیشرفته" type="button" onclick="PF('dlg1').show();" />
 
                         </p:panelGrid>
-
-                        <p:dialog header="Basic Dialog" widgetVar="dlg1" minHeight="100" width="800px" height="400px">
-                            <p:panelGrid id="productSearch" columns="4" columnsWidth="2,4,2,4" styleClass="ui-noborder">
-                            <p:outputLabel value="کد محصول:" style="margin-left: 5px;"/>
-                            <p:inputText value="#{editProductViewBean.productSearchParam.code}" />
-
-                            <p:outputLabel value="بانک:" style="margin-left: 5px;"/>
-                            <h:selectOneMenu id="test" value="#{editProductViewBean.productSearchParam.bankId}" filter="true" filterMatchMode="contains" style="width: 220px">
-                                <f:selectItem  itemValue="" noSelectionOption="true" />
-                                <f:selectItems var="bank" value="#{editProductViewBean.bankDTOS}"  itemLabel="#{bank.name}" itemValue="#{bank.id}"/>
-                                <f:ajax listener="#{insertProductViewBean.findBank()}"
-                                        execute="@this"/>
-                            </h:selectOneMenu>
-                            </p:panelGrid>
-
-                        </p:dialog>
                     </p:panel>
                     <p:spacer height="10"/>
                 </p:fieldset>
