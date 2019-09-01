@@ -31,8 +31,8 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public UserEntity searchUserByUserName(UserEntity userEntity) throws BaseException {
-        userDao.searchUserByUserName(userEntity.getProfile().getUserName());
-        return userEntity;
+        UserEntity u=userDao.searchUserByUserName(userEntity.getProfile().getUserName());
+        return u;
     }
 
     @Override
