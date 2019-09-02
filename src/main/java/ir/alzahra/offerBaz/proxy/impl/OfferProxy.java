@@ -84,4 +84,10 @@ public class OfferProxy extends BaseProxy implements IOfferProxy {
         return callRest(RestURIConstants.MAIN_URI + "/product/searchProductByParam", searchParam, new ParameterizedTypeReference<ResponseDTO<List<ProductDTO>>>() {
 
         });}
+
+    @Override
+    public List<BankDTO> findBankByParam(String bankName) throws BaseException {
+        return callRest(RestURIConstants.MAIN_URI + "/bank/searchBankByParam", bankName, new ParameterizedTypeReference<ResponseDTO<List<BankDTO>>>() {
+        });}
+
 }

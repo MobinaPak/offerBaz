@@ -32,4 +32,6 @@ public interface IOfferProxy {
     String findBankByAbbreviation(String substring)throws BaseException;
 
     List<ProductDTO> searchProduct(Long searchParam)throws BaseException;
+
+    List<BankDTO> findBankByParam(String bankName)throws BaseException;
 }

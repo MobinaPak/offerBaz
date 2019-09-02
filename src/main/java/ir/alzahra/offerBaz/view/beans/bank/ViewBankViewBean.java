@@ -60,7 +60,7 @@ public class ViewBankViewBean extends BaseBean {
 
     public void searchBank() {
         if (bankName.equals("") || bankName.equals(null)) {
-            //TODO
+            GeneralUtil.openWindow("includes/searchBank", new Object[]{true, "850", "520", "100%", "100%", false, false}, "viewObject", null, "viewObject");
         } else {
             try {
                 selectedBank = offerProxy.findBankByName(bankName);
@@ -81,7 +81,15 @@ public class ViewBankViewBean extends BaseBean {
         bankName = null;
     }
 
-    public void onBankSelected() {
+    public void onBankSelected(SelectEvent event){
+
+        Object returnObj = event.getObject();
+        if (returnObj != null) {
+            selectedBank = (BankDTO) returnObj;
+            bankName=selectedBank.getName();
+
+        }
+
 
     }
 

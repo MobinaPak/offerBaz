@@ -108,4 +108,9 @@ public class OfferServiceImpl implements IOfferService {
         return productDao.searchProductByParam(param);
 
     }
+
+    @Override
+    public List<BankEntity> searchBankByParam(String bankName) throws BaseException {
+        return bankDao.findBankByParam(bankName);
+    }
 }

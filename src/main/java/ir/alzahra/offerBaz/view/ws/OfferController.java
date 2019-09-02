@@ -107,4 +107,13 @@ public class OfferController {
 
     }
 
+    @RequestMapping(method = RequestMethod.POST, value = "/bank/searchBankByParam")
+    ResponseEntity<ResponseDTO<List<BankDTO>>> searchBankByParam(@RequestBody String bankName) throws BaseException {
+        ResponseDTO responseDto = new ResponseDTO();
+        responseDto.setResponse(offerFacade.searchBankByParam(bankName));
+        return new ResponseEntity<ResponseDTO<List<BankDTO>>>(responseDto, HttpStatus.OK);
+
+    }
+
+
 }

@@ -116,4 +116,14 @@ public class OfferFacade  implements IOfferFacade {
         }
         return productDTOS;
     }
+
+    @Override
+    public List<BankDTO> searchBankByParam(String bankName) throws BaseException {
+        List<BankEntity> bankEntities=offerService.searchBankByParam(bankName);
+        List<BankDTO> banks=new ArrayList<>();
+        for (BankEntity b : bankEntities) {
+            banks.add(MapperClass.mapper(new BankDTO(),b));
+        }
+        return banks;
+    }
 }

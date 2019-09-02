@@ -67,5 +67,11 @@ public class BankDaoImpl extends AbstractDAO implements IBankDao {
 
     }
 
-
+    @Override
+    public List<BankEntity> findBankByParam(String bankName) throws BaseException {
+        String query="select * from BANK b where (b.NAME='' or b.NAME like :bankName)";
+        Query statement=entityManager.createNativeQuery(query,BankEntity.class);
+        statement.setParameter("bankName","%"+bankName+"%");
+        return statement.getResultList();
+    }
 }

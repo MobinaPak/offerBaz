@@ -37,4 +37,6 @@ public interface IOfferService {
     String findBankByAbbreviation(String name)throws BaseException;
 
     List<ProductEntity> searchProductByParam(Long param)throws BaseException;
+
+    List<BankEntity> searchBankByParam(String bankName)throws BaseException;
 }

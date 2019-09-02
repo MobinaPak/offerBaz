@@ -42,4 +42,7 @@ public interface IOfferFacade {
 
     @Transactional(rollbackFor = Exception.class)
     List<ProductDTO> searchProductByParam(Long param)throws BaseException;
+
+    @Transactional(rollbackFor = Exception.class)
+    List<BankDTO> searchBankByParam(String bankName)throws BaseException;
 }
