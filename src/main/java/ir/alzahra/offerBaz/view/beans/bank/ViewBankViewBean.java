@@ -65,7 +65,7 @@ public class ViewBankViewBean extends BaseBean {
             try {
                 selectedBank = offerProxy.findBankByName(bankName);
             } catch (BaseException e) {
-                //TODO
+               handleBaseException(e);
             }
         }
 
@@ -76,10 +76,7 @@ public class ViewBankViewBean extends BaseBean {
             GeneralUtil.openWindow("includes/viewPro", new Object[]{true, "850", "520", "100%", "100%", false, false}, "viewObject", selectedProduct, "viewObject");
     }
 
-    private void emptyPage() {
-        selectedBank = new BankDTO();
-        bankName = null;
-    }
+
 
     public void onBankSelected(SelectEvent event){
 

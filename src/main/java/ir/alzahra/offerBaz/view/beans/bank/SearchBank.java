@@ -67,13 +67,13 @@ public class SearchBank extends BaseBean {
             try {
                 banks=offerProxy.getAllBanks();
             } catch (BaseException e) {
-                //TODO
+                handleBaseException(e);
             }
         }else{
             try {
                 banks=offerProxy.findBankByParam(bankName);
             } catch (BaseException e) {
-                //TODO
+                handleBaseException(e);
             }
         }
 

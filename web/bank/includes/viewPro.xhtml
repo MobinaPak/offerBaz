@@ -7,7 +7,7 @@
       xmlns:p="http://primefaces.org/ui"
 >
 <f:metadata>
-    <f:viewAction onPostback="false" action="#{bean2.init}"/>
+    <f:viewAction onPostback="false" action="#{viewProductInBank.init}"/>
 </f:metadata>
 <ui:composition template="../../templates/dialogTemplate.xhtml">
     <ui:define name="title">
@@ -21,13 +21,13 @@
                 <p:fieldset legend="مشخصات محصول">
                     <p:panelGrid id="productEdit" columns="2" columnsWidth="2,4" styleClass="ui-noborder">
                         <p:outputLabel value="کد محصول:" style="margin-left: 5px;"/>
-                        <p:inputText value="#{bean2.productDTO.uniqueCode}"/>
+                        <p:inputText value="#{viewProductInBank.productDTO.uniqueCode}"/>
 
                         <p:outputLabel value="نام محصول:" style="margin-left: 5px;"/>
-                        <p:inputText value="#{bean2.productDTO.productName}"/>
+                        <p:inputText value="#{viewProductInBank.productDTO.productName}"/>
 
                         <p:outputLabel value="توضیحات:"/>
-                        <p:inputTextarea rows="6" cols="33" value="#{bean2.productDTO.description}"  readonly="true"/>
+                        <p:inputTextarea rows="6" cols="33" value="#{viewProductInBank.productDTO.description}"  readonly="true"/>
                     </p:panelGrid>
 
                 </p:fieldset>

@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @Author: Mobina Pak
@@ -64,6 +65,11 @@ public class OfferServiceImpl implements IOfferService {
     @Override
     public void insertBank(BankEntity bank) throws BaseException {
         offerCheckService.checkInsertBank(bank);
+       BankEntity duplicateBank= bankDao.findByName(bank.getName());
+       if (Objects.nonNull(duplicateBank))
+           throw new BaseException("bank.insert.duplicateBankName");
+       if (Objects.nonNull(bankDao.findBankByAbbreviation(bank.getNameAbbreviation())))
+           throw new BaseException("bank.insert.duplicateMokhafafName");
         bankDao.insert(bank);
         applicationEventPublisher.notify("bank.insert.success", NotificationType.Info);
 
@@ -83,7 +89,11 @@ public class OfferServiceImpl implements IOfferService {
 
     @Override
     public BankEntity findBankByName(String bankName) throws BaseException {
-       return bankDao.findByName(bankName);
+        BankEntity bank=bankDao.findByName(bankName);
+        if(Objects.isNull(bank))
+            throw new BaseException("bank.find.notFoundBank");
+        else
+       return bank;
     }
 
     @Override
@@ -117,6 +127,9 @@ public class OfferServiceImpl implements IOfferService {
 
     @Override
     public List<BankEntity> searchBankByParam(String bankName) throws BaseException {
-        return bankDao.findBankByParam(bankName);
+        List<BankEntity> bankEntity=bankDao.findBankByParam(bankName);
+        if(Objects.isNull(bankEntity) || bankEntity.size()==0)
+            throw new BaseException("bank.find.notFoundBank");
+        else return bankEntity;
     }
 }
