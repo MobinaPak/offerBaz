@@ -13,7 +13,6 @@ import java.util.List;
  **/
 public interface IOfferProxy {
 
-    //public void insert(ProductDTO productDTO)throws BaseException;
 
     void insertBank(BankDTO bankDTO)throws BaseException;
 

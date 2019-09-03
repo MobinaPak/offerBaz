@@ -1,10 +1,8 @@
 package ir.alzahra.offerBaz.facade.impl;
 
-import ir.alzahra.offerBaz.config.JPAConfig;
 import ir.alzahra.offerBaz.control.IOfferService;
 import ir.alzahra.offerBaz.dto.BankDTO;
 import ir.alzahra.offerBaz.dto.ProductDTO;
-import ir.alzahra.offerBaz.dto.searchParameter.ProductSearchParam;
 import ir.alzahra.offerBaz.enums.DtoState;
 import ir.alzahra.offerBaz.exception.BaseException;
 import ir.alzahra.offerBaz.facade.IOfferFacade;
@@ -12,13 +10,7 @@ import ir.alzahra.offerBaz.facade.mapper.MapperClass;
 import ir.alzahra.offerBaz.model.entity.BankEntity;
 import ir.alzahra.offerBaz.model.entity.ProductEntity;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,16 +57,18 @@ public class OfferFacade  implements IOfferFacade {
 
     @Override
     public void updateBank(BankDTO bankDTO) throws BaseException {
+        String trackCode="";
         List<ProductDTO> productDTOS = bankDTO.getProducts();
         for (ProductDTO p :productDTOS
              ) {
             if (p.getDtoState().equals(DtoState.New)) {
                 p.setDtoState(DtoState.None);
-                p.setUniqueCode(offerService.generateUniqueCode(bankDTO.getNameAbbreviation()));
+                trackCode=offerService.generateUniqueCode(bankDTO.getNameAbbreviation());
+                p.setUniqueCode(trackCode);
             }
         }
         BankEntity bankEntity=MapperClass.mapper(new BankEntity(),bankDTO);
-        offerService.updateBank(bankEntity);
+        offerService.updateBank(bankEntity,trackCode);
     }
 
     @Override

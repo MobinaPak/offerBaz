@@ -42,7 +42,9 @@ abstract class BaseProxy {
 //            } else {
 //                throw new BaseException(responseDto.getMsg());
 //            }
-            return responseDto.getResponse();
+            if (responseDto.getResponseStatus().equals(ResponseStatus.ERROR))
+                  throw new BaseException(responseDto.getMsg());
+                return responseDto.getResponse();
         } else return null;
     }
 

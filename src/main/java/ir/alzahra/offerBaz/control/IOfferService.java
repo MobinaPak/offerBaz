@@ -20,7 +20,7 @@ public interface IOfferService {
 
     List<BankEntity> getAllBanks()throws BaseException;
 
-    void updateBank(BankEntity bankEntity)throws BaseException;
+    void updateBank(BankEntity bankEntity,String trackCode)throws BaseException;
 
     BankEntity findBankByName(String bankName)throws BaseException;
 

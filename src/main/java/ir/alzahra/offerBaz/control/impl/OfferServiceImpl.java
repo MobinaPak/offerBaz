@@ -1,6 +1,7 @@
 package ir.alzahra.offerBaz.control.impl;
 
 
+import ir.alzahra.offerBaz.control.IOfferCheckService;
 import ir.alzahra.offerBaz.control.IOfferService;
 import ir.alzahra.offerBaz.dto.BankDTO;
 import ir.alzahra.offerBaz.dto.searchParameter.ProductSearchParam;
@@ -34,6 +35,10 @@ public class OfferServiceImpl implements IOfferService {
 
     @Autowired
     private CustomSpringEvent applicationEventPublisher;
+
+    @Autowired
+    private IOfferCheckService offerCheckService;
+
     private String finalcode;
 
     @Override
@@ -58,6 +63,7 @@ public class OfferServiceImpl implements IOfferService {
 
     @Override
     public void insertBank(BankEntity bank) throws BaseException {
+        offerCheckService.checkInsertBank(bank);
         bankDao.insert(bank);
         applicationEventPublisher.notify("bank.insert.success", NotificationType.Info);
 
@@ -69,9 +75,9 @@ public class OfferServiceImpl implements IOfferService {
     }
 
     @Override
-    public void updateBank(BankEntity bankEntity) throws BaseException {
+    public void updateBank(BankEntity bankEntity,String trackCode) throws BaseException {
         bankDao.update(bankEntity);
-        applicationEventPublisher.notify("product.insert.success",new Object[]{bankEntity.getProducts().get(0).getUniqueCode()}, NotificationType.Info);
+        applicationEventPublisher.notify("product.insert.success",new Object[]{trackCode}, NotificationType.Info);
 
     }
 
