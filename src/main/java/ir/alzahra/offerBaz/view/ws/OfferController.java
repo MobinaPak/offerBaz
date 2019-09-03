@@ -29,12 +29,6 @@ public class OfferController {
     private IOfferFacade offerFacade;
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/insertProduct.xhtml")
-    ResponseEntity<ResponseDTO> insertProduct(@RequestBody ProductDTO productDTO) throws BaseException {
-        offerFacade.insertProduct(productDTO);
-        return new ResponseEntity(HttpStatus.OK);
-
-       }
 
     @RequestMapping(method = RequestMethod.POST, value = "/bank/insertBank")
     ResponseEntity<ResponseDTO> insertBank(@RequestBody BankDTO bankDTO) throws BaseException {

@@ -24,11 +24,6 @@ public class OfferProxy extends BaseProxy implements IOfferProxy {
 
  /*   ************************************************************************************************* */
 
-//    @Override
-//    public void insert(ProductDTO productDTO) throws BaseException {
-//         callRest(RestURIConstants.MAIN_URI+"/product/insertProduct.xhtml"
-//                 , productDTO);
-//    }
 
     @Override
     public void insertBank(BankDTO bankDTO)throws BaseException {

@@ -48,8 +48,8 @@ public class EditProductViewBean extends BaseBean {
     private void emptyPage() {
         productSearchParam = new ProductSearchParam();
         selectedProduct = new ProductDTO();
-        bankName="";
-        productCode="";
+        bankName = "";
+        productCode = "";
     }
 
     public String getProductCode() {
@@ -103,41 +103,50 @@ public class EditProductViewBean extends BaseBean {
                 addNotificationMessage();
                 emptyPage();
             } catch (BaseException e) {
-                //TODO
+                handleBaseException(e);
             }
         }
 
     }
 
     public void edit() {
-        try {
-            selectedProduct.setDtoState(DtoState.Edit);
-            offerProxy.editProduct(selectedProduct);
-            addNotificationMessage();
+        if (Objects.nonNull(selectedProduct.getId())) {
+            try {
+                selectedProduct.setDtoState(DtoState.Edit);
+                offerProxy.editProduct(selectedProduct);
+                addNotificationMessage();
+                emptyPage();
+            } catch (BaseException e) {
+                handleBaseException(e);
+            }
+        } else {
+            handleBaseException(new BaseException("product.edit.notFoundForEdit"));
             emptyPage();
-        } catch (BaseException e) {
-            //TODO
         }
 
     }
 
     public void delete() {
-        selectedProduct.setDtoState(DtoState.Delete);
-        try {
-            offerProxy.deleteProduct(selectedProduct);
-            addNotificationMessage();
-            emptyPage();
-        } catch (BaseException e) {
-            //TODO
+        if (Objects.nonNull(selectedProduct.getId())) {
+            selectedProduct.setDtoState(DtoState.Delete);
+            try {
+                offerProxy.deleteProduct(selectedProduct);
+                addNotificationMessage();
+                emptyPage();
+            } catch (BaseException e) {
+                handleBaseException(e);
+            }
+        } else {
+            handleBaseException(new BaseException("product.delete.notFoundForDelete"));
         }
     }
 
-    public void onProductSelected(SelectEvent event){
+    public void onProductSelected(SelectEvent event) {
 
         Object returnObj = event.getObject();
         if (returnObj != null) {
             selectedProduct = (ProductDTO) returnObj;
-            productCode=selectedProduct.getUniqueCode();
+            productCode = selectedProduct.getUniqueCode();
             try {
                 bankName = offerProxy.findBankByAbbreviation(selectedProduct.getUniqueCode().substring(6, 9));
             } catch (BaseException e) {

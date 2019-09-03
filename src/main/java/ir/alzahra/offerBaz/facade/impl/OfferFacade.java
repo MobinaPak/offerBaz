@@ -27,13 +27,6 @@ public class OfferFacade  implements IOfferFacade {
     private IOfferService offerService;
 
 
-    @Override
-    public void insertProduct(ProductDTO productDTO) throws BaseException {
-        ProductEntity p= MapperClass.mapper(new ProductEntity(),productDTO);
-        offerService.insertProduct(p);
-
-
-    }
 
     @Override
     public void insertBank(BankDTO bankDTO) throws BaseException {
@@ -62,7 +55,11 @@ public class OfferFacade  implements IOfferFacade {
         for (ProductDTO p :productDTOS
              ) {
             if (p.getDtoState().equals(DtoState.New)) {
-                p.setDtoState(DtoState.None);
+                if (Objects.isNull(p.getProductName())|| Objects.equals(p.getProductName(),""))
+                    throw new BaseException("product.insert.nullName");
+                if (Objects.isNull(p.getDescription())|| Objects.equals(p.getDescription(),""))
+                    throw new BaseException("product.insert.nullDescription");
+                offerService.checkExistProduct(p.getProductName());
                 trackCode=offerService.generateUniqueCode(bankDTO.getNameAbbreviation());
                 p.setUniqueCode(trackCode);
             }

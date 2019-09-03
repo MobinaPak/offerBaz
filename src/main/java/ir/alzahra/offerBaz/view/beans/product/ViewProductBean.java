@@ -101,9 +101,9 @@ public class ViewProductBean extends BaseBean {
                 selectedProduct = offerProxy.findProduct(productCode);
                 bankName = offerProxy.findBankByAbbreviation(selectedProduct.getUniqueCode().substring(6, 9));
                 addNotificationMessage();
-                //emptyPage();
             } catch (BaseException e) {
-                //TODO
+                handleBaseException(e);
+
             }
         }
 
