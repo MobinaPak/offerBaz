@@ -17,6 +17,10 @@ import java.util.List;
                 @NamedQuery(
                         name = "findProductByCode",
                         query = "from ProductEntity p where p.uniqueCode=:productCode"
+                ),
+                @NamedQuery(
+                        name = "findProductByName",
+                        query = "from ProductEntity p where p.productName=:name"
                 )
         }
 )

@@ -49,9 +49,11 @@ public class InsertBankViewBean extends BaseBean {
             addNotificationMessage();
             emptyPage();
         } catch (BaseException e) {
-            e.printStackTrace();
+            handleBaseException(e);
         }
 
 
     }
+
+
 }

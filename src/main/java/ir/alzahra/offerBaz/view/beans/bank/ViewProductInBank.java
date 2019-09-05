@@ -12,9 +12,9 @@ import java.io.Serializable;
  * @author z.moafi
  * @since 28/08/2019
  */
-@Component("bean2")
+@Component("viewProductInBank")
 @Scope("view")
-public class Bean2 implements Serializable {
+public class ViewProductInBank implements Serializable {
 
     private ProductDTO productDTO;
 

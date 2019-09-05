@@ -4,6 +4,7 @@ import ir.alzahra.offerBaz.dto.BankDTO;
 import ir.alzahra.offerBaz.dto.ProductDTO;
 import ir.alzahra.offerBaz.exception.BaseException;
 import ir.alzahra.offerBaz.proxy.IOfferProxy;
+import ir.alzahra.offerBaz.view.beans.BaseBean;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ import java.util.Objects;
  */
 @Component("searchProduct")
 @Scope("view")
-public class SearchProduct {
+public class SearchProduct extends BaseBean {
 
     @Autowired
     private IOfferProxy offerProxy;
@@ -35,9 +36,8 @@ public class SearchProduct {
         try {
             bankDTOS= offerProxy.getAllBanks();
         } catch (BaseException e) {
-            e.printStackTrace();
+            handleBaseException(e);
         }
-
 
     }
 
@@ -75,13 +75,14 @@ public class SearchProduct {
     }
 
     public void searchProduct(){
+        try {
         if (Objects.nonNull(bankId)) {
-            try {
-
                 products=offerProxy.searchProduct(bankId);
-            } catch (BaseException e) {
-                //TODO HANIEH
-            }
+        }else{
+            throw new BaseException("product.insert.bankNotSelect");
+        }
+        } catch (BaseException e) {
+           handleBaseException(e);
         }
     }
 

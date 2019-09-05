@@ -14,9 +14,6 @@ import java.util.List;
 public interface IOfferFacade {
 
     @Transactional(rollbackFor = Exception.class)
-    void insertProduct(ProductDTO productDTO) throws BaseException;
-
-    @Transactional(rollbackFor = Exception.class)
     void insertBank(BankDTO bankDTO) throws BaseException;
 
     @Transactional(rollbackFor = Exception.class)

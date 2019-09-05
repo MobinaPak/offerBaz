@@ -50,6 +50,9 @@
                         <p:column headerText="ردیف" width="30">
                             <h:outputText value="#{rowIndex+1}"/>
                         </p:column>
+                        <p:column headerText="نام محصول">
+                            <h:outputText value="#{products.productName}"/>
+                        </p:column>
                         <p:column headerText="کد محصول">
                             <h:outputText value="#{products.uniqueCode}"/>
                         </p:column>
