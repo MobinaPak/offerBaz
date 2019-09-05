@@ -14,13 +14,12 @@ import java.util.List;
  **/
 public interface IOfferService {
 
-    void insertProduct(ProductEntity productEntity)throws BaseException;
 
     void insertBank(BankEntity bankDTO)throws BaseException;
 
     List<BankEntity> getAllBanks()throws BaseException;
 
-    void updateBank(BankEntity bankEntity)throws BaseException;
+    void updateBank(BankEntity bankEntity, String trackCode)throws BaseException;
 
     BankEntity findBankByName(String bankName)throws BaseException;
 
