@@ -91,6 +91,13 @@ public class OfferController {
 
     }
 
+    @RequestMapping(method = RequestMethod.POST, value = "/bank/deleteBank")
+    ResponseEntity<ResponseDTO> deleteBank(@RequestBody BankDTO bankDTO) throws BaseException {
+        offerFacade.deleteBank(bankDTO);
+        return new ResponseEntity(HttpStatus.OK);
+
+    }
+
     @RequestMapping(method = RequestMethod.POST, value = "/bank/findBankByAbbreviation")
     ResponseEntity<ResponseDTO<String>> findBankByAbbreviation(@RequestBody String name) throws BaseException {
         ResponseDTO responseDto = new ResponseDTO();

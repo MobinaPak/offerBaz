@@ -34,4 +34,8 @@ public interface IOfferProxy {
     List<ProductDTO> searchProduct(Long searchParam)throws BaseException;
 
     List<BankDTO> findBankByParam(String bankName)throws BaseException;
+
+    void editBankInfo(BankDTO bankDTO) throws BaseException;
+
+    void deleteBank(BankDTO bankDTO)throws BaseException;
 }

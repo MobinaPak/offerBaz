@@ -1,5 +1,6 @@
 package ir.alzahra.offerBaz.dto;
 
+import ir.alzahra.offerBaz.enums.DtoState;
 import ir.alzahra.offerBaz.facade.mapper.MapTo;
 import ir.alzahra.offerBaz.model.entity.ProductEntity;
 

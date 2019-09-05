@@ -44,7 +44,7 @@ public class OfferServiceImpl implements IOfferService {
     }
 
     public String generateUniqueCode(String name2) throws BaseException {
-       long code = bankDao.getCountOfRecord()+1000;
+       long code = productDao.getCountOfRecord()+1000;
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyMMdd");
         LocalDateTime now = LocalDateTime.now();
         finalcode =dtf.format(now)+name2+code;
@@ -112,5 +112,12 @@ public class OfferServiceImpl implements IOfferService {
     @Override
     public List<BankEntity> searchBankByParam(String bankName) throws BaseException {
         return bankDao.findBankByParam(bankName);
+    }
+
+    @Override
+    public void deleteBank(BankEntity bankEntity) throws BaseException {
+        bankDao.delete(bankEntity);
+        applicationEventPublisher.notify("bank.delete.success", NotificationType.Info);
+
     }
 }

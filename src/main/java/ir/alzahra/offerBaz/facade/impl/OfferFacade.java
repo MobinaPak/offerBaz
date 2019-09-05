@@ -68,8 +68,7 @@ public class OfferFacade  implements IOfferFacade {
         List<ProductDTO> productDTOS = bankDTO.getProducts();
         for (ProductDTO p :productDTOS
              ) {
-            if (p.getDtoState().equals(DtoState.New)) {
-                p.setDtoState(DtoState.None);
+            if (p.getDtoState()==DtoState.New) {
                 p.setUniqueCode(offerService.generateUniqueCode(bankDTO.getNameAbbreviation()));
             }
         }
@@ -125,5 +124,11 @@ public class OfferFacade  implements IOfferFacade {
             banks.add(MapperClass.mapper(new BankDTO(),b));
         }
         return banks;
+    }
+
+    @Override
+    public void deleteBank(BankDTO bankDTO) throws BaseException {
+        BankEntity bankEntity=MapperClass.mapper(new BankEntity(),bankDTO);
+        offerService.deleteBank(bankEntity);
     }
 }

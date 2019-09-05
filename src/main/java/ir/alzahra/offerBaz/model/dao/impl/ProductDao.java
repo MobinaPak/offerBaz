@@ -34,6 +34,11 @@ public class ProductDao extends AbstractDAO implements IProductDao {
 
     }
 
+    public Long getCountOfRecord(){
+        Query query = entityManager.createQuery("SELECT count (*) FROM ProductEntity ");
+        return (long) query.getSingleResult();
+    }
+
     @Override
     public void delete(ProductEntity entity) {
         entityManager.remove(entityManager.contains(entity) ? entity : entityManager.merge(entity));

@@ -45,4 +45,7 @@ public interface IOfferFacade {
 
     @Transactional(rollbackFor = Exception.class)
     List<BankDTO> searchBankByParam(String bankName)throws BaseException;
+
+    @Transactional(rollbackFor = Exception.class)
+    void deleteBank(BankDTO bankDTO)throws BaseException;
 }

@@ -16,8 +16,6 @@ public interface IBankDao extends GenericDao<BankEntity> {
 
     BankEntity findByName(String bankName)throws BaseException;
 
-    Long getCountOfRecord()throws BaseException;
-
     String findBankByAbbreviation(String name)throws BaseException;
 
     List<BankEntity> findBankByParam(String bankName)throws BaseException;
