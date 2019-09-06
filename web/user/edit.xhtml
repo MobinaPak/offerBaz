@@ -21,13 +21,13 @@
                     <p:messages autoUpdate="true" globalOnly="false" id="messages" closable="true" />
                     <p:panelGrid id="registerUser" columns="2" columnsWidth="2,4" styleClass="ui-noborder">
                         <p:outputLabel value="نام:"/>
-                        <p:inputText rows="2" cols="33" value="#{registerUserViewBean.userDTO.name}"/>
+                        <p:inputText rows="2" cols="33" value="#{editUserInformationViewBean.userDTO.name}"/>
 
                         <p:outputLabel value="نام خانوادگی:"/>
-                        <p:inputTextarea rows="2" cols="33" value="#{registerUserViewBean.userDTO.family}"/>
+                        <p:inputTextarea rows="2" cols="33" value="#{editUserInformationViewBean.userDTO.family}"/>
 
                         <p:outputLabel value="جنسیت:" />
-                        <p:selectOneRadio required="true" id="t" value="#{registerUserViewBean.userDTO.gender}">
+                        <p:selectOneRadio required="true" id="t" value="#{editUserInformationViewBean.userDTO.gender}">
                             <f:selectItem itemLabel="مونث" itemValue="FEMALE"/>
                             <f:selectItem itemLabel="مذکر" itemValue="MALE"/>
                         </p:selectOneRadio>

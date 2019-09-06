@@ -31,13 +31,13 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public UserEntity searchUserByUserName(UserEntity userEntity) throws BaseException {
-        UserEntity u=userDao.searchUserByUserName(userEntity.getProfile().getUserName());
-        return u;
+        return userDao.searchUserByUserName(userEntity.getProfile().getUserName());
     }
 
     @Override
     public UserEntity edit(UserEntity userEntity) {
         userDao.update(userEntity);
+        applicationEventPublisher.notify("user.edit.success", NotificationType.Info);
         return userEntity;
     }
 }
