@@ -3,7 +3,6 @@ package ir.alzahra.offerBaz.dto;
 import ir.alzahra.offerBaz.facade.mapper.MapTo;
 import ir.alzahra.offerBaz.model.entity.OfferRequestEntity;
 import ir.alzahra.offerBaz.model.entity.ProfileRoleEntity;
-import ir.alzahra.offerBaz.model.entity.UserEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,25 +11,31 @@ import java.util.List;
  * @Author: hanieh moafi
  * @Date: 4/19/2019
  **/
-public class ProfileDTO extends BaseDto{
+public class ProfileDTO extends BaseDto {
 
     private Long id;
     private String userName;
     private String password;
     private boolean enabled;
     @MapTo(targetEntity = OfferRequestEntity.class)
-    private List<OfferRequestDTO> offerRequests=new ArrayList<>();
+    private List<OfferRequestDTO> offerRequests = new ArrayList<>();
     @MapTo(targetEntity = ProfileRoleEntity.class)
     private List<ProfileRoleDTO> profileRoles = new ArrayList<>();
-/*    @MapTo(targetEntity = UserEntity.class)
-    private UserDTO user;*/
 
     public ProfileDTO() {
     }
 
-    public ProfileDTO(String userName, String password) {
+    public ProfileDTO(String userName, String password, boolean enabled) {
         this.userName = userName;
         this.password = password;
+        this.enabled = enabled;
+    }
+
+    public ProfileDTO(String userName, String password, boolean enabled, List<ProfileRoleDTO> profileRoles) {
+        this.userName = userName;
+        this.password = password;
+        this.enabled = enabled;
+        this.profileRoles = profileRoles;
     }
 
     public Long getId() {
@@ -80,12 +85,4 @@ public class ProfileDTO extends BaseDto{
     public void setProfileRoles(List<ProfileRoleDTO> profileRoles) {
         this.profileRoles = profileRoles;
     }
-/*
-    public UserDTO getUser() {
-        return user;
-    }
-
-    public void setUser(UserDTO user) {
-        this.user = user;
-    }*/
 }

@@ -17,7 +17,7 @@ import java.util.Set;
  * @Date: 4/21/2019, Sun
  **/
 @Entity
-@Table(name="PROFILE")
+@Table(name = "PROFILE")
 public class ProfileEntity extends BaseEntity {
 
     @Id
@@ -25,10 +25,10 @@ public class ProfileEntity extends BaseEntity {
     @Column(name = "ID")
     private Long id;
 
-    @Column(name = "USERNAME", unique = true,nullable = false, length = 45)
+    @Column(name = "USERNAME", unique = true, nullable = false, length = 45)
     private String userName;
 
-    @Column(name = "PASSWORD",nullable = false, length = 60)
+    @Column(name = "PASSWORD", nullable = false, length = 60)
     private String password;
 
     @Column(name = "ENABLE", nullable = false)
@@ -98,12 +98,4 @@ public class ProfileEntity extends BaseEntity {
     public void setOfferRequests(List<OfferRequestEntity> offerRequests) {
         this.offerRequests = offerRequests;
     }
-
-/*    public UserEntity getUser() {
-        return user;
-    }
-
-    public void setUser(UserEntity user) {
-        this.user = user;
-    }*/
 }

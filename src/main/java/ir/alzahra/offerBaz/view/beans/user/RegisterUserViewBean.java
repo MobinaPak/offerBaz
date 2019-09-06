@@ -33,7 +33,7 @@ public class RegisterUserViewBean extends BaseBean {
 
     public void register() {
         try {
-            userDTO.setProfile(new ProfileDTO(userName , password));
+            userDTO.setProfile(new ProfileDTO(userName, password, true));
             userDTO.setPhoneNumber(userName);
             userProxy.register(userDTO);
             addNotificationMessage();

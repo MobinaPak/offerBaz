@@ -4,7 +4,10 @@ package ir.alzahra.offerBaz.exception;
  * @Author: zahra soltaninejad
  * @Date: 4/19/2019, Fri
  **/
-public class BaseException extends Exception{
+public class BaseException extends Exception {
+
+    public BaseException() {
+    }
 
     public BaseException(String message) {
         super(message);

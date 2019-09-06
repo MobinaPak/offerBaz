@@ -2,6 +2,8 @@ package ir.alzahra.offerBaz.facade;
 
 import ir.alzahra.offerBaz.dto.UserDTO;
 import ir.alzahra.offerBaz.exception.BaseException;
+import ir.alzahra.offerBaz.exception.UserNotFoundException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -10,12 +12,13 @@ import org.springframework.transaction.annotation.Transactional;
  **/
 public interface IUserFacade {
 
-    @Transactional(rollbackFor = Exception.class)
-    UserDTO register(UserDTO userDTO);
+    @Transactional(noRollbackFor = UserNotFoundException.class, rollbackFor = Exception.class)
+    UserDTO register(UserDTO userDTO) throws BaseException;
 
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional(noRollbackFor = UserNotFoundException.class, rollbackFor = Exception.class)
     UserDTO searchUserByUserName(UserDTO userDTO) throws BaseException;
 
+    @PreAuthorize("isAuthenticated()")
     @Transactional(rollbackFor = Exception.class)
     UserDTO edit(UserDTO userDTO) throws BaseException;
 }

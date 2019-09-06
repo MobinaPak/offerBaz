@@ -13,7 +13,7 @@ import java.util.List;
  * @Author: zahra soltaninejad
  * @Date: 4/18/2019, Thu
  **/
-public class UserDTO extends BaseDto{
+public class UserDTO extends BaseDto {
 
     private Long id;
     private String name;
@@ -25,8 +25,13 @@ public class UserDTO extends BaseDto{
     private String email;
     private String phoneNumber;
     private CustomerType customerType;
-/*    @MapTo(targetEntity = OfferRequestEntity.class)
-    private List<OfferRequestDTO> requestDTOS = new ArrayList<>();*/
+
+    public UserDTO() {
+    }
+
+    public UserDTO(ProfileDTO profile) {
+        this.profile = profile;
+    }
 
     public Long getId() {
         return id;
@@ -99,12 +104,4 @@ public class UserDTO extends BaseDto{
     public void setCustomerType(CustomerType customerType) {
         this.customerType = customerType;
     }
-
-/*    public List<OfferRequestDTO> getRequestDTOS() {
-        return requestDTOS;
-    }
-
-    public void setRequestDTOS(List<OfferRequestDTO> requestDTOS) {
-        this.requestDTOS = requestDTOS;
-    }*/
 }
