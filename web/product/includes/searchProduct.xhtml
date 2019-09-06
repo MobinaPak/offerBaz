@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+>
+<f:metadata>
+    <f:viewAction onPostback="false" action="#{searchProduct.init}"/>
+</f:metadata>
+<ui:composition template="../../templates/dialogTemplate.xhtml">
+    <ui:define name="title">
+        <title>جستجوی محصول</title>
+    </ui:define>
+
+    <ui:define name="maincontent">
+        <p:scrollPanel mode="native" style="height: 280px; border: none; padding: 5px ; direction: rtl">
+            <p:messages autoUpdate="true" globalOnly="false" id="messages"/>
+            <h:form id="addForm">
+                <p:panel>
+                <p:panelGrid id="searchParameterPnl" columns="4" columnsWidth="2,4,2,4" styleClass="ui-noborder">
+                    <p:outputLabel value="نام بانک:"/>
+                    <h:selectOneMenu id="test" value="#{searchProduct.bankId}"  filter="true" filterMatchMode="contains">
+                        <f:selectItem itemLabel="بانک را انتخاب کنید" itemValue="" noSelectionOption="true" />
+                        <f:selectItems var="bank" value="#{searchProduct.bankDTOS}"  itemLabel="#{bank.name}" itemValue="#{bank.id}"/>
+                    </h:selectOneMenu>
+                </p:panelGrid>
+                    <p:spacer height="3"/>
+                    <p:panel styleClass="buttonBox">
+                        <p:commandButton value="جستجو"
+                                         actionListener="#{searchProduct.searchProduct}"
+                                         process="@form"  update="foundPlanTbl"/>
+                    </p:panel>
+                    <p:spacer height="3"/>
+
+                    <p:dataTable style="margin-bottom: 10px" id="foundPlanTbl"
+                                 value="#{searchProduct.products}"
+                                 var="products" selectionMode="single"
+                                 selection="#{searchProduct.selectedProduct}"
+                                 rowKey="#{products.hashCode()}"
+                                 emptyMessage="سطری برای نمایش وجود ندارد"
+                                 rowIndexVar="rowIndex"
+                                 rows="10"
+                                 widgetVar="foundPlanTbl">
+                        <f:facet name="header">
+                            <h:outputText value="نتایج جستجو"/>
+                        </f:facet>
+                        <p:ajax event="rowDblselect" listener="#{searchProduct.onFoundProductTableRowDbClick}"/>
+                        <p:column headerText="ردیف" width="30">
+                            <h:outputText value="#{rowIndex+1}"/>
+                        </p:column>
+                        <p:column headerText="نام محصول">
+                            <h:outputText value="#{products.productName}"/>
+                        </p:column>
+                        <p:column headerText="کد محصول">
+                            <h:outputText value="#{products.uniqueCode}"/>
+                        </p:column>
+                        <p:column headerText="توضیحات">
+                            <h:outputText value="#{products.description}"/>
+                        </p:column>
+
+                    </p:dataTable>
+
+                    <p:panel styleClass="buttonBox">
+                        <p:commandButton value="انتخاب" actionListener="#{searchProduct.select()}"
+                                         process=""/>
+                        <p:commandButton value="انصراف" actionListener="#{searchProduct.close}"
+                                         process="@this"/>
+                    </p:panel>
+                </p:panel>
+            </h:form>
+        </p:scrollPanel>
+    </ui:define>
+</ui:composition>
+</html>

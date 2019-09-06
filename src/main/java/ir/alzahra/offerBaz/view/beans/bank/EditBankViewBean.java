@@ -21,9 +21,9 @@ import java.util.*;
  * @author z.moafi
  * @since 13/08/2019
  */
-@Component("viewBankViewBean")
+@Component("editBankViewBean")
 @Scope("view")
-public class ViewBankViewBean extends BaseBean {
+public class EditBankViewBean extends BaseBean {
 
     @Autowired
     private IOfferProxy offerProxy;
@@ -65,7 +65,7 @@ public class ViewBankViewBean extends BaseBean {
             try {
                 selectedBank = offerProxy.findBankByName(bankName);
             } catch (BaseException e) {
-               handleBaseException(e);
+                //TODO
             }
         }
 
@@ -73,10 +73,13 @@ public class ViewBankViewBean extends BaseBean {
 
     public void redirectViewProduct() {
         if (Objects.nonNull(selectedProduct))
-            GeneralUtil.openWindow("includes/viewPro", new Object[]{true, "850", "520", "100%", "100%", false, false}, "viewObject", selectedProduct, "viewObject");
+            GeneralUtil.openWindow("includes/editPro", new Object[]{true, "850", "850", "100%", "100%", false, false}, "viewObject", selectedProduct, "viewObject");
     }
 
-
+    private void emptyPage() {
+        selectedBank = new BankDTO();
+        bankName = null;
+    }
 
     public void onBankSelected(SelectEvent event){
 
@@ -90,6 +93,25 @@ public class ViewBankViewBean extends BaseBean {
 
     }
 
+    public void edit(){
+        try {
+            offerProxy.editBankInfo(selectedBank);
+            addNotificationMessage();
+            emptyPage();
+        } catch (BaseException e) {
+            //must fill
+        }
+    }
+
+    public void delete(){
+        try {
+            offerProxy.deleteBank(selectedBank);
+            addNotificationMessage();
+            emptyPage();
+        } catch (BaseException e) {
+            //must fill
+        }
+    }
     public void returnProduct(final SelectEvent event) {
         Object returnObj = event.getObject();
         if (returnObj != null) {
@@ -98,5 +120,7 @@ public class ViewBankViewBean extends BaseBean {
 
             //  }
         }
+
+
     }
 }

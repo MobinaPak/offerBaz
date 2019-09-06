@@ -4,6 +4,7 @@ import ir.alzahra.offerBaz.dto.BankDTO;
 import ir.alzahra.offerBaz.dto.MultiWrapperDto;
 import ir.alzahra.offerBaz.dto.ProductDTO;
 import ir.alzahra.offerBaz.dto.ResponseDTO;
+import ir.alzahra.offerBaz.dto.searchParameter.ProductSearchParam;
 import ir.alzahra.offerBaz.exception.BaseException;
 import ir.alzahra.offerBaz.proxy.IOfferProxy;
 import ir.alzahra.offerBaz.view.RestURIConstants;
@@ -23,11 +24,6 @@ public class OfferProxy extends BaseProxy implements IOfferProxy {
 
  /*   ************************************************************************************************* */
 
-//    @Override
-//    public void insert(ProductDTO productDTO) throws BaseException {
-//         callRest(RestURIConstants.MAIN_URI+"/product/insertProduct.xhtml"
-//                 , productDTO);
-//    }
 
     @Override
     public void insertBank(BankDTO bankDTO)throws BaseException {
@@ -77,4 +73,27 @@ public class OfferProxy extends BaseProxy implements IOfferProxy {
         return callRest(RestURIConstants.MAIN_URI + "/bank/findBankByAbbreviation", name, new ParameterizedTypeReference<ResponseDTO<String>>() {
         });
     }
+
+    @Override
+    public List<ProductDTO> searchProduct(Long searchParam) throws BaseException {
+        return callRest(RestURIConstants.MAIN_URI + "/product/searchProductByParam", searchParam, new ParameterizedTypeReference<ResponseDTO<List<ProductDTO>>>() {
+
+        });}
+
+    @Override
+    public List<BankDTO> findBankByParam(String bankName) throws BaseException {
+        return callRest(RestURIConstants.MAIN_URI + "/bank/searchBankByParam", bankName, new ParameterizedTypeReference<ResponseDTO<List<BankDTO>>>() {
+        });}
+
+    @Override
+    public void editBankInfo(BankDTO bankDTO) throws BaseException {
+        callRest(RestURIConstants.MAIN_URI + "/bank/updateBank", bankDTO);
+    }
+
+    @Override
+    public void deleteBank(BankDTO bankDTO) throws BaseException {
+        callRest(RestURIConstants.MAIN_URI + "/bank/deleteBank", bankDTO);
+
+    }
+
 }

@@ -19,7 +19,8 @@ import java.util.List;
                 @NamedQuery(
                         name = "findBankByName",
                         query = "from BankEntity b where b.name=:bankName"
-                )
+                ),
+
         }
 )
 @Entity

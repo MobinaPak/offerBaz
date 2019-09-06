@@ -1,9 +1,11 @@
 package ir.alzahra.offerBaz.model.dao.impl;
 
 
+import ir.alzahra.offerBaz.dto.searchParameter.ProductSearchParam;
 import ir.alzahra.offerBaz.exception.BaseException;
 import ir.alzahra.offerBaz.model.dao.IBankDao;
 import ir.alzahra.offerBaz.model.entity.BankEntity;
+import ir.alzahra.offerBaz.model.entity.ProductEntity;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.Query;
@@ -51,10 +53,7 @@ public class BankDaoImpl extends AbstractDAO implements IBankDao {
         return null;
     }
 
-    public Long getCountOfRecord(){
-        Query query = entityManager.createQuery("SELECT count (*) FROM ProductEntity ");
-        return (long) query.getSingleResult();
-    }
+
 
     @Override
     public String findBankByAbbreviation(String name) throws BaseException {
@@ -63,5 +62,13 @@ public class BankDaoImpl extends AbstractDAO implements IBankDao {
         statement.setParameter("name",name);
         return (String) statement.getSingleResult();
 
+    }
+
+    @Override
+    public List<BankEntity> findBankByParam(String bankName) throws BaseException {
+        String query="select * from BANK b where (b.NAME='' or b.NAME like :bankName)";
+        Query statement=entityManager.createNativeQuery(query,BankEntity.class);
+        statement.setParameter("bankName","%"+bankName+"%");
+        return statement.getResultList();
     }
 }

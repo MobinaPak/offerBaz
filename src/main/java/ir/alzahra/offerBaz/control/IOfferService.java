@@ -1,6 +1,7 @@
 package ir.alzahra.offerBaz.control;
 
 
+import ir.alzahra.offerBaz.dto.searchParameter.ProductSearchParam;
 import ir.alzahra.offerBaz.exception.BaseException;
 import ir.alzahra.offerBaz.model.entity.BankEntity;
 import ir.alzahra.offerBaz.model.entity.ProductEntity;
@@ -13,13 +14,12 @@ import java.util.List;
  **/
 public interface IOfferService {
 
-    void insertProduct(ProductEntity productEntity)throws BaseException;
 
     void insertBank(BankEntity bankDTO)throws BaseException;
 
     List<BankEntity> getAllBanks()throws BaseException;
 
-    void updateBank(BankEntity bankEntity)throws BaseException;
+    void updateBank(BankEntity bankEntity, String trackCode)throws BaseException;
 
     BankEntity findBankByName(String bankName)throws BaseException;
 
@@ -34,4 +34,10 @@ public interface IOfferService {
     void deleteProduct(ProductEntity productEntity)throws BaseException;
 
     String findBankByAbbreviation(String name)throws BaseException;
+
+    List<ProductEntity> searchProductByParam(Long param)throws BaseException;
+
+    List<BankEntity> searchBankByParam(String bankName)throws BaseException;
+    void deleteBank(BankEntity bankEntity)throws BaseException;
+    void checkExistProduct(String name)throws BaseException;
 }

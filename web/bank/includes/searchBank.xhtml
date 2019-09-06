@@ -7,75 +7,67 @@
       xmlns:p="http://primefaces.org/ui"
 >
 <f:metadata>
-    <f:viewAction onPostback="false" action="#{insertBankViewBean.init}"/>
+    <f:viewAction onPostback="false" action="#{searchBank.init}"/>
 </f:metadata>
-    <h:head>
-        <title>نمایش بانک</title>
+<ui:composition template="../../templates/dialogTemplate.xhtml">
+    <ui:define name="title">
+        <title>جستجوی بانک</title>
+    </ui:define>
 
-
-        <h:outputStylesheet library="css" name="style.css"/>
-
-
-    </h:head>
-    <h:body style="direction: rtl">
-        <div class="ui-g-3"></div>
-
-        <p:fieldset legend="نمایش بانک" style="margin-bottom:30px" class="ui-g-6">
+    <ui:define name="maincontent">
+        <p:scrollPanel mode="native" style="height: 280px; border: none; padding: 5px ; direction: rtl">
+            <p:messages autoUpdate="true" globalOnly="false" id="messages"/>
             <h:form id="addForm">
-                <p:growl id="growl" showDetail="true" sticky="true"/>
+                <p:fieldset legend="مشخصات بانک">
+                    <p:panelGrid id="productEdit" columns="2" columnsWidth="2,4" styleClass="ui-noborder">
+                        <p:outputLabel value=" نام/مخفف بانک:" style="margin-left: 5px;"/>
+                        <p:inputText value="#{searchBank.bankName}"/>
 
-                <p:fieldset legend="جستجوی بانک">
-                    <p:panel styleClass="searchBox">
-                        <p:panelGrid id="productAdd" columns="4" columnsWidth="2,4,2,4" styleClass="ui-noborder">
-                            <p:outputLabel value="نام بانک:" style="margin-left: 5px;"/>
-                            <p:inputText value="#{viewBankViewBean.bankName}" id="nameSearch"/>
-
-                            <p:commandButton id="searchButton" value="جستجو"
-                                             actionListener="#{viewBankViewBean.searchBank}"
-                                             update=":#{p:component('sessionTable')}">
-                                <p:ajax event="dialogReturn" listener="#{viewBankViewBean.onBankSelected}"
-                                        update="@form"/>
-                            </p:commandButton>
-                        </p:panelGrid>
-                    </p:panel>
-                    <p:spacer height="10"/>
-
-                    <p:panel>
-                        <p:dataTable id="sessionTable" value="#{viewBankViewBean.selectedBank.products}"
-                                     var="product" selectionMode="single"
-                                     rowKey="#{product.hashCode()}"
-                                     rowIndexVar="index"
-                                     emptyMessage="سطری برای نمایش وجود ندارد">
-                            <f:facet name="header">
-                                <h:outputText value="محصولات بانک"/>
-                            </f:facet>
-                            <p:ajax event="rowSelect"/>
-                            <p:column headerText="ردیف" width="50">
-                                <h:outputText
-                                        value="#{index + 1}" />
-                            </p:column>
-                            <p:column headerText="نام محصول" width="120">
-                                <h:outputText value="#{product.productName}"/>
-                            </p:column>
-                            <p:column headerText="توضیحات محصول" width="200">
-                                <h:outputText value="#{product.description}"/>
-                            </p:column>
-                            <p:column headerText="جزییات">
-                                <center>
-                                    <p:commandButton value="مشاهده محصول" id="nonAjax"
-                                                     actionListener="#{viewBankViewBean.redirectViewProduct}"
-                                                     ajax="false"/>
-                                </center>
-                            </p:column>
-
-                        </p:dataTable>
+                    </p:panelGrid>
+                    <p:spacer height="3"/>
+                    <p:panel styleClass="buttonBox">
+                        <p:commandButton value="جستجو"
+                                         actionListener="#{searchBank.searchBank}"
+                                         process="@form"  update="foundBankTbl"/>
                     </p:panel>
 
+                    <p:spacer height="3"/>
+
+                    <p:dataTable style="margin-bottom: 10px" id="foundBankTbl"
+                                 value="#{searchBank.banks}"
+                                 var="banks" selectionMode="single"
+                                 selection="#{searchBank.selectedBank}"
+                                 rowKey="#{banks.hashCode()}"
+                                 emptyMessage="سطری برای نمایش وجود ندارد"
+                                 rowIndexVar="rowIndex"
+                                 rows="10"
+                                 widgetVar="foundBankTbl">
+                        <f:facet name="header">
+                            <h:outputText value="نتایج جستجو"/>
+                        </f:facet>
+                        <p:ajax event="rowDblselect" listener="#{searchBank.onFoundBankTableRowDbClick}"/>
+                        <p:column headerText="ردیف" width="30">
+                            <h:outputText value="#{rowIndex+1}"/>
+                        </p:column>
+                        <p:column headerText="نام بانک">
+                            <h:outputText value="#{banks.name}"/>
+                        </p:column>
+                        <p:column headerText="مخفف">
+                            <h:outputText value="#{banks.nameAbbreviation}"/>
+                        </p:column>
+
+                    </p:dataTable>
+
+                    <p:panel styleClass="buttonBox">
+                        <p:commandButton value="انتخاب" actionListener="#{searchBank.selectBank()}"
+                                         process=""/>
+                        <p:commandButton value="انصراف" actionListener="#{searchBank.close}"
+                                         process="@this"/>
+                    </p:panel>
                 </p:fieldset>
+
             </h:form>
-        </p:fieldset>
-
-        <div class="ui-g-3"></div>
-    </h:body>
-
+        </p:scrollPanel>
+    </ui:define>
+</ui:composition>
 </html>

@@ -1,6 +1,7 @@
 package ir.alzahra.offerBaz.facade;
 import ir.alzahra.offerBaz.dto.BankDTO;
 import ir.alzahra.offerBaz.dto.ProductDTO;
+import ir.alzahra.offerBaz.dto.searchParameter.ProductSearchParam;
 import ir.alzahra.offerBaz.exception.BaseException;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,9 +12,6 @@ import java.util.List;
  * @Date: 5/3/2019
  **/
 public interface IOfferFacade {
-
-    @Transactional(rollbackFor = Exception.class)
-    void insertProduct(ProductDTO productDTO) throws BaseException;
 
     @Transactional(rollbackFor = Exception.class)
     void insertBank(BankDTO bankDTO) throws BaseException;
@@ -38,4 +36,13 @@ public interface IOfferFacade {
 
     @Transactional(rollbackFor = Exception.class)
     String findBankByAbbreviation(String name)throws BaseException;
+
+    @Transactional(rollbackFor = Exception.class)
+    List<ProductDTO> searchProductByParam(Long param)throws BaseException;
+
+    @Transactional(rollbackFor = Exception.class)
+    List<BankDTO> searchBankByParam(String bankName)throws BaseException;
+
+    @Transactional(rollbackFor = Exception.class)
+    void deleteBank(BankDTO bankDTO)throws BaseException;
 }

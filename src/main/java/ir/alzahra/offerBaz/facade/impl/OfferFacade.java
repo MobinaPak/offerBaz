@@ -4,6 +4,7 @@ import ir.alzahra.offerBaz.config.JPAConfig;
 import ir.alzahra.offerBaz.control.IOfferService;
 import ir.alzahra.offerBaz.dto.BankDTO;
 import ir.alzahra.offerBaz.dto.ProductDTO;
+import ir.alzahra.offerBaz.dto.searchParameter.ProductSearchParam;
 import ir.alzahra.offerBaz.enums.DtoState;
 import ir.alzahra.offerBaz.exception.BaseException;
 import ir.alzahra.offerBaz.facade.IOfferFacade;
@@ -34,13 +35,6 @@ public class OfferFacade  implements IOfferFacade {
     private IOfferService offerService;
 
 
-    @Override
-    public void insertProduct(ProductDTO productDTO) throws BaseException {
-        ProductEntity p= MapperClass.mapper(new ProductEntity(),productDTO);
-        offerService.insertProduct(p);
-
-
-    }
 
     @Override
     public void insertBank(BankDTO bankDTO) throws BaseException {
@@ -64,16 +58,22 @@ public class OfferFacade  implements IOfferFacade {
 
     @Override
     public void updateBank(BankDTO bankDTO) throws BaseException {
+        String trackCode="";
         List<ProductDTO> productDTOS = bankDTO.getProducts();
         for (ProductDTO p :productDTOS
-             ) {
+                ) {
             if (p.getDtoState().equals(DtoState.New)) {
-                p.setDtoState(DtoState.None);
-                p.setUniqueCode(offerService.generateUniqueCode(bankDTO.getNameAbbreviation()));
+                if (Objects.isNull(p.getProductName())|| Objects.equals(p.getProductName(),""))
+                    throw new BaseException("product.insert.nullName");
+                if (Objects.isNull(p.getDescription())|| Objects.equals(p.getDescription(),""))
+                    throw new BaseException("product.insert.nullDescription");
+                offerService.checkExistProduct(p.getProductName());
+                trackCode=offerService.generateUniqueCode(bankDTO.getNameAbbreviation());
+                p.setUniqueCode(trackCode);
             }
         }
         BankEntity bankEntity=MapperClass.mapper(new BankEntity(),bankDTO);
-        offerService.updateBank(bankEntity);
+        offerService.updateBank(bankEntity,trackCode);
     }
 
     @Override
@@ -104,23 +104,31 @@ public class OfferFacade  implements IOfferFacade {
     public String findBankByAbbreviation(String name) throws BaseException {
         return offerService.findBankByAbbreviation(name);
     }
-    //    public void initializeDataBase() throws BaseException {
-//        offerService.initializeDatabase("dropSessionSequence.txt");
-//        offerService.initializeDatabase("createSessionSequence.txt");
-//    }
 
-//    @Override
-//    @Transactional(rollbackFor = Exception.class)
-//    public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-//
-//        if (JPAConfig.state.equals("create")){
-//            try {
-//               initializeDataBase();
-//    } catch (BaseException e) {
-//        e.printStackTrace();
-//    }
-//}
-//    }
+    @Override
+    public List<ProductDTO> searchProductByParam(Long param) throws BaseException {
+        List<ProductEntity> products=offerService.searchProductByParam(param);
+        List<ProductDTO> productDTOS = new ArrayList<>();
+        for (ProductEntity p:products
+             ) {
+            productDTOS.add(MapperClass.mapper(new ProductDTO(),p));
+        }
+        return productDTOS;
+    }
 
+    @Override
+    public List<BankDTO> searchBankByParam(String bankName) throws BaseException {
+        List<BankEntity> bankEntities=offerService.searchBankByParam(bankName);
+        List<BankDTO> banks=new ArrayList<>();
+        for (BankEntity b : bankEntities) {
+            banks.add(MapperClass.mapper(new BankDTO(),b));
+        }
+        return banks;
+    }
 
+    @Override
+    public void deleteBank(BankDTO bankDTO) throws BaseException {
+        BankEntity bankEntity=MapperClass.mapper(new BankEntity(),bankDTO);
+        offerService.deleteBank(bankEntity);
+    }
 }

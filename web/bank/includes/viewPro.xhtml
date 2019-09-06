@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+>
+<f:metadata>
+    <f:viewAction onPostback="false" action="#{viewProductInBank.init}"/>
+</f:metadata>
+<ui:composition template="../../templates/dialogTemplate.xhtml">
+    <ui:define name="title">
+        <title>نمایش محصول</title>
+    </ui:define>
+
+    <ui:define name="maincontent">
+        <p:scrollPanel mode="native" style="height: 280px; border: none; padding: 5px ; direction: rtl">
+            <p:messages autoUpdate="true" globalOnly="false" id="messages"/>
+            <h:form id="addForm">
+                <p:fieldset legend="مشخصات محصول">
+                    <p:panelGrid id="productEdit" columns="2" columnsWidth="2,4" styleClass="ui-noborder">
+                        <p:outputLabel value="کد محصول:" style="margin-left: 5px;"/>
+                        <p:inputText value="#{viewProductInBank.productDTO.uniqueCode}"/>
+
+                        <p:outputLabel value="نام محصول:" style="margin-left: 5px;"/>
+                        <p:inputText value="#{viewProductInBank.productDTO.productName}"/>
+
+                        <p:outputLabel value="توضیحات:"/>
+                        <p:inputTextarea rows="6" cols="33" value="#{viewProductInBank.productDTO.description}"  readonly="true"/>
+                    </p:panelGrid>
+
+                </p:fieldset>
+
+            </h:form>
+        </p:scrollPanel>
+    </ui:define>
+</ui:composition>
+</html>

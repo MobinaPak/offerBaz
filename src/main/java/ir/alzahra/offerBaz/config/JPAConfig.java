@@ -26,7 +26,6 @@ import java.util.Properties;
 @EnableTransactionManagement
 public class JPAConfig {
 
-    public static String state ="create";
     @Bean
     public DataSource dataSource(){
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -40,7 +39,7 @@ public class JPAConfig {
     private Properties HibernateProperties(){
         Properties hibernateProperties = new Properties();
 //        hibernateProperties.put("hibernate.hbm2ddl.auto", "create-drop");
-        hibernateProperties.put("hibernate.hbm2ddl.auto", state);
+//        hibernateProperties.put("hibernate.hbm2ddl.auto", "create");
         return hibernateProperties;
     }
 

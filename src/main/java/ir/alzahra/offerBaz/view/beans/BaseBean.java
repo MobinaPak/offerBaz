@@ -1,9 +1,11 @@
 package ir.alzahra.offerBaz.view.beans;
 
+import ir.alzahra.offerBaz.exception.BaseException;
 import ir.alzahra.offerBaz.notify.CustomEventParameters;
 import ir.alzahra.offerBaz.notify.CustomSpringEventListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -71,15 +73,28 @@ public class BaseBean {
 
 
     public static String show(String msgCode,Object[] params) {
-       if (Objects.nonNull(params)){
-           for (int i = 0; i < params.length; i++) {
-               if (!(params[i] instanceof BigDecimal) && !(params[0].getClass().getName().contains("alzahra")))
-                   params[i] = params[i].toString();
-           }
-       }
+        if (Objects.nonNull(params) && params.length>0){
+            for (int i = 0; i < params.length; i++) {
+                if (!(params[i] instanceof BigDecimal) && !(params[0].getClass().getName().contains("alzahra")))
+                    params[i] = params[i].toString();
+            }
 
+        }
         return context.getMessage(msgCode, params,defaultMsg, Locale.ENGLISH);
 
+    }
+
+
+    public void handleBaseException(Throwable throwable) {
+        Throwable cause = throwable.getCause();
+
+        if (cause instanceof AccessDeniedException) {
+            cause.printStackTrace();
+        } else if (throwable instanceof BaseException) {
+
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, show(throwable.getMessage(), new Object[0]), ""));
+
+        }
     }
 
 

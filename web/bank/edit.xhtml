@@ -12,17 +12,16 @@
 
 <ui:composition>
     <h:head>
-        <title>نمایش بانک</title>
+        <title>ویرایش بانک</title>
 
 
         <h:outputStylesheet library="css" name="style.css"/>
 
-
     </h:head>
-    <h:body style="direction: rtl">
+     <h:body style="direction: rtl">
         <div class="ui-g-3"></div>
 
-        <p:fieldset legend="نمایش بانک" style="margin-bottom:30px" class="ui-g-6">
+        <p:fieldset legend="ویرایش بانک" style="margin-bottom:30px" class="ui-g-6">
             <h:form id="form"  prependId="false">
                 <p:messages autoUpdate="true" globalOnly="false" id="messages" closable="true" />
 
@@ -30,23 +29,24 @@
                     <p:panel styleClass="searchBox">
                         <p:panelGrid id="productAdd" columns="4" columnsWidth="2,4,2,4" styleClass="ui-noborder">
                             <p:outputLabel value="نام بانک:" style="margin-left: 5px;"/>
-                            <p:inputText value="#{viewBankViewBean.bankName}" id="nameSearch"/>
+                            <p:inputText value="#{editBankViewBean.bankName}" id="nameSearch"/>
 
                             <p:commandButton id="searchButton" value="جستجو"
-                                             actionListener="#{viewBankViewBean.searchBank}"
+                                             actionListener="#{editBankViewBean.searchBank}"
                                              update=":#{p:component('sessionTable')}">
-                                <p:ajax event="dialogReturn" listener="#{viewBankViewBean.onBankSelected}"
+                                <p:ajax event="dialogReturn" listener="#{editBankViewBean.onBankSelected}"
                                         update="@form"/>
                             </p:commandButton>
                         </p:panelGrid>
                     </p:panel>
+
                     <p:spacer height="10"/>
 
                     <p:panel>
-                        <p:dataTable id="sessionTable" value="#{viewBankViewBean.selectedBank.products}"
+                        <p:dataTable id="sessionTable" value="#{editBankViewBean.selectedBank.products}"
                                      var="product"
                                      selectionMode="single"
-                                     selection="#{viewBankViewBean.selectedProduct}"
+                                     selection="#{editBankViewBean.selectedProduct}"
                                      rowKey="#{product.hashCode()}"
                                      rowIndexVar="index"
                                      emptyMessage="سطری برای نمایش وجود ندارد">
@@ -66,12 +66,12 @@
                             </p:column>
                             <p:column headerText="جزییات">
                                 <center>
-                                    <p:commandButton value="مشاهده محصول" id="nonAjax"
-                                                     actionListener="#{viewBankViewBean.redirectViewProduct}"
+                                    <p:commandButton value="ویرایش محصول" id="nonAjax"
+                                                     actionListener="#{editBankViewBean.redirectViewProduct}"
                                                      ajax="true">
-                                    <p:ajax event="dialogReturn"
-                                            listener="#{viewBankViewBean.returnProduct}"
-                                            update=":#{p:component('sessionTable')}"/>
+                                        <p:ajax event="dialogReturn"
+                                                listener="#{editBankViewBean.returnProduct}"
+                                                update=":#{p:component('sessionTable')}"/>
                                     </p:commandButton>
                                 </center>
                             </p:column>
@@ -79,20 +79,67 @@
 
                     </p:panel>
 
+                    <p:spacer height="3"/>
+                    <p:panel >
+
+                        <f:facet name="header">
+                            <h:outputText value="مشخصات بانک"/>
+                        </f:facet>
+
+                        <p:panelGrid id="BankInfoEdit" columns="2" columnsWidth="2,4" styleClass="ui-noborder" >
+                            <p:outputLabel value="نام بانک:"/>
+                            <p:inputText  value="#{editBankViewBean.selectedBank.name}" />
+
+                            <p:outputLabel value="مخفف"/>
+                            <p:inputText  value="#{editBankViewBean.selectedBank.nameAbbreviation}"/>
+
+                        </p:panelGrid>
+
+
+                        <p:spacer height="5"/>
+
+                            <p:commandButton value="ویرایش" action="#{editBankViewBean.edit}"
+                                             update=":#{p:component('sessionTable')}">
+
+
+                            </p:commandButton>
+                            <p:commandButton value="حذف" action="#{editBankViewBean.delete}"
+                                             update=":#{p:component('sessionTable')}">
+
+
+                            </p:commandButton>
+                        </p:panel>
+
+
+
+
+
+
+
                 </p:fieldset>
+
+
+
             </h:form>
         </p:fieldset>
 
         <p:dialog header="نمایش محصول" widgetVar="dlg1" minHeight="100" width="800px" height="400px">
             <p:panelGrid id="productSearch" columns="4" columnsWidth="2,4,2,4" styleClass="ui-noborder">
                 <p:outputLabel value="نام محصول:" style="margin-left: 5px;"/>
-                <p:inputText value="#{viewBankViewBean.bankName}" readonly="true" />
+                <p:inputText value="#{editBankViewBean.bankName}" readonly="true" />
 
             </p:panelGrid>
 
         </p:dialog>
 
+
+
+
+
+
         <div class="ui-g-3"></div>
-    </h:body>
-</ui:composition>
+
+         </h:body>
+
+        </ui:composition>
 </html>

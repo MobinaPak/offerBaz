@@ -4,6 +4,8 @@ import ir.alzahra.offerBaz.dto.BankDTO;
 import ir.alzahra.offerBaz.dto.MultiWrapperDto;
 import ir.alzahra.offerBaz.dto.ProductDTO;
 import ir.alzahra.offerBaz.dto.ResponseDTO;
+import ir.alzahra.offerBaz.dto.searchParameter.ProductSearchParam;
+import ir.alzahra.offerBaz.enums.ResponseStatus;
 import ir.alzahra.offerBaz.exception.BaseException;
 import ir.alzahra.offerBaz.facade.IOfferFacade;
 import ir.alzahra.offerBaz.view.RestURIConstants;
@@ -27,12 +29,6 @@ public class OfferController {
     private IOfferFacade offerFacade;
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "/insertProduct.xhtml")
-    ResponseEntity<ResponseDTO> insertProduct(@RequestBody ProductDTO productDTO) throws BaseException {
-        offerFacade.insertProduct(productDTO);
-        return new ResponseEntity(HttpStatus.OK);
-
-       }
 
     @RequestMapping(method = RequestMethod.POST, value = "/bank/insertBank")
     ResponseEntity<ResponseDTO> insertBank(@RequestBody BankDTO bankDTO) throws BaseException {
@@ -45,7 +41,7 @@ public class OfferController {
     ResponseEntity<ResponseDTO<List<BankDTO>>> getAllBanks() throws BaseException {
         ResponseDTO responseDto = new ResponseDTO();
         responseDto.setResponse(offerFacade.getAllBanks());
-
+        responseDto.setResponseStatus(ResponseStatus.OK);
         return new ResponseEntity<ResponseDTO<List<BankDTO>>>(responseDto, HttpStatus.OK);
 
 
@@ -62,6 +58,7 @@ public class OfferController {
     ResponseEntity<ResponseDTO<BankDTO>> findBankByName(@RequestBody String bankName) throws BaseException {
         ResponseDTO responseDto = new ResponseDTO();
         responseDto.setResponse(offerFacade.findBankByName(bankName));
+        responseDto.setResponseStatus(ResponseStatus.OK);
         return new ResponseEntity<ResponseDTO<BankDTO>>(responseDto, HttpStatus.OK);
 
 
@@ -71,6 +68,7 @@ public class OfferController {
     ResponseEntity<ResponseDTO<ProductDTO>> findProductByCode(@RequestBody String trackingCode) throws BaseException {
         ResponseDTO responseDto = new ResponseDTO();
         responseDto.setResponse(offerFacade.findProductByCode(trackingCode));
+        responseDto.setResponseStatus(ResponseStatus.OK);
         return new ResponseEntity<ResponseDTO<ProductDTO>>(responseDto, HttpStatus.OK);
 
 
@@ -90,12 +88,39 @@ public class OfferController {
 
     }
 
+    @RequestMapping(method = RequestMethod.POST, value = "/bank/deleteBank")
+    ResponseEntity<ResponseDTO> deleteBank(@RequestBody BankDTO bankDTO) throws BaseException {
+        offerFacade.deleteBank(bankDTO);
+        return new ResponseEntity(HttpStatus.OK);
+
+    }
+
     @RequestMapping(method = RequestMethod.POST, value = "/bank/findBankByAbbreviation")
     ResponseEntity<ResponseDTO<String>> findBankByAbbreviation(@RequestBody String name) throws BaseException {
         ResponseDTO responseDto = new ResponseDTO();
         responseDto.setResponse(offerFacade.findBankByAbbreviation(name));
+        responseDto.setResponseStatus(ResponseStatus.OK);
         return new ResponseEntity<ResponseDTO<String>>(responseDto, HttpStatus.OK);
 
     }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/product/searchProductByParam")
+    ResponseEntity<ResponseDTO<List<ProductDTO>>> searchProductByParam(@RequestBody Long param) throws BaseException {
+        ResponseDTO responseDto = new ResponseDTO();
+        responseDto.setResponse(offerFacade.searchProductByParam(param));
+        responseDto.setResponseStatus(ResponseStatus.OK);
+        return new ResponseEntity<ResponseDTO<List<ProductDTO>>>(responseDto, HttpStatus.OK);
+
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/bank/searchBankByParam")
+    ResponseEntity<ResponseDTO<List<BankDTO>>> searchBankByParam(@RequestBody String bankName) throws BaseException {
+        ResponseDTO responseDto = new ResponseDTO();
+        responseDto.setResponse(offerFacade.searchBankByParam(bankName));
+        responseDto.setResponseStatus(ResponseStatus.OK);
+        return new ResponseEntity<ResponseDTO<List<BankDTO>>>(responseDto, HttpStatus.OK);
+
+    }
+
 
 }

@@ -1,10 +1,12 @@
 package ir.alzahra.offerBaz.model.dao.impl;
 
+import ir.alzahra.offerBaz.dto.searchParameter.ProductSearchParam;
 import ir.alzahra.offerBaz.exception.BaseException;
 import ir.alzahra.offerBaz.model.dao.IProductDao;
 import ir.alzahra.offerBaz.model.entity.ProductEntity;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Objects;
@@ -32,6 +34,11 @@ public class ProductDao extends AbstractDAO implements IProductDao {
 
     }
 
+    public Long getCountOfRecord(){
+        Query query = entityManager.createQuery("SELECT count (*) FROM ProductEntity ");
+        return (long) query.getSingleResult();
+    }
+
     @Override
     public void delete(ProductEntity entity) {
         entityManager.remove(entityManager.contains(entity) ? entity : entityManager.merge(entity));
@@ -50,17 +57,25 @@ public class ProductDao extends AbstractDAO implements IProductDao {
             return null;
     }
 
-//    public Integer getUniqueNumber(){
-//        String query= "select SESSION_COUNTER_SEQ.nextval from dual";
-//        Query nativeQuery = entityManager.createNativeQuery(query);
-//        return ((Number)nativeQuery.getSingleResult()).intValue();
-//    }
-//
-//
-//    public void initializeDatabase(String name) throws BaseException {
-//        InputStream resourcAsStream = this.getClass().getClassLoader().getResourceAsStream(name);
-//        ScriptRunner sr = new ScriptRunner(entityManager.unwrap(SessionImpl.class).connection());
-//        sr.runScript(new InputStreamReader(resourcAsStream));
-//
-//    }
+    @Override
+    public List<ProductEntity> searchProductByParam(Long param) throws BaseException {
+
+        String queryStatement="select * from PRODUCT p where (p.BANK_ID=:bankId)";
+        Query query=entityManager.createNativeQuery(queryStatement,ProductEntity.class);
+        query.setParameter("bankId",param);
+       return query.getResultList();
+
+
+    }
+
+    @Override
+    public ProductEntity findByName(String name) throws BaseException {
+        TypedQuery query =entityManager.createNamedQuery("findProductByName", ProductEntity.class);
+        query.setParameter("name",name);
+        List<ProductEntity> products = query.getResultList();
+        if (Objects.nonNull(products) && products.size()>0)
+            return products.get(0);
+        else
+            return null;
+    }
 }
