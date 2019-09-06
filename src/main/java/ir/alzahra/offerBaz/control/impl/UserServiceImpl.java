@@ -28,11 +28,14 @@ import java.util.Set;
 @Service("userDetailsService")
 public class UserServiceImpl implements IUserService, UserDetailsService {
 
-    @Autowired
     private IUserDao userDao;
+    private CustomSpringEvent applicationEventPublisher;
 
     @Autowired
-    private CustomSpringEvent applicationEventPublisher;
+    public UserServiceImpl(IUserDao userDao, CustomSpringEvent applicationEventPublisher) {
+        this.userDao = userDao;
+        this.applicationEventPublisher = applicationEventPublisher;
+    }
 
     @Override
     public UserEntity register(UserEntity userEntity) {
@@ -44,7 +47,6 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
     @Override
     public UserEntity searchUserByUserName(UserEntity userEntity) throws BaseException {
         return userDao.searchUserByUserName(userEntity.getProfile().getUserName());
-
     }
 
     @Override

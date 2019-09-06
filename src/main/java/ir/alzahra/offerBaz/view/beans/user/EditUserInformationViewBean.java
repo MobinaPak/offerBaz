@@ -23,18 +23,20 @@ public class EditUserInformationViewBean extends BaseBean {
 
     private UserDTO userDTO;
 
-    @Autowired
     private IUserProxy userProxy;
+
+    @Autowired
+    public void setUserProxy(IUserProxy userProxy) {
+        this.userProxy = userProxy;
+    }
 
     public void init() {
         try {
-            // TODO: 8/16/2019 SHAMIM
             userDTO = new UserDTO();
             userDTO.setProfile(new ProfileDTO());
             userDTO.getProfile().setUserName("0");
             userDTO = userProxy.getUser(userDTO);
         } catch (BaseException e) {
-            // TODO: 8/9/2019 SHAMIM
             e.printStackTrace();
         }
         if (Objects.isNull(userDTO)){

@@ -1,6 +1,7 @@
 package ir.alzahra.offerBaz.view.beans.user;
 
 import ir.alzahra.offerBaz.dto.ProfileDTO;
+import ir.alzahra.offerBaz.dto.ProfileRoleDTO;
 import ir.alzahra.offerBaz.dto.UserDTO;
 import ir.alzahra.offerBaz.exception.BaseException;
 import ir.alzahra.offerBaz.proxy.IUserProxy;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Component;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Author: Mobina Pak
@@ -24,8 +27,12 @@ public class RegisterUserViewBean extends BaseBean {
     private String userName;
     private String password;
 
-    @Autowired
     private IUserProxy userProxy;
+
+    @Autowired
+    public void setUserProxy(IUserProxy userProxy) {
+        this.userProxy = userProxy;
+    }
 
     public RegisterUserViewBean() {
         userDTO = new UserDTO();
@@ -33,7 +40,9 @@ public class RegisterUserViewBean extends BaseBean {
 
     public void register() {
         try {
-            userDTO.setProfile(new ProfileDTO(userName, password, true));
+            List<ProfileRoleDTO> roles = new ArrayList<>();
+            roles.add(new ProfileRoleDTO("ROLE_USER"));
+            userDTO.setProfile(new ProfileDTO(userName, password, true , roles));
             userDTO.setPhoneNumber(userName);
             userProxy.register(userDTO);
             addNotificationMessage();

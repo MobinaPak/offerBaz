@@ -30,8 +30,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
+        //ROLE_ADMIN , ROLE_USER
+        //you must set special permissions using these roles
         http.csrf().disable();
         http.authorizeRequests()
+                .antMatchers("/web/user/edit.xhtml").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
                 .antMatchers("/web/javax.faces.resource/**"
                         , "/web/user/register.xhtml")
                 .permitAll()
