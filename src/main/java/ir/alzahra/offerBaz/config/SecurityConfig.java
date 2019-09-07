@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
 
 @Configuration
 @EnableWebSecurity
@@ -38,8 +39,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/web/javax.faces.resource/**"
                         , "/web/user/register.xhtml")
                 .permitAll()
-                .antMatchers("/**").authenticated()
-                .and().formLogin().loginPage("/web/login.xhtml").loginProcessingUrl("/web/login.xhtml").permitAll()
+                .antMatchers("/**").authenticated();
+        http
+                .headers()
+                .addHeaderWriter(new XFrameOptionsHeaderWriter(XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN));
+        http.formLogin().loginPage("/web/login.xhtml").loginProcessingUrl("/web/login.xhtml").permitAll()
                 .usernameParameter("user").passwordParameter("pass").defaultSuccessUrl("/web/index.xhtml");
 
         http.logout().logoutUrl("/web/logout").logoutSuccessUrl("/web/index.xhtml");
