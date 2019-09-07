@@ -21,10 +21,14 @@
                     <p:messages autoUpdate="true" globalOnly="false" id="messages" closable="true" />
                     <p:panelGrid id="registerUser" columns="2" columnsWidth="2,4" styleClass="ui-noborder">
                         <p:outputLabel value="شماره موبایل:"/>
-                        <p:inputText id="userName" rows="2" cols="33" value="#{registerUserViewBean.userName}"/>
+                        <p:inputText id="userName" required="true" rows="2" cols="33" value="#{registerUserViewBean.userName}" validatorMessage="شماره موبایل خود را به درستی وارد کنید" >
+                            <f:validateRegex pattern="\d{11}" />
+                        </p:inputText>
 
                         <p:outputLabel value="رمز عبور:"/>
-                        <p:password id="password" rows="2" cols="33" value="#{registerUserViewBean.password}"/>
+                        <p:password id="password" required="true" rows="2" cols="33" value="#{registerUserViewBean.password}" validatorMessage="رمز عبور شما باید حداقل شش و حداکثر بیست کاراکتر متشکل از عدد و حروف باشد">
+                            <f:validateRegex pattern="((?=.*\d)(?=.*[a-z]).{6,20})" />
+                        </p:password>
                     </p:panelGrid>
                     <p:spacer height="5"/>
                     <p:panel styleClass="buttonBox">
