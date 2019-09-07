@@ -51,9 +51,9 @@
                     <p:spacer height="5"/>
 
                     <p:panel styleClass="buttonBox">
-                        <p:commandButton value="تایید" action="#{insertProductViewBean.insert}"
-                                         update=":addForm"
-                        >
+                        <p:commandButton value="تایید" actionListener="#{insertProductViewBean.insert}"
+                                         update=":addForm">
+
                         </p:commandButton>
                     </p:panel>
 

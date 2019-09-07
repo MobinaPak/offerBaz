@@ -6,10 +6,12 @@ import ir.alzahra.offerBaz.enums.DtoState;
 import ir.alzahra.offerBaz.exception.BaseException;
 import ir.alzahra.offerBaz.proxy.IOfferProxy;
 import ir.alzahra.offerBaz.view.beans.BaseBean;
+import org.primefaces.event.SelectEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,7 +21,7 @@ import java.util.Objects;
  **/
 @Component("insertProductViewBean")
 @Scope("view")
-public class InsertProductViewBean extends BaseBean{
+public class InsertProductViewBean extends BaseBean {
 
     @Autowired
     private IOfferProxy offerProxy;
@@ -32,7 +34,7 @@ public class InsertProductViewBean extends BaseBean{
 
     public void init() {
         try {
-            bankDTOS= offerProxy.getAllBanks();
+            bankDTOS = offerProxy.getAllBanks();
         } catch (BaseException e) {
             //TODO
         }
@@ -77,15 +79,16 @@ public class InsertProductViewBean extends BaseBean{
 
     private void emptyPage() {
         productDTO = new ProductDTO();
+     //   bankDTOS = new ArrayList<>();
 
 
     }
 
-    public void findBank(){
-        for (BankDTO b:bankDTOS
-             ) {
-            if (b.getId()==bankId)
-                selectedBank=b;
+    public void findBank() {
+        for (BankDTO b : bankDTOS
+        ) {
+            if (b.getId() == bankId)
+                selectedBank = b;
 
         }
 
@@ -94,18 +97,28 @@ public class InsertProductViewBean extends BaseBean{
     public void insert() {
         try {
             if (Objects.nonNull(productDTO) && Objects.nonNull(selectedBank)) {
+                BankDTO b= offerProxy.findBankByName(selectedBank.getName());
                 productDTO.setDtoState(DtoState.New);
-                selectedBank.getProducts().add(productDTO);
-                offerProxy.updateBank(selectedBank);
+                b.getProducts().add(productDTO);
+                offerProxy.updateBank(b);
                 addNotificationMessage();
-                  emptyPage();
-            }else {
+                emptyPage();
+                //  init();
+            } else {
                 throw new BaseException("product.insert.bankNotSelect");
             }
         } catch (BaseException e) {
-           handleBaseException(e);
+            handleBaseException(e);
         }
 
 
+    }
+
+    public void onProductAdded() {
+        try {
+            bankDTOS = offerProxy.getAllBanks();
+        } catch (BaseException e) {
+            //TODO
+        }
     }
 }

@@ -71,7 +71,7 @@ public class ProductDao extends AbstractDAO implements IProductDao {
     @Override
     public ProductEntity findByName(String name) throws BaseException {
         TypedQuery query =entityManager.createNamedQuery("findProductByName", ProductEntity.class);
-        query.setParameter("name",name);
+        query.setParameter("name1",name);
         List<ProductEntity> products = query.getResultList();
         if (Objects.nonNull(products) && products.size()>0)
             return products.get(0);

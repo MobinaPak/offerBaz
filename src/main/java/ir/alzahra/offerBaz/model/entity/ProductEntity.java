@@ -20,7 +20,7 @@ import java.util.List;
                 ),
                 @NamedQuery(
                         name = "findProductByName",
-                        query = "from ProductEntity p where p.productName=:name"
+                        query = "from ProductEntity p where p.productName=:name1"
                 )
         }
 )
