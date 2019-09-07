@@ -36,7 +36,9 @@
                         <p:inputText rows="2" cols="33" value="#{editUserInformationViewBean.userDTO.phoneNumber}" readonly="true"/>
 
                         <p:outputLabel value="آدرس ایمیل:"/>
-                        <p:inputText rows="2" cols="33" value="#{editUserInformationViewBean.userDTO.email}"/>
+                        <p:inputText rows="2" cols="33" value="#{editUserInformationViewBean.userDTO.email}" validatorMessage="ایمیل خود را به درستی وارد کنید">
+                            <f:validateRegex pattern="^([_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{1,6}))?$" />
+                        </p:inputText>
 
                     </p:panelGrid>
                     <p:spacer height="5"/>
