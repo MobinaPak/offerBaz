@@ -34,6 +34,11 @@ public class EditBankViewBean extends BaseBean {
     private ProductDTO selectedProduct;
 
 
+    public void init(){
+
+    }
+
+
     public String getBankName() {
         return bankName;
     }

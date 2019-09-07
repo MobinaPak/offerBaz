@@ -161,6 +161,18 @@
             <artifactId>spring-security-config</artifactId>
             <version>${spring.security.version}</version>
         </dependency>
+
+        <!--<dependency>
+            <groupId>org.primefaces.themes</groupId>
+            <artifactId>cupertino</artifactId>
+            &lt;!&ndash;<artifactId>all-themes</artifactId>&ndash;&gt;
+            <version>1.0.10</version>
+        </dependency>-->
+        <dependency>
+            <groupId>org.primefaces.themes</groupId>
+            <artifactId>all-themes</artifactId>
+            <version>1.0.10</version>
+        </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
