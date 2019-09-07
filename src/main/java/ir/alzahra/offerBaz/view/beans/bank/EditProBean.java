@@ -6,6 +6,7 @@ import ir.alzahra.offerBaz.exception.BaseException;
 import ir.alzahra.offerBaz.proxy.IOfferProxy;
 import ir.alzahra.offerBaz.view.beans.BaseBean;
 import ir.alzahra.offerBaz.view.util.GeneralUtil;
+import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -19,10 +20,10 @@ import java.io.Serializable;
  **/
 @Component("editProBean")
 @Scope("view")
-public class EditProBean extends BaseBean implements Serializable{
+public class EditProBean  implements Serializable{
 
 
-        private ProductDTO productDTO;
+       private ProductDTO productDTO;
 
         @Autowired
         private IOfferProxy offerProxy;
@@ -41,26 +42,39 @@ public class EditProBean extends BaseBean implements Serializable{
             this.productDTO = productDTO;
         }
 
-        public void edit() {
+       /* public void edit() {
             try {
                 productDTO.setDtoState(DtoState.Edit);
                 offerProxy.editProduct(productDTO);
-                addNotificationMessage();
             } catch (BaseException e) {
                 //TODO
             }
 
         }
-
-        public void delete() {
+*/
+       /* public void delete() {
             productDTO.setDtoState(DtoState.Delete);
             try {
                 offerProxy.deleteProduct(productDTO);
-                addNotificationMessage();
             } catch (BaseException e) {
                 //TODO
             }
-        }
+        }*/
+
+       public void selectProForEdit(){
+           if (productDTO != null)
+               RequestContext.getCurrentInstance().closeDialog(productDTO);
+           else{
+               //TODO
+           }
+
+       }
+
+       public void close(){
+           RequestContext.getCurrentInstance().closeDialog(null);
+
+       }
+
 
 
 }

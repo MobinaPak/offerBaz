@@ -18,12 +18,12 @@
         <h:outputStylesheet library="css" name="style.css"/>
 
     </h:head>
-     <h:body style="direction: rtl">
+    <h:body style="direction: rtl">
         <div class="ui-g-3"></div>
 
         <p:fieldset legend="ویرایش بانک" style="margin-bottom:30px" class="ui-g-6">
-            <h:form id="form"  prependId="false">
-                <p:messages autoUpdate="true" globalOnly="false" id="messages" closable="true" />
+            <h:form id="form" prependId="false">
+                <p:messages autoUpdate="true" globalOnly="false" id="messages" closable="true"/>
 
                 <p:fieldset legend="جستجوی بانک">
                     <p:panel styleClass="searchBox">
@@ -33,7 +33,7 @@
 
                             <p:commandButton id="searchButton" value="جستجو"
                                              actionListener="#{editBankViewBean.searchBank}"
-                                             update=":#{p:component('sessionTable')}">
+                                             update=":#{p:component('sessionTable')} @form">
                                 <p:ajax event="dialogReturn" listener="#{editBankViewBean.onBankSelected}"
                                         update="@form"/>
                             </p:commandButton>
@@ -43,6 +43,18 @@
                     <p:spacer height="10"/>
 
                     <p:panel>
+
+                        <p:panelGrid id="BankInfoEdit" columns="2" columnsWidth="2,4" styleClass="ui-noborder">
+                            <p:outputLabel value="نام بانک:"/>
+                            <p:inputText value="#{editBankViewBean.selectedBank.name}"/>
+
+                            <p:outputLabel value="مخفف"/>
+                            <p:inputText value="#{editBankViewBean.selectedBank.nameAbbreviation}"/>
+
+                        </p:panelGrid>
+
+                        <p:spacer height="3"/>
+
                         <p:dataTable id="sessionTable" value="#{editBankViewBean.selectedBank.products}"
                                      var="product"
                                      selectionMode="single"
@@ -56,7 +68,7 @@
                             <p:ajax event="rowSelect"/>
                             <p:column headerText="ردیف" width="50">
                                 <h:outputText
-                                        value="#{index + 1}" />
+                                        value="#{index + 1}"/>
                             </p:column>
                             <p:column headerText="نام محصول" width="120">
                                 <h:outputText value="#{product.productName}"/>
@@ -66,7 +78,7 @@
                             </p:column>
                             <p:column headerText="جزییات">
                                 <center>
-                                    <p:commandButton value="ویرایش محصول" id="nonAjax"
+                                    <p:commandButton value="ویرایش " id="nonAjax"
                                                      actionListener="#{editBankViewBean.redirectViewProduct}"
                                                      ajax="true">
                                         <p:ajax event="dialogReturn"
@@ -75,64 +87,43 @@
                                     </p:commandButton>
                                 </center>
                             </p:column>
+                            <p:column headerText="حذف محصول">
+                                <center>
+                                    <p:commandButton value="حذف " id="but2"
+                                                     actionListener="#{editBankViewBean.deleteSelectedPro}"
+                                                     ajax="true"
+                                                     update=":#{p:component('sessionTable')}">
+
+                                    </p:commandButton>
+                                </center>
+                            </p:column>
                         </p:dataTable>
 
                     </p:panel>
 
-                    <p:spacer height="3"/>
-                    <p:panel >
-
-                        <f:facet name="header">
-                            <h:outputText value="مشخصات بانک"/>
-                        </f:facet>
-
-                        <p:panelGrid id="BankInfoEdit" columns="2" columnsWidth="2,4" styleClass="ui-noborder" >
-                            <p:outputLabel value="نام بانک:"/>
-                            <p:inputText  value="#{editBankViewBean.selectedBank.name}" />
-
-                            <p:outputLabel value="مخفف"/>
-                            <p:inputText  value="#{editBankViewBean.selectedBank.nameAbbreviation}"/>
-
-                        </p:panelGrid>
+                    <p:spacer height="5"/>
+                    <p:panel>
+                        <p:commandButton value="ویرایش" action="#{editBankViewBean.edit}"
+                                         update="@form">
 
 
-                        <p:spacer height="5"/>
-
-                            <p:commandButton value="ویرایش" action="#{editBankViewBean.edit}"
-                                             update=":#{p:component('sessionTable')}">
-
-
-                            </p:commandButton>
-                            <p:commandButton value="حذف" action="#{editBankViewBean.delete}"
-                                             update=":#{p:component('sessionTable')}">
+                        </p:commandButton>
+                        <p:commandButton value="حذف" action="#{editBankViewBean.delete}"
+                                         update="@form">
 
 
-                            </p:commandButton>
-                        </p:panel>
+                        </p:commandButton>
+                    </p:panel>
                 </p:fieldset>
-
 
 
             </h:form>
         </p:fieldset>
 
-        <p:dialog header="نمایش محصول" widgetVar="dlg1" minHeight="100" width="800px" height="400px">
-            <p:panelGrid id="productSearch" columns="4" columnsWidth="2,4,2,4" styleClass="ui-noborder">
-                <p:outputLabel value="نام محصول:" style="margin-left: 5px;"/>
-                <p:inputText value="#{editBankViewBean.bankName}" readonly="true" />
-
-            </p:panelGrid>
-
-        </p:dialog>
-
-
-
-
-
 
         <div class="ui-g-3"></div>
 
-         </h:body>
+    </h:body>
 
-        </ui:composition>
+</ui:composition>
 </html>

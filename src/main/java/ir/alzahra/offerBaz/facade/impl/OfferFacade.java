@@ -131,4 +131,10 @@ public class OfferFacade  implements IOfferFacade {
         BankEntity bankEntity=MapperClass.mapper(new BankEntity(),bankDTO);
         offerService.deleteBank(bankEntity);
     }
+
+    @Override
+    public void editBankInfo(BankDTO bankDTO) throws BaseException {
+        BankEntity bankEntity=MapperClass.mapper(new BankEntity(),bankDTO);
+        offerService.editBankInfo(bankEntity);
+    }
 }

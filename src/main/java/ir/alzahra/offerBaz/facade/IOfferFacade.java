@@ -45,4 +45,7 @@ public interface IOfferFacade {
 
     @Transactional(rollbackFor = Exception.class)
     void deleteBank(BankDTO bankDTO)throws BaseException;
+
+    @Transactional(rollbackFor = Exception.class)
+    void editBankInfo(BankDTO bankDTO)throws BaseException;
 }

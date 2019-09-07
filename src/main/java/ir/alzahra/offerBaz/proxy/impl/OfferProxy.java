@@ -87,7 +87,7 @@ public class OfferProxy extends BaseProxy implements IOfferProxy {
 
     @Override
     public void editBankInfo(BankDTO bankDTO) throws BaseException {
-        callRest(RestURIConstants.MAIN_URI + "/bank/updateBank", bankDTO);
+        callRest(RestURIConstants.MAIN_URI + "/bank/editBankInfo", bankDTO);
     }
 
     @Override

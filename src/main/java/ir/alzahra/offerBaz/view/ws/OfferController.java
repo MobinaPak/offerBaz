@@ -54,6 +54,13 @@ public class OfferController {
 
     }
 
+    @RequestMapping(method = RequestMethod.POST, value = "/bank/editBankInfo")
+    ResponseEntity<ResponseDTO> editBankInfo(@RequestBody BankDTO bankDTO) throws BaseException {
+        offerFacade.editBankInfo(bankDTO);
+        return new ResponseEntity(HttpStatus.OK);
+
+    }
+
     @RequestMapping(method = RequestMethod.POST, value = "/bank/findBankByName")
     ResponseEntity<ResponseDTO<BankDTO>> findBankByName(@RequestBody String bankName) throws BaseException {
         ResponseDTO responseDto = new ResponseDTO();

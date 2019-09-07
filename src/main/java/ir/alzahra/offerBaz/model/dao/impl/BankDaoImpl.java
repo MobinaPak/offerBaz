@@ -32,6 +32,8 @@ public class BankDaoImpl extends AbstractDAO implements IBankDao {
 
     @Override
     public void delete(BankEntity bankEntity) {
+//        entityManager.remove(bankEntity);
+        entityManager.remove(entityManager.contains(bankEntity) ? bankEntity : entityManager.merge(bankEntity));
 
     }
 

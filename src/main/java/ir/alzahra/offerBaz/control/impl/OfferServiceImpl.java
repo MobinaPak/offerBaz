@@ -153,4 +153,11 @@ public class OfferServiceImpl implements IOfferService {
         applicationEventPublisher.notify("bank.delete.success", NotificationType.Info);
 
     }
+
+    @Override
+    public void editBankInfo(BankEntity bankEntity) throws BaseException {
+        bankDao.update(bankEntity);
+        applicationEventPublisher.notify("bank.edit.success", NotificationType.Info);
+
+    }
 }

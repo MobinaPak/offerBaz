@@ -38,6 +38,10 @@ public interface IOfferService {
     List<ProductEntity> searchProductByParam(Long param)throws BaseException;
 
     List<BankEntity> searchBankByParam(String bankName)throws BaseException;
+
     void deleteBank(BankEntity bankEntity)throws BaseException;
+
     void checkExistProduct(String name)throws BaseException;
+
+    void editBankInfo(BankEntity bankEntity)throws BaseException;
 }

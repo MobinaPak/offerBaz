@@ -3,6 +3,7 @@ package ir.alzahra.offerBaz.view.beans.bank;
 import ir.alzahra.offerBaz.dto.BankDTO;
 import ir.alzahra.offerBaz.dto.ProductDTO;
 import ir.alzahra.offerBaz.exception.BaseException;
+import ir.alzahra.offerBaz.model.entity.ProductEntity;
 import ir.alzahra.offerBaz.proxy.IOfferProxy;
 import ir.alzahra.offerBaz.view.beans.BaseBean;
 import ir.alzahra.offerBaz.view.util.GeneralUtil;
@@ -35,6 +36,7 @@ public class EditBankViewBean extends BaseBean {
 
 
     public void init(){
+        selectedBank= new BankDTO();
 
     }
 
@@ -70,7 +72,7 @@ public class EditBankViewBean extends BaseBean {
             try {
                 selectedBank = offerProxy.findBankByName(bankName);
             } catch (BaseException e) {
-                //TODO
+                handleBaseException(e);
             }
         }
 
@@ -94,8 +96,6 @@ public class EditBankViewBean extends BaseBean {
             bankName=selectedBank.getName();
 
         }
-
-
     }
 
     public void edit(){
@@ -104,28 +104,35 @@ public class EditBankViewBean extends BaseBean {
             addNotificationMessage();
             emptyPage();
         } catch (BaseException e) {
-            //must fill
+            handleBaseException(e);
         }
     }
 
     public void delete(){
         try {
             offerProxy.deleteBank(selectedBank);
-            addNotificationMessage();
             emptyPage();
+            addNotificationMessage();
+
         } catch (BaseException e) {
-            //must fill
+            handleBaseException(e);
         }
     }
     public void returnProduct(final SelectEvent event) {
         Object returnObj = event.getObject();
         if (returnObj != null) {
-//            cardDataTableDto = (CardDataTableDto) returnObj;
-//            if (cardDataTableDto.getDtoState() == DtoState.Edit) {
-
-            //  }
+           ProductDTO editedPro=(ProductDTO) returnObj;
+           int index= selectedBank.getProducts().indexOf(selectedProduct);
+           selectedBank.getProducts().get(index).setProductName(editedPro.getProductName());
+           selectedBank.getProducts().get(index).setDescription(editedPro.getDescription());
         }
 
 
+    }
+
+    public void deleteSelectedPro(){
+        if (Objects.nonNull(selectedProduct)){
+            selectedBank.getProducts().remove(selectedProduct);
+        }
     }
 }

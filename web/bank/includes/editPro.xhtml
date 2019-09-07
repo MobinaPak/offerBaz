@@ -11,7 +11,7 @@
 </f:metadata>
 <ui:composition template="../../templates/dialogTemplate.xhtml">
     <ui:define name="title">
-        <title>,ویرایش محصول</title>
+        <title>نمایش محصول</title>
     </ui:define>
 
     <ui:define name="maincontent">
@@ -19,28 +19,26 @@
             <p:messages autoUpdate="true" globalOnly="false" id="messages"/>
             <h:form id="addForm">
                 <p:fieldset legend="مشخصات محصول">
-                    <p:panelGrid id="productEditInBankForm" columns="2" columnsWidth="2,4" styleClass="ui-noborder">
+                    <p:panelGrid id="productEdit" columns="2" columnsWidth="2,4" styleClass="ui-noborder">
                         <p:outputLabel value="کد محصول:" style="margin-left: 5px;"/>
-                        <p:inputText value="#{editProBean.productDTO.uniqueCode}"/>
+                        <p:inputText value="#{editProBean.productDTO.uniqueCode}" readonly="true"/>
 
                         <p:outputLabel value="نام محصول:" style="margin-left: 5px;"/>
                         <p:inputText value="#{editProBean.productDTO.productName}"/>
 
                         <p:outputLabel value="توضیحات:"/>
                         <p:inputTextarea rows="6" cols="33" value="#{editProBean.productDTO.description}" />
-
-
-                        <p:commandButton value="ویرایش" action="#{editProBean.edit}"
-                                         update=":addForm"
-                        >
-                        </p:commandButton>
-                        <p:commandButton value="حذف" action="#{editProBean.delete}"
-                                         update=":addForm"
-                        >
-                        </p:commandButton>
                     </p:panelGrid>
 
                 </p:fieldset>
+                <p:spacer height="3"/>
+
+                <p:panel styleClass="buttonBox">
+                    <p:commandButton value="انتخاب" actionListener="#{editProBean.selectProForEdit()}"
+                                     process=""/>
+                    <p:commandButton value="انصراف" actionListener="#{editProBean.close}"
+                                     process="@this"/>
+                </p:panel>
 
             </h:form>
         </p:scrollPanel>
