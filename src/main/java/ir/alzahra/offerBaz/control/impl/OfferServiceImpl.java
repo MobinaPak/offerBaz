@@ -58,7 +58,7 @@ public class OfferServiceImpl implements IOfferService {
         offerCheckService.checkInsertBank(bank);
        BankEntity duplicateBank= bankDao.findByName(bank.getName());
        if (Objects.nonNull(duplicateBank))
-           throw new BaseException("bank.insert.duplicateBankName");
+           throw new BaseException("bank.insert.duplicateName");
        if (Objects.nonNull(bankDao.findBankByAbbreviation(bank.getNameAbbreviation())))
            throw new BaseException("bank.insert.duplicateMokhafafName");
         bankDao.insert(bank);
