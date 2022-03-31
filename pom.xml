@@ -29,7 +29,7 @@
 
     <properties>
         <spring.security.version>3.2.3.RELEASE</spring.security.version>
-        <spring.version>5.0.0.RELEASE</spring.version>
+        <spring.version>5.3.18</spring.version>
 
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
